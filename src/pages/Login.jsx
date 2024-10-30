@@ -4,8 +4,9 @@ import imageBg from "/src/assets/images/imagebg.png";
 import logotickitz from "/src/assets/images/logotickitz.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa6";
+import { PiHandWavingLight } from "react-icons/pi";
 
-function Register() {
+function Login() {
   return (
     <div>
       <div className=" relative flex min-h-screen justify-center items-center bg-dark">
@@ -24,39 +25,13 @@ function Register() {
           >
             <div>
               <div className="flex flex-col pt-9">
-                <div className="flex flex-row gap-6">
-                  <div>
-                    <div className="h-14 w-14 bg-blue rounded-full">
-                      <div className="flex justify-center content-center pt-5 text-white">
-                        1
-                      </div>
-                    </div>
-                    <div className="flex text-center text-sm text-gray pt-2">
-                      Fill Form
-                    </div>
-                  </div>
-                  <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
-                  <div>
-                    <div className="h-14 w-14 bg-grey rounded-full">
-                      <div className="flex justify-center content-center pt-5 text-dark">
-                        2
-                      </div>
-                    </div>
-                    <div className="flex justify-center text-sm text-gray pt-2">
-                      Activate
-                    </div>
-                  </div>
-                  <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
-                  <div>
-                    <div className="h-14 w-14 bg-grey rounded-full">
-                      <div className="flex justify-center content-center pt-5 text-dark">
-                        3
-                      </div>
-                    </div>
-                    <div className="flex justify-center text-sm text-gray pt-2">
-                      Done
-                    </div>
-                  </div>
+                <div className="flex flex-row">
+                  <div className="text-3xl">Welcome back </div>
+                  <PiHandWavingLight className="text-3xl" />
+                </div>
+                <div className="text-gray flex pt-8 text-lg">
+                  Sign in with your data that you entered during your
+                  registration
                 </div>
                 <label for="email">
                   <b className="flex pt-12">Email</b>
@@ -81,13 +56,10 @@ function Register() {
                   className="w-96 h-16 border-grey border pl-3"
                 ></input>
               </div>
-              <div className="pt-6 flex flex-row">
-                <input type="checkbox" id="agree" name="agree"></input>
-                <label for="agree">
-                  <div className="flex pl-4">
-                    I agree to term and conditions
-                  </div>
-                </label>
+              <div className="pt-6 flex flex-row justify-end">
+                <Link to="/login" className="underline text-blue">
+                  Forgot your password?
+                </Link>
               </div>
               <div className="flex pt-6">
                 <button className="w-96 h-16 bg-blue rounded-lg text-white">
@@ -95,12 +67,6 @@ function Register() {
                 </button>
               </div>
               <br></br>
-              <span>
-                already have an account?{" "}
-                <Link to="/login" className="underline text-blue">
-                  Log in
-                </Link>
-              </span>
               <div className="flex flex-row justify-between items-center gap-3 ">
                 <hr class="w-40 h-px my-4 bg-dark border-0 md:my-10" />
                 <div>or</div>
@@ -124,4 +90,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;
