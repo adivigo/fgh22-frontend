@@ -12,7 +12,11 @@ export default {
       secondary: "#A0A3BD",
       blue: "#1D4ED8",
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        bgimg: "url('/src/assets/images/imagebg.png')",
+      },
+    },
   },
   plugins: [],
 };
