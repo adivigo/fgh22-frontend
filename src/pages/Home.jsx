@@ -22,7 +22,7 @@ function Home() {
   const MovieCard = (props) => {
     return (
       <div className="flex flex-col gap-5">
-        <div className="w-64 h-96 bg-red rounded-xl"></div>
+        <div className="w-[284px] h-[405px] bg-red rounded-xl"></div>
         <div className="text-xl font-normal">{props.data.title}</div>
         <div className="flex flex-row gap-2">
           <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg">
@@ -193,7 +193,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full h-80 bg-blue rounded-lg flex flex-col justify-evenly">
+        <div className="w-full h-80 bg-blue rounded-s-2xl flex flex-col justify-evenly">
           <div className="text-5xl flex text-center justify-center text-white">
             Subscribe to our newsletter
           </div>

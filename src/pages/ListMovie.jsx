@@ -7,6 +7,8 @@ import fb from "/src/assets/images/flogo.png";
 import ig from "/src/assets/images/instalogo.png";
 import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
+import imagebg from "/src/assets/images/imagebg.png";
+import { FaArrowRight } from "react-icons/fa";
 
 function ListMovie() {
   const MovieCard = (props) => {
@@ -51,7 +53,121 @@ function ListMovie() {
           </a>
         </div>
       </nav>
-      <footer className="px-32 pt-24">
+      <div className="flex flex-col px-32">
+        <div className="flex relative w-full h-[462px]">
+          <img
+            src={imagebg}
+            className="object-cover w-screen h-[462px]"
+            alt=""
+          />
+          <div className="flex flex-col gap-2 absolute pt-24 pl-32">
+            <div className="text-lg text-white">LIST MOVIE OF THE WEEK</div>
+            <div className="text-5xl max-w-[580px] text-white">
+              Experience the Magic of Cinema: Book Your Tickets Today
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-row gap-5 pt-16 pl-36">
+          <div>
+            <div>Cari Event</div>
+            <div>
+              <input
+                type="text"
+                placeholder="New Born Expert"
+                className="w-80 h-16 bg-[rgba(222, 222, 222, 1)] pl-3 border border-gray rounded"
+              />
+            </div>
+          </div>
+          <div className="flex gap-6 flex-col">
+            <div>Filter</div>
+            <div className="flex flex-row gap-x-8">
+              <div className="bg-blue rounded-lg text-white w-24 h-10 flex justify-center items-center">
+                thriller
+              </div>
+              <div className="w-24 h-10 flex justify-center items-center">
+                Horror
+              </div>
+              <div className="w-24 h-10 flex justify-center items-center">
+                Romantic
+              </div>
+              <div className="w-24 h-10 flex justify-center items-center">
+                Adventure
+              </div>
+              <div className="w-24 h-10 flex justify-center items-center">
+                Sci-fi
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-10">
+          <div className="flex flex-row justify-between pt-14">
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+          </div>
+          <div className="flex flex-row justify-between">
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+          </div>
+          <div className="flex flex-row justify-between">
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Spiderman" }} />
+          </div>
+        </div>
+        <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-16">
+          <div className="h-14 w-14 bg-blue rounded-full">
+            <div className="flex justify-center content-center pt-4 text-white">
+              1
+            </div>
+          </div>
+          <div className="h-14 w-14 bg-grey rounded-full">
+            <div className="flex justify-center content-center pt-4 text-white">
+              2
+            </div>
+          </div>
+          <div className="h-14 w-14 bg-grey rounded-full">
+            <div className="flex justify-center content-center pt-4 text-white">
+              3
+            </div>
+          </div>
+          <div className="h-14 w-14 bg-grey rounded-full">
+            <div className="flex justify-center content-center pt-4 text-white">
+              4
+            </div>
+          </div>
+          <div className="h-14 w-14 bg-blue rounded-full">
+            <div className="flex justify-center content-center pt-5 text-white">
+              <FaArrowRight />
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-80 bg-blue rounded-2xl flex flex-col justify-evenly">
+          <div className="text-5xl flex text-center justify-center text-white">
+            Subscribe to our newsletter
+          </div>
+          <div className="flex justify-center gap-x-3">
+            <input
+              type="text"
+              placeholder="First Name"
+              className="flex w-56 h-16 bg-blue .placeholder-white border-2 border-white rounded-lg pl-4"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="flex w-56 h-16 bg-blue .placeholder-white border-2 border-white rounded-lg pl-4"
+            />
+            <button className="flex w-56 h-16 bg-white text-blue .placeholder-white border-2 border-white rounded-lg items-center justify-center">
+              Subscribe Now
+            </button>
+          </div>
+        </div>
+      </div>
+      <footer className="px-32 pt-24 h-439px">
         <div className="flex flex-col ">
           <div className="flex w-full py-3 px-11 flex-col md:flex-row md:justify-between gap-3 ">
             <div className="brand-footer gap-4">
@@ -104,7 +220,7 @@ function ListMovie() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center pt-12">
             © 2020 Tickitz. All Rights Reserved.
           </div>
         </div>

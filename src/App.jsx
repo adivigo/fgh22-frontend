@@ -3,6 +3,7 @@ import Home from "/src/pages/Home.jsx";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ListMovie from "./pages/ListMovie";
+import DetailMovie from "./pages/DetailMovie";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/list-movie",
     element: <ListMovie />,
+  },
+  {
+    path: "/detail-movie",
+    element: <DetailMovie />,
   },
 ]);
 
