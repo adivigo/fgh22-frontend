@@ -69,33 +69,60 @@ function DetailMovie() {
         </div>
         <div className="pl-[413px] pt-6">
           <div className="text-3xl">Spider-Man: Homecoming</div>
-          <div className="flex flex-row gap-2">
-            <div className="rounded-2xl border border-grey text-dark text-opacity-50 bg-grey px-3 py-1">
+          <div className="flex flex-row gap-2 pt-6">
+            <div className="rounded-2xl border border-grey text-dark text-opacity-50 bg-grey px-3 flex justify-center items-center">
               Action
             </div>
-            <div className="rounded-2xl border border-grey text-dark text-opacity-50 bg-grey px-3 py-1">
+            <div className="rounded-2xl border border-grey text-dark text-opacity-50 bg-grey px-3 flex justify-center items-center">
               Adventure
             </div>
           </div>
-          <div className="flex flex-row">
-            <div>Release date</div>
-            <div>Directed by</div>
+          <div className="flex flex-row py-4">
+            <div>
+              <div className="text-sm text-dark text-opacity-50 pr-28">
+                Release Date
+              </div>
+              <div>June 28, 2017</div>
+            </div>
+            <div>
+              <div className="text-sm text-dark text-opacity-50">
+                Directed by
+              </div>
+              <div>Jon Watss</div>
+            </div>
           </div>
-          <div className="flex flex-row">
-            <div>Duration</div>
-            <div>Casts</div>
+          <div className="flex flex-row pb-12">
+            <div className="pr-16">
+              <div className="text-sm text-dark text-opacity-50">Duration</div>
+              <div>2 hours 13 minutes </div>
+            </div>
+            <div>
+              <div className="text-sm text-dark text-opacity-50">Casts</div>
+              <div>Tom Holland, Michael Keaton, Robert Downey Jr</div>
+            </div>
           </div>
         </div>
         <div className="px-32">
-          <div className="pt-32">Synopsis</div>
           <div>
-            Thrilled by his experience with the Avengers, Peter returns home,
-            where he lives with his Aunt May, under the watchful eye of his new
-            mentor Tony Stark, Peter tries to fall back into his normal daily
-            routine - distracted by thoughts of proving himself to be more than
-            just your friendly neighborhood Spider-Man - but when the Vulture
-            emerges as a new villain, everything that Peter holds most important
-            will be threatened.{" "}
+            <div className="text-xl pb-1">Synopsis</div>
+            <div className="max-w-[821px] text-gray text-opacity-50">
+              Thrilled by his experience with the Avengers, Peter returns home,
+              where he lives with his Aunt May, under the watchful eye of his
+              new mentor Tony Stark, Peter tries to fall back into his normal
+              daily routine - distracted by thoughts of proving himself to be
+              more than just your friendly neighborhood Spider-Man - but when
+              the Vulture emerges as a new villain, everything that Peter holds
+              most important will be threatened.
+            </div>
+          </div>
+          <div className="pt-14 text-3xl">Book Tickets</div>
+          <div className="flex flex-row">
+            <div>
+              <div>Choose Date</div>
+            </div>
+            <div>Choose Time</div>
+            <div>Choose Location</div>
+            <div>Filter</div>
           </div>
         </div>
       </div>
