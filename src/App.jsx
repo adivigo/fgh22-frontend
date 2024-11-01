@@ -7,6 +7,7 @@ import DetailMovie from "./pages/DetailMovie";
 import SeatList from "./pages/SeatList";
 import Payment from "./pages/Payment";
 import PaymentConfirm from "./pages/PaymentConfirm";
+import Thankyou from "./pages/Thankyou";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/payment-confirm",
     element: <PaymentConfirm />,
+  },
+  {
+    path: "/thankyou",
+    element: <Thankyou />,
   },
 ]);
 
