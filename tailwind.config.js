@@ -11,6 +11,7 @@ export default {
       dark: "#171717",
       secondary: "#A0A3BD",
       blue: "#1D4ED8",
+      green: "#008000",
     },
     extend: {
       backgroundImage: {

@@ -4,6 +4,9 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ListMovie from "./pages/ListMovie";
 import DetailMovie from "./pages/DetailMovie";
+import SeatList from "./pages/SeatList";
+import Payment from "./pages/Payment";
+import PaymentConfirm from "./pages/PaymentConfirm";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
   {
     path: "/detail-movie",
     element: <DetailMovie />,
+  },
+  {
+    path: "/seat-list",
+    element: <SeatList />,
+  },
+  {
+    path: "/payment",
+    element: <Payment />,
+  },
+  {
+    path: "/payment-confirm",
+    element: <PaymentConfirm />,
   },
 ]);
 

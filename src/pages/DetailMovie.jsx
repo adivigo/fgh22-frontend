@@ -9,24 +9,9 @@ import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
 import bannerp5 from "/src/assets/images/g2.svg";
 import g2 from "/src/assets/images/g2.png";
+import hiflixp6 from "/src/assets/images/hiflixp6.svg";
 
 function DetailMovie() {
-  const MovieCard = (props) => {
-    return (
-      <div className="flex flex-col gap-5">
-        <div className="w-64 h-96 bg-red rounded-xl"></div>
-        <div className="text-xl font-normal">{props.data.title}</div>
-        <div className="flex flex-row gap-2">
-          <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg">
-            Action
-          </div>
-          <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg">
-            Adventure
-          </div>
-        </div>
-      </div>
-    );
-  };
   return (
     <div>
       <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
@@ -116,13 +101,94 @@ function DetailMovie() {
             </div>
           </div>
           <div className="pt-14 text-3xl">Book Tickets</div>
-          <div className="flex flex-row">
+          <div className="flex flex-row gap-8 pt-10 justify-between">
             <div>
-              <div>Choose Date</div>
+              <div className="text-xl pb-3">Choose Date</div>
+              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10">
+                <option selected>21/07/20</option>
+                <option value="CA">California</option>
+              </select>
             </div>
-            <div>Choose Time</div>
-            <div>Choose Location</div>
-            <div>Filter</div>
+            <div>
+              <div className="text-xl pb-3">Choose Time</div>
+              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10">
+                <option selected>21/07/20</option>
+                <option value="CA">California</option>
+              </select>
+            </div>
+            <div>
+              <div className="text-xl pb-3">Choose Location</div>
+              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10">
+                <option selected>21/07/20</option>
+                <option value="CA">California</option>
+              </select>
+            </div>
+            <div className="flex items-end">
+              <div className="w-48 h-14 bg-blue text-white flex justify-center items-center">
+                Filter
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row gap-9 pt-10 pb-9">
+            <div className="text-xl">Choose Cinema</div>
+            <div className="text-lg text-dark text-opacity-60 justify-end">
+              39 Result
+            </div>
+          </div>
+          <div className="flex flex-row gap-4 justify-center">
+            <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg flex justify-center items-center">
+              <div>
+                <img src={ebv} alt="" className="w-52 h-20" />
+              </div>
+            </div>
+            <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg bg-blue">
+              <div className="w-64 h-40 border rounded-lg flex justify-center items-center">
+                <div>
+                  <img src={hiflixp6} alt="" className="w-52 h-10" />
+                </div>
+              </div>
+            </div>
+            <div className="w-64 h-40 rounded-lg">
+              <div className="w-64 h-40 border rounded-lg flex justify-center items-center">
+                <div>
+                  <img src={cineone} alt="" className="w-56 h-8" />
+                </div>
+              </div>
+            </div>
+            <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg">
+              <div className="w-64 h-40 border rounded-lg flex justify-center items-center">
+                <div>
+                  <img src={ebv} alt="" className="w-52 h-20" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-9">
+            <div className="h-14 w-14 bg-blue rounded-lg">
+              <div className="flex justify-center content-center pt-4 text-white text-lg">
+                1
+              </div>
+            </div>
+            <div className="h-14 w-14 border border-dark border-opacity-20 rounded-lg">
+              <div className="flex justify-center content-center pt-4 text-lg">
+                2
+              </div>
+            </div>
+            <div className="h-14 w-14 border border-dark border-opacity-20 rounded-lg">
+              <div className="flex justify-center content-center pt-4 text-lg">
+                3
+              </div>
+            </div>
+            <div className="h-14 w-14 border border-dark border-opacity-20 rounded-lg">
+              <div className="flex justify-center content-center pt-4 text-lg">
+                4
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center items-center pt-14 pb-6">
+            <button className=" w-48 h-14 bg-blue text-white rounded text-sm">
+              Book Now
+            </button>
           </div>
         </div>
       </div>
