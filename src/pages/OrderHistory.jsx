@@ -8,9 +8,11 @@ import cineone from "/src/assets/images/cineone.png";
 import { FaChevronDown } from "react-icons/fa";
 import ebv from "/src/assets/images/ebv.png";
 import { FaChevronUp } from "react-icons/fa";
+import qr from "/src/assets/images/qr.svg";
 
 function OrderHistory() {
   const [isShow, setShow] = React.useState(false);
+  const [isShow2, setShow2] = React.useState(false);
   return (
     <div>
       <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
@@ -246,13 +248,75 @@ function OrderHistory() {
                     <div className="flex flex-row items-center gap-4 text-dark text-opacity-40">
                       <div>Show Detail</div>
                       <div>
-                        <button className="flex items-center">
-                          <FaChevronDown />
+                        <button
+                          className="flex items-center"
+                          onClick={() => setShow2(!isShow2)}
+                        >
+                          {isShow2 && <FaChevronDown />}
+                          {!isShow2 && <FaChevronUp />}
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
+                {isShow2 && (
+                  <div>
+                    <div className=" px-12 text-lg">Ticket Information</div>
+                    <div className="flex flex-row">
+                      <div className="flex px-12 pt-8">
+                        <img src={qr} alt="" />
+                      </div>
+                      <div className="flex flex-col pt-20 gap-5">
+                        <div className="flex gap-6 flex-row">
+                          <div>
+                            <div className="text-xs text-dark text-opacity-40">
+                              Category
+                            </div>
+                            <div className="text-sm ">PG-13</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-dark text-opacity-40">
+                              Time
+                            </div>
+                            <div className="text-sm ">2:00pm</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-dark text-opacity-40">
+                              Seats
+                            </div>
+                            <div className="text-sm ">C4, C5, C6</div>
+                          </div>
+                        </div>
+                        <div className="flex gap-6 flex-row">
+                          <div>
+                            <div className="text-xs text-dark text-opacity-40">
+                              Movie
+                            </div>
+                            <div className="text-sm ">Spider-Man: ..</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-dark text-opacity-40">
+                              Date
+                            </div>
+                            <div className="text-sm ">07 Jul</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-dark text-opacity-40">
+                              Count
+                            </div>
+                            <div className="text-sm ">3 pcs</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-center items-center pt-10">
+                        <div className="w-[247px] h-12 flex flex-col justify-around items-center">
+                          <div>Total</div>
+                          <div className="text-2xl">$30.00</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             {/* batas */}

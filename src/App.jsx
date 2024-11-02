@@ -10,6 +10,8 @@ import PaymentConfirm from "./pages/PaymentConfirm";
 import Thankyou from "./pages/Thankyou";
 import Profile from "./pages/Profile";
 import OrderHistory from "./pages/OrderHistory";
+import Graph from "./pages/Graph";
+import ManageMovie from "./pages/ManageMovie";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
   {
     path: "/history",
     element: <OrderHistory />,
+  },
+  {
+    path: "/graph",
+    element: <Graph />,
+  },
+  {
+    path: "/manage-movie",
+    element: <ManageMovie />,
   },
 ]);
 

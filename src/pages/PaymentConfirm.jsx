@@ -9,7 +9,6 @@ import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
 import { IoMdCheckmark } from "react-icons/io";
 import visa from "/src/assets/images/logos_visa.svg";
-import logocover from "/src/assets/images/logotickitz.png";
 
 function PaymentConfirm() {
   return (
