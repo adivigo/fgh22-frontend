@@ -8,6 +8,8 @@ import SeatList from "./pages/SeatList";
 import Payment from "./pages/Payment";
 import PaymentConfirm from "./pages/PaymentConfirm";
 import Thankyou from "./pages/Thankyou";
+import Profile from "./pages/Profile";
+import OrderHistory from "./pages/OrderHistory";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
   {
     path: "/thankyou",
     element: <Thankyou />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/history",
+    element: <OrderHistory />,
   },
 ]);
 

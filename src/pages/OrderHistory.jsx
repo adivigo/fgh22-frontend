@@ -1,0 +1,266 @@
+import React from "react";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { SlMagnifier } from "react-icons/sl";
+import pp from "/src/assets/images/pp.png";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import star from "/src/assets/images/star.svg";
+import cineone from "/src/assets/images/cineone.png";
+import { FaChevronDown } from "react-icons/fa";
+import ebv from "/src/assets/images/ebv.png";
+import { FaChevronUp } from "react-icons/fa";
+
+function OrderHistory() {
+  const [isShow, setShow] = React.useState(false);
+  return (
+    <div>
+      <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
+        <div className="text-3xl">TixIT</div>
+        <ul>
+          <li className="flex gap-14 text-sm">
+            <a href="#">Home</a>
+            <a href="#">Movie</a>
+            <a href="#">Buy Ticket</a>
+          </li>
+        </ul>
+        <div className="flex gap-3 justify-center items-center">
+          <div>Location</div>
+          <div className="w-4 h-4 flex justify-center items-end">
+            <RiArrowDropDownLine className="" />
+          </div>
+          <div>
+            <SlMagnifier />
+          </div>
+          <div className="w-14 h-14 rounded-full bg-red">
+            <img
+              src={pp}
+              alt=""
+              className="w-14 h-14 rounded-full flex object-cover"
+            />
+          </div>
+        </div>
+      </nav>
+      <div className="w-screen bg-background bg-opacity-20">
+        <div className="flex flex-row gap-8 justify-center">
+          <div className="flex pt-14">
+            <div className="w-[328px] h-[783px] bg-white rounded-3xl">
+              <div>
+                <div className="flex flex-row justify-between px-10 pt-10">
+                  <div>INFO</div>
+                  <div>
+                    <HiOutlineDotsHorizontal />
+                  </div>
+                </div>
+                <div className="flex justify-center pt-8">
+                  <div className="w-32 h-32 bg-red rounded-full">
+                    <img
+                      src={pp}
+                      alt=""
+                      className="w-32 h-32 bg-red rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="text-xl font-semibold pt-8">
+                    Jonas El Rodriguez
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="text-sm text-gray pt-1">Moviegoers</div>
+                </div>
+                <div className="pt-10 text-dark text-opacity-20">
+                  <hr />
+                </div>
+                <div className="flex pt-10 pl-10">
+                  <div className="font-semibold">Loyalty Points</div>
+                </div>
+                <div className="flex justify-center pt-6">
+                  <div className="bg-blue w-60 h-32 rounded-2xl flex">
+                    <div className="flex flex-col justify-around pl-4 text-white">
+                      <div className="flex flex-row w-56 justify-between items-center">
+                        <div className="font-bold text-lg">Moviegoers</div>
+                        <div>
+                          <img src={star} alt="" />
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-1 items-center">
+                        <div className="text-2xl font-semibold">320</div>
+                        <div className="text-xs">points</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-center pt-8">
+                  <div>180 points become a master</div>
+                </div>
+                <div className="flex justify-center pt-2">
+                  <div className="bg-grey w-60 h-4 rounded-lg">
+                    <div className="bg-blue w-32 h-4 rounded-lg"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-12 flex-col pt-14">
+            <div className="bg-white w-[866px] h-20 rounded-2xl">
+              <div className="flex flex-row pt-6 pl-12 gap-14">
+                <div>
+                  <div className="text-dark text-opacity-40 text-lg">
+                    Account Settings
+                  </div>
+                </div>
+                <div>
+                  <div className="pb-6 text-lg">Order History</div>
+                  <hr className="text-blue " />
+                </div>
+              </div>
+            </div>
+            <div className="w-[866px] bg-white rounded-3xl">
+              <div>
+                <div className="flex flex-row justify-between items-center px-12 py-10">
+                  <div>
+                    <div className="text-sm text-dark text-opacity-30">
+                      Tuesday, 07 July 2020 - 04:30pm
+                    </div>
+                    <div className="text-2xl font-semibold">
+                      Spider-Man: Homecoming
+                    </div>
+                  </div>
+                  <div className="w-40 h-16 flex justify-center items-center">
+                    <div className="flex items-center justify-center">
+                      <img
+                        src={cineone}
+                        alt=""
+                        className="w-[122px] h-[22px]"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <hr className="text-dark text-opacity-20" />
+                </div>
+                <div className="flex flex-row justify-between px-12 py-8">
+                  <div className="flex flex-row gap-4">
+                    <div className="w-[198px] h-10 text-green bg-green bg-opacity-10 text-sm rounded-lg">
+                      <div className="flex justify-center pt-2">
+                        Ticket in Active
+                      </div>
+                    </div>
+                    <div className="w-[198px] h-10 text-red bg-red bg-opacity-10 text-sm rounded-lg">
+                      <div className="flex justify-center pt-2">Not Paid</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex flex-row items-center gap-4 text-dark text-opacity-40">
+                      <div>Show Detail</div>
+                      <button
+                        className="flex items-center"
+                        onClick={() => setShow(!isShow)}
+                      >
+                        {isShow && <FaChevronDown />}
+                        {!isShow && <FaChevronUp />}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {isShow && (
+                  <>
+                    <div className="flex flex-col px-12">
+                      <div className="text-lg">Ticket Information</div>
+                      <div className="flex flex-row justify-between pt-8">
+                        <div className="flex flex-row justify-center items-center">
+                          <div className="text-sm text-dark text-opacity-40 pr-10 justify-end">
+                            No. Rekening Virtual
+                          </div>
+                          <div>:</div>
+                        </div>
+                        <div className="flex flex-row justify-center items-center gap-5">
+                          <div className="text-lg font-bold">
+                            12321328913829724
+                          </div>
+                          <div>
+                            <button className=" w-20 h-12 text-blue border border-blue rounded">
+                              Copy
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-row justify-between pt-3">
+                        <div className="flex flex-row justify-center items-center">
+                          <div className="text-sm text-dark text-opacity-40 pr-20 justify-end">
+                            Total Payment
+                          </div>
+                          <div>:</div>
+                        </div>
+                        <div className="flex flex-row justify-center items-center gap-5">
+                          <div className="text-lg text-blue font-bold">$30</div>
+                        </div>
+                      </div>
+                      <div className="pt-3 font-normal text-dark text-opacity-40">
+                        Pay this payment bill before it is due,
+                        <span className="text-red"> on June 23, 2023</span>. If
+                        the bill has not been paid by the specified time, it
+                        will be forfeited
+                      </div>
+                      <div className="pt-3 pb-9">
+                        <button className="w-[191px] h-12 text-white bg-blue rounded font-bold">
+                          Check Pembayaran
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="w-[866px] bg-white rounded-3xl">
+              <div>
+                <div className="flex flex-row justify-between items-center px-12 py-10">
+                  <div>
+                    <div className="text-sm text-dark text-opacity-30">
+                      Monday, 14 June 2020 - 02:00pm
+                    </div>
+                    <div className="text-2xl font-semibold">
+                      Avengers: End Game
+                    </div>
+                  </div>
+                  <div className="w-40 h-16 flex justify-center items-center">
+                    <div className="flex items-center justify-center">
+                      <img src={ebv} alt="" className="w-[122px] h-[46px]" />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <hr className="text-dark text-opacity-20" />
+                </div>
+                <div className="flex flex-row justify-between px-12 py-8">
+                  <div className="flex flex-row gap-4">
+                    <div className="w-[198px] h-10 text-gray bg-gray bg-opacity-10 text-sm rounded-lg">
+                      <div className="flex justify-center pt-2">
+                        Ticket Used
+                      </div>
+                    </div>
+                    <div className="w-[198px] h-10 text-blue bg-blue bg-opacity-10 text-sm rounded-lg">
+                      <div className="flex justify-center pt-2">Paid</div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex flex-row items-center gap-4 text-dark text-opacity-40">
+                      <div>Show Detail</div>
+                      <div>
+                        <button className="flex items-center">
+                          <FaChevronDown />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* batas */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default OrderHistory;

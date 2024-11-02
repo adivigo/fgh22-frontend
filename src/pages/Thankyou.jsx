@@ -41,7 +41,7 @@ function Thankyou() {
         </div>
       </nav>
       <div className="flex flex-row bg-gray bg-opacity-20">
-        <div className="w-screen flex flex-row">
+        <div className="w-screen flex flex-row justify-center">
           <div className="relative">
             <img src={tycover} alt="" />
             <div className="absolute w-[800px] h-[920px] bg-dark top-0 bg-opacity-85"></div>
