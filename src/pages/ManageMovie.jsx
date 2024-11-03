@@ -7,6 +7,7 @@ import g2 from "/src/assets/images/g2.png";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaPen } from "react-icons/fa";
 import { FiTrash } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 function ManageMovie() {
   return (
@@ -15,9 +16,10 @@ function ManageMovie() {
         <div className="text-3xl">TixIT</div>
         <ul>
           <li className="flex gap-14 text-sm">
-            <a href="#">Home</a>
-            <a href="#">Movie</a>
-            <a href="#">Buy Ticket</a>
+            <Link to="/graph">Dashboard</Link>
+            <Link to="/manage-movie" className="text-blue">
+              Movie
+            </Link>
           </li>
         </ul>
         <div className="flex gap-3 justify-center items-center">
@@ -37,7 +39,7 @@ function ManageMovie() {
           </div>
         </div>
       </nav>
-      <div className="bg-background bg-opacity-20 w-full">
+      <div className="bg-background bg-opacity-20 w-full h-screen">
         <div className="flex justify-center items-center pt-16">
           <div className="w-[1105px] h-[567px] bg-white rounded-2xl">
             <div className="flex flex-row justify-between pl-[58px] pr-[36px] pt-6">
@@ -55,9 +57,11 @@ function ManageMovie() {
                   </div>
                 </div>
                 <div>
-                  <button className="w-[140px] h-14 bg-blue text-white rounded-lg">
-                    Add Movie
-                  </button>
+                  <Link to="/add-movie">
+                    <button className="w-[140px] h-14 bg-blue text-white rounded-lg">
+                      Add Movie
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -211,7 +215,7 @@ function ManageMovie() {
                 </tr>
               </tbody>
             </table>
-            <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-9">
+            <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-5">
               <div className="h-14 w-14 bg-blue rounded-lg">
                 <div className="flex justify-center content-center pt-4 text-white text-lg">
                   1

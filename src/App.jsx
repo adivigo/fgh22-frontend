@@ -1,17 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "/src/pages/Home.jsx";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import ListMovie from "./pages/ListMovie";
-import DetailMovie from "./pages/DetailMovie";
-import SeatList from "./pages/SeatList";
-import Payment from "./pages/Payment";
-import PaymentConfirm from "./pages/PaymentConfirm";
-import Thankyou from "./pages/Thankyou";
-import Profile from "./pages/Profile";
-import OrderHistory from "./pages/OrderHistory";
-import Graph from "./pages/Graph";
-import ManageMovie from "./pages/ManageMovie";
+import Register from "/src/pages/Register";
+import Login from "/src/pages/Login";
+import ListMovie from "/src/pages/ListMovie";
+import DetailMovie from "/src/pages/DetailMovie";
+import SeatList from "/src/pages/SeatList";
+import Payment from "/src/pages/Payment";
+import PaymentConfirm from "/src/pages/PaymentConfirm";
+import Thankyou from "/src/pages/Thankyou";
+import Profile from "/src/pages/Profile";
+import OrderHistory from "/src/pages/OrderHistory";
+import Graph from "/src/pages/Graph";
+import ManageMovie from "/src/pages/ManageMovie";
+import AddMovie from "/src/pages/AddMovie";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: "/manage-movie",
     element: <ManageMovie />,
+  },
+  {
+    path: "/add-movie",
+    element: <AddMovie />,
   },
 ]);
 

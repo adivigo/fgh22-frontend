@@ -1,8 +1,8 @@
 import React from "react";
-import g1 from "/src/assets/images/g1.png";
-import g2 from "/src/assets/images/g2.png";
-import g3 from "/src/assets/images/g3.png";
-import g4 from "/src/assets/images/g4.png";
+import gc from "/src/assets/images/gc.png";
+import dw from "/src/assets/images/dw.jpg";
+import frieren from "/src/assets/images/frieren.png";
+import penguin from "/src/assets/images/penguin.jpg";
 import logoTickitz from "/src/assets/images/tickitzfooter.png";
 import ebv from "/src/assets/images/ebv.png";
 import cineone from "/src/assets/images/cineone.png";
@@ -17,12 +17,33 @@ import checkLogo from "/src/assets/images/checkLogo.png";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Home() {
   const MovieCard = (props) => {
     return (
       <div className="flex flex-col gap-5">
-        <div className="w-[284px] h-[405px] bg-red rounded-xl"></div>
+        <div className="group w-[284px] h-[405px] bg-red rounded-xl overflow-hidden">
+          <img
+            src={props.data.image}
+            alt=""
+            className="group w-[284px] h-[405px] rounded-xl overflow-hidden absolute"
+          />
+          <div className="w-full h-full bg-dark bg-opacity-70 invisible group-hover:visible flex flex-col justify-center items-center gap-2 relative">
+            <Link
+              to="/detail-movie"
+              className="text-white bg-dark bg-opacity-70 inline-block py-2 px-20 border-white border rounded"
+            >
+              Detail
+            </Link>
+            <Link
+              to="/seat-list"
+              className="text-white bg-blue inline-block py-2 px-16 border-blue border rounded"
+            >
+              Buy Ticket
+            </Link>
+          </div>
+        </div>
         <div className="text-xl font-normal">{props.data.title}</div>
         <div className="flex flex-row gap-2">
           <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg">
@@ -75,34 +96,38 @@ function Home() {
             </div>
           </div>
           <div className="flex flex-1 pt-14 justify-center gap-x-3">
-            <div className="grid grid-rows-2">
-              <img
-                src={g1}
-                alt="g1"
-                className="object-cover h-44 w-56 rounded-t-3xl"
-              />
-              <img
-                src={g2}
-                alt="g2"
-                className="object-cover w-56 h-64 rounded-b-3xl"
-              />
+            <div className="grid grid-rows-2 gap-4 h-[300px] w-[250px]">
+              <div className="flex h-[300px] w-[250px]">
+                <img
+                  src={dw}
+                  alt="g1"
+                  className="object-cover h-[300px] w-[250px] rounded-t-3xl"
+                />
+              </div>
+              <div className="flex w-[250px] h-[400px] pt-40">
+                <img
+                  src={gc}
+                  alt="g2"
+                  className="object-cover w-[250px] h-[400px] rounded-b-3xl"
+                />
+              </div>
             </div>
             <div className="grid grid-rows-2 gap-y-4">
               <img
-                src={g3}
+                src={frieren}
                 alt="g3"
-                className="object-cover w-56 h-64 rounded-t-3xl"
+                className="object-cover w-[250px] h-[400px] rounded-t-3xl"
               />
               <img
-                src={g4}
+                src={penguin}
                 alt="g4"
-                className="object-cover h-44 w-56 rounded-b-3xl"
+                className="object-cover h-[300px] w-[250px] rounded-b-3xl object-bottom"
               />
             </div>
           </div>
         </div>
         <div className="pb-20">
-          <div className="text-lg text-blue pt-48">WHY CHOOSE US</div>
+          <div className="text-lg text-blue pt-28">WHY CHOOSE US</div>
           <div className="text-3xl max-w-lg pt-3.5">
             Unleashing the Ultimate Movie Experience
           </div>
@@ -154,15 +179,17 @@ function Home() {
               </div>
             </div>
             <div className="flex flex-row justify-between">
-              <MovieCard data={{ title: "Spiderman" }} />
-              <MovieCard data={{ title: "Spiderman" }} />
-              <MovieCard data={{ title: "Spiderman" }} />
-              <MovieCard data={{ title: "Spiderman" }} />
+              <MovieCard data={{ title: "Deadpool x Wolverine", image: dw }} />
+              <MovieCard data={{ title: "Gyeongseong Creature", image: gc }} />
+              <MovieCard data={{ title: "Frieren", image: frieren }} />
+              <MovieCard data={{ title: "Penguin", image: penguin }} />
             </div>
-            <div className="flex flex-row justify-center text-blue text-lg items-center gap-2">
-              <div>View All</div>
-              <FaArrowRightLong />
-            </div>
+            <Link to="/list-movie">
+              <div className="flex flex-row justify-center text-blue text-lg items-center gap-2">
+                <div>View All</div>
+                <FaArrowRightLong />
+              </div>
+            </Link>
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row justify-between">
@@ -173,7 +200,7 @@ function Home() {
                 </div>
               </div>
               <div className="flex flex-row gap-x-2 items-end pb-7">
-                <div className="h-14 w-14 bg-grey rounded-full">
+                <div className="h-14 w-14 bg-gray bg-opacity-50 rounded-full">
                   <div className="flex justify-center content-center pt-5 text-white">
                     <FaArrowLeft />
                   </div>
@@ -186,10 +213,10 @@ function Home() {
               </div>
             </div>
             <div className="flex flex-row justify-between">
-              <MovieCard data={{ title: "Spiderman" }} />
-              <MovieCard data={{ title: "Spiderman" }} />
-              <MovieCard data={{ title: "Spiderman" }} />
-              <MovieCard data={{ title: "Spiderman" }} />
+              <MovieCard data={{ title: "Spiderman", image: dw }} />
+              <MovieCard data={{ title: "Spiderman", image: gc }} />
+              <MovieCard data={{ title: "Spiderman", image: frieren }} />
+              <MovieCard data={{ title: "Spiderman", image: penguin }} />
             </div>
           </div>
         </div>

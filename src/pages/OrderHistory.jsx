@@ -9,6 +9,7 @@ import { FaChevronDown } from "react-icons/fa";
 import ebv from "/src/assets/images/ebv.png";
 import { FaChevronUp } from "react-icons/fa";
 import qr from "/src/assets/images/qr.svg";
+import { Link } from "react-router-dom";
 
 function OrderHistory() {
   const [isShow, setShow] = React.useState(false);
@@ -106,9 +107,11 @@ function OrderHistory() {
             <div className="bg-white w-[866px] h-20 rounded-2xl">
               <div className="flex flex-row pt-6 pl-12 gap-14">
                 <div>
-                  <div className="text-dark text-opacity-40 text-lg">
-                    Account Settings
-                  </div>
+                  <Link to="/profile">
+                    <div className="text-dark text-opacity-40 text-lg">
+                      Account Settings
+                    </div>
+                  </Link>
                 </div>
                 <div>
                   <div className="pb-6 text-lg">Order History</div>

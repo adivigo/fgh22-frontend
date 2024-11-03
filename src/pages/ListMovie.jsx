@@ -1,4 +1,8 @@
 import React from "react";
+import gc from "/src/assets/images/gc.png";
+import dw from "/src/assets/images/dw.jpg";
+import frieren from "/src/assets/images/frieren.png";
+import penguin from "/src/assets/images/penguin.jpg";
 import logoTickitz from "/src/assets/images/tickitzfooter.png";
 import ebv from "/src/assets/images/ebv.png";
 import cineone from "/src/assets/images/cineone.png";
@@ -9,12 +13,33 @@ import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
 import imagebg from "/src/assets/images/imagebg.png";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function ListMovie() {
   const MovieCard = (props) => {
     return (
       <div className="flex flex-col gap-5">
-        <div className="w-64 h-96 bg-red rounded-xl"></div>
+        <div className="group w-[284px] h-[405px] bg-red rounded-xl overflow-hidden">
+          <img
+            src={props.data.image}
+            alt=""
+            className="group w-[284px] h-[405px] rounded-xl overflow-hidden absolute"
+          />
+          <div className="w-full h-full bg-dark bg-opacity-70 invisible group-hover:visible flex flex-col justify-center items-center gap-2 relative">
+            <Link
+              to="/detail-movie"
+              className="text-white bg-dark bg-opacity-70 inline-block py-2 px-20 border-white border rounded"
+            >
+              Detail
+            </Link>
+            <Link
+              to="/seat-list"
+              className="text-white bg-blue inline-block py-2 px-16 border-blue border rounded"
+            >
+              Buy Ticket
+            </Link>
+          </div>
+        </div>
         <div className="text-xl font-normal">{props.data.title}</div>
         <div className="flex flex-row gap-2">
           <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg">
@@ -74,7 +99,7 @@ function ListMovie() {
               <input
                 type="text"
                 placeholder="New Born Expert"
-                className="w-80 h-16 bg-[rgba(222, 222, 222, 1)] pl-3 border border-gray rounded"
+                className="w-80 h-16 bg-[rgba(222, 222, 222, 1)] pl-3 border border-gray rounded-md border-opacity-50"
               />
             </div>
           </div>
@@ -101,22 +126,22 @@ function ListMovie() {
         </div>
         <div className="flex flex-col gap-10">
           <div className="flex flex-row justify-between pt-14">
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Deadpool x Wolverine", image: dw }} />
+            <MovieCard data={{ title: "Gyeongseong Creature", image: gc }} />
+            <MovieCard data={{ title: "Frieren", image: frieren }} />
+            <MovieCard data={{ title: "Penguin", image: penguin }} />
           </div>
           <div className="flex flex-row justify-between">
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Deadpool x Wolverine", image: dw }} />
+            <MovieCard data={{ title: "Gyeongseong Creature", image: gc }} />
+            <MovieCard data={{ title: "Frieren", image: frieren }} />
+            <MovieCard data={{ title: "Penguin", image: penguin }} />
           </div>
           <div className="flex flex-row justify-between">
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
-            <MovieCard data={{ title: "Spiderman" }} />
+            <MovieCard data={{ title: "Deadpool x Wolverine", image: dw }} />
+            <MovieCard data={{ title: "Gyeongseong Creature", image: gc }} />
+            <MovieCard data={{ title: "Frieren", image: frieren }} />
+            <MovieCard data={{ title: "Penguin", image: penguin }} />
           </div>
         </div>
         <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-16">

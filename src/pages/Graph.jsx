@@ -3,6 +3,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
 import pp from "/src/assets/images/pp.png";
 import graph from "/src/assets/images/graph.svg";
+import { Link } from "react-router-dom";
 
 function Graph() {
   return (
@@ -11,9 +12,10 @@ function Graph() {
         <div className="text-3xl">TixIT</div>
         <ul>
           <li className="flex gap-14 text-sm">
-            <a href="#">Home</a>
-            <a href="#">Movie</a>
-            <a href="#">Buy Ticket</a>
+            <Link to="/graph" className="text-blue">
+              Dashboard
+            </Link>
+            <Link to="/manage-movie">Movie</Link>
           </li>
         </ul>
         <div className="flex gap-3 justify-center items-center">

@@ -12,6 +12,7 @@ import { FiDownload } from "react-icons/fi";
 import logocover from "/src/assets/images/logotickitz.png";
 import { FaArrowRightLong } from "react-icons/fa6";
 import qr from "/src/assets/images/qr.svg";
+import { Link } from "react-router-dom";
 
 function Thankyou() {
   return (
@@ -26,12 +27,12 @@ function Thankyou() {
           </li>
         </ul>
         <div className="flex gap-3 text-sm">
-          <a
-            href="#"
+          <Link
+            to="/profile"
             className="px-4 py-3 bg-white rounded-lg text-black border border-gray"
           >
             SignIn
-          </a>
+          </Link>
           <a
             href="#"
             className="px-4 py-3 bg-gray rounded-lg text-white border border-gray"

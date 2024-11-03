@@ -17,7 +17,7 @@ function Register() {
         <div className="absolute top-16 w-72 h-24">
           <img src={logotickitz} alt="" />
         </div>
-        <div className="absolute w-[546px] h-[709px] bg-white top-44 rounded-2xl">
+        <div className="absolute w-[546px] h-[739px] bg-white top-44 rounded-2xl">
           <form
             action=""
             className="flex flex-col justify-center content-center px-20"
@@ -58,19 +58,21 @@ function Register() {
                     </div>
                   </div>
                 </div>
-                <label for="email">
-                  <b className="flex pt-12">Email</b>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="enter your Email"
-                  className="w-96 h-16 border-grey border pl-3"
-                ></input>
+                <div className="flex flex-col gap-3">
+                  <label for="email">
+                    <b className="flex pt-10">Email</b>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="enter your Email"
+                    className="w-96 h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                  ></input>
+                </div>
               </div>
-              <div className="flex flex-col pt-6">
-                <label for="password">
+              <div className="flex flex-col pt-6 gap-3">
+                <label htmlFor="password">
                   <b>Password</b>
                 </label>
                 <input
@@ -78,12 +80,12 @@ function Register() {
                   id="password"
                   name="password"
                   placeholder="enter your Password"
-                  className="w-96 h-16 border-grey border pl-3"
+                  className="w-96 h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
                 ></input>
               </div>
               <div className="pt-6 flex flex-row">
                 <input type="checkbox" id="agree" name="agree"></input>
-                <label for="agree">
+                <label htmlFor="agree">
                   <div className="flex pl-4">
                     I agree to term and conditions
                   </div>

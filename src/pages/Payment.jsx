@@ -9,8 +9,10 @@ import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
 import { IoMdCheckmark } from "react-icons/io";
 import visa from "/src/assets/images/logos_visa.svg";
+import { Link } from "react-router-dom";
 
 function Payment() {
+  const [isShow, setShow] = React.useState(false);
   return (
     <div>
       <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
@@ -189,12 +191,82 @@ function Payment() {
               </div>
               <div className="flex pt-12">
                 <div className="flex justify-center items-center w-[665px] h-14 bg-blue rounded">
-                  <button className="text-white">Pay your order</button>
+                  <button
+                    className="text-white"
+                    onClick={() => setShow(!isShow)}
+                  >
+                    Pay your order
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {isShow && (
+          <>
+            <div className="w-screen bg-dark bg-opacity-40 absolute top-24 h-[1617px]">
+              <div className="flex justify-center">
+                <div className="w-[573px] h-[506px] bg-white rounded-lg flex flex-col absolute top-1/2 -translate-y-2/4">
+                  <div className="pt-6 flex flex-col px-3">
+                    <div className="flex justify-center">
+                      <div className="text-2xl font-bold">Payment Info</div>
+                    </div>
+                    <div className="flex flex-row justify-between pt-8">
+                      <div className="flex flex-row justify-center items-center">
+                        <div className="text-sm text-dark text-opacity-40 pr-10 justify-end">
+                          No. Rekening Virtual
+                        </div>
+                        <div>:</div>
+                      </div>
+                      <div className="flex flex-row justify-center items-center gap-5">
+                        <div className="text-lg font-bold">
+                          12321328913829724
+                        </div>
+                        <div>
+                          <button className=" w-20 h-12 text-blue border border-blue rounded">
+                            Copy
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-row justify-between pt-8">
+                      <div className="flex flex-row justify-center items-center">
+                        <div className="text-sm text-dark text-opacity-40 pr-20 justify-end">
+                          Total Payment
+                        </div>
+                        <div>:</div>
+                      </div>
+                      <div className="flex flex-row justify-center items-center gap-5">
+                        <div className="text-lg text-blue font-bold">$30</div>
+                      </div>
+                    </div>
+                    <div className="pt-8 font-normal text-dark text-opacity-40">
+                      Pay this payment bill before it is due,
+                      <span className="text-red"> on June 23, 2023</span>. If
+                      the bill has not been paid by the specified time, it will
+                      be forfeited
+                    </div>
+                    <div className="pt-14">
+                      <Link to="/thankyou">
+                        <button className="w-[545px] h-14 text-white bg-blue rounded font-bold">
+                          Check Payment
+                        </button>
+                      </Link>
+                    </div>
+                    <div className="pt-2">
+                      <button
+                        className="w-[545px] h-14 text-blue bg-white rounded font-bold"
+                        onClick={() => setShow(isShow)}
+                      >
+                        Pay Later
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <footer className="px-32 pt-24 h-439px">
         <div className="flex flex-col ">

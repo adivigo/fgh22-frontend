@@ -4,6 +4,7 @@ import { SlMagnifier } from "react-icons/sl";
 import pp from "/src/assets/images/pp.png";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import star from "/src/assets/images/star.svg";
+import { Link } from "react-router-dom";
 
 function Profile() {
   return (
@@ -70,7 +71,7 @@ function Profile() {
                 </div>
                 <div className="flex justify-center pt-6">
                   <div className="bg-blue w-60 h-32 rounded-2xl flex">
-                    <div className="flex flex-col justify-between pl-4 text-white">
+                    <div className="flex flex-col justify-around pl-4 text-white">
                       <div className="flex flex-row w-56 justify-between items-center">
                         <div className="font-bold text-lg">Moviegoers</div>
                         <div>
@@ -102,9 +103,11 @@ function Profile() {
                   <div className="pb-6 text-lg">Account Settings</div>
                   <hr className="text-blue " />
                 </div>
-                <div className="text-dark text-opacity-40 text-lg">
-                  Order History
-                </div>
+                <Link to="/history">
+                  <div className="text-dark text-opacity-40 text-lg">
+                    Order History
+                  </div>
+                </Link>
               </div>
             </div>
             <div className="bg-white w-[866px] h-[418px] rounded-3xl">

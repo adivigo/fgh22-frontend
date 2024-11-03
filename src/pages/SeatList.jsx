@@ -9,6 +9,7 @@ import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
 import { IoMdCheckmark } from "react-icons/io";
 import g2 from "/src/assets/images/g2.png";
+import { Link } from "react-router-dom";
 
 function SeatList() {
   return (
@@ -38,7 +39,7 @@ function SeatList() {
         </div>
       </nav>
       <div>
-        <div className="w-[1366px] h-[1072px] bg-gray bg-opacity-10">
+        <div className="w-screen h-[1072px] bg-gray bg-opacity-10">
           <div className="px-32">
             <div className="flex flex-row gap-6 justify-center pt-8">
               <div className="flex justify-center items-center flex-col">
@@ -74,7 +75,7 @@ function SeatList() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row gap-4 pt-8">
+            <div className="flex flex-row gap-4 pt-8 justify-center">
               <div className="w-[734px] h-[807px] bg-white flex flex-col rounded">
                 <div className="flex justify-center px-5 pt-10 ">
                   <div className="w-[687px] h-[143px] flex py-3 pl-6 rounded border border-dark border-opacity-20">
@@ -244,7 +245,7 @@ function SeatList() {
                           <div className="bg-gray w-7 h-7 rounded"></div>
                           <div className="bg-gray w-7 h-7 rounded"></div>
                           <div className="bg-grey w-7 h-7 rounded"></div>
-                          <div className="bg-grey w-7 h-7 rounded"></div>
+                          <div className="bg-red bg-opacity-50 w-7 h-7 rounded"></div>
                           <div className="bg-grey w-7 h-7 rounded"></div>
                           <div className="w-7 h-7 rounded flex justify-center items-center">
                             9
@@ -256,7 +257,7 @@ function SeatList() {
                           <div className="bg-grey w-7 h-7 rounded"></div>
                           <div className="bg-grey w-7 h-7 rounded"></div>
                           <div className="bg-grey w-7 h-7 rounded"></div>
-                          <div className="bg-grey w-7 h-7 rounded"></div>
+                          <div className="bg-red bg-opacity-50 w-7 h-7 rounded"></div>
                           <div className="bg-grey w-7 h-7 rounded"></div>
                           <div className="w-7 h-7 rounded flex justify-center items-center">
                             10
@@ -381,9 +382,11 @@ function SeatList() {
                   </div>
                 </div>
                 <div>
-                  <button className="w-[358px] h-14 bg-blue text-white rounded">
-                    Checkout Now
-                  </button>
+                  <Link to="/payment">
+                    <button className="w-[358px] h-14 bg-blue text-white rounded">
+                      Checkout Now
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

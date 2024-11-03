@@ -10,6 +10,7 @@ import youtube from "/src/assets/images/ytlogo.png";
 import bannerp5 from "/src/assets/images/g2.svg";
 import g2 from "/src/assets/images/g2.png";
 import hiflixp6 from "/src/assets/images/hiflixp6.svg";
+import { Link } from "react-router-dom";
 
 function DetailMovie() {
   return (
@@ -104,22 +105,22 @@ function DetailMovie() {
           <div className="flex flex-row gap-8 pt-10 justify-between">
             <div>
               <div className="text-xl pb-3">Choose Date</div>
-              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10">
+              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10 px-6">
                 <option selected>21/07/20</option>
-                <option value="CA">California</option>
+                <option value="CA">22/07/20</option>
               </select>
             </div>
             <div>
               <div className="text-xl pb-3">Choose Time</div>
-              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10">
-                <option selected>21/07/20</option>
-                <option value="CA">California</option>
+              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10 px-6">
+                <option selected>08 : 30 AM</option>
+                <option value="CA">09 : 00 AM</option>
               </select>
             </div>
             <div>
               <div className="text-xl pb-3">Choose Location</div>
-              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10">
-                <option selected>21/07/20</option>
+              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10 px-6">
+                <option selected>Purwokerto</option>
                 <option value="CA">California</option>
               </select>
             </div>
@@ -135,10 +136,12 @@ function DetailMovie() {
               39 Result
             </div>
           </div>
-          <div className="flex flex-row gap-4 justify-center">
-            <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg flex justify-center items-center">
-              <div>
-                <img src={ebv} alt="" className="w-52 h-20" />
+          <div className="flex flex-row gap-4 justify-center pl-14">
+            <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg">
+              <div className="w-64 h-40 border rounded-lg flex justify-center items-center">
+                <div>
+                  <img src={ebv} alt="" className="w-52 h-20" />
+                </div>
               </div>
             </div>
             <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg bg-blue">
@@ -186,9 +189,11 @@ function DetailMovie() {
             </div>
           </div>
           <div className="flex justify-center items-center pt-14 pb-6">
-            <button className=" w-48 h-14 bg-blue text-white rounded text-sm">
-              Book Now
-            </button>
+            <Link to="/seat-list">
+              <button className=" w-48 h-14 bg-blue text-white rounded text-sm">
+                Book Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>
