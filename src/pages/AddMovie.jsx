@@ -44,7 +44,7 @@ function AddMovie() {
                   Upload Image
                 </div>
                 <div>
-                  <button className="w-28 h-8 bg-blue text-white rounded-lg">
+                  <button className="w-28 h-8 bg-dark text-white rounded-lg">
                     Upload
                   </button>
                 </div>
@@ -158,7 +158,7 @@ function AddMovie() {
               </div>
               <div className="flex flex-row gap-7">
                 <div>
-                  <button className="w-14 h-7 border border-blue text-blue flex justify-center items-center">
+                  <button className="w-14 h-7 border border-dark text-dark flex justify-center items-center">
                     <FaPlus />
                   </button>
                 </div>
@@ -170,7 +170,7 @@ function AddMovie() {
                 <Link to="/manage-movie">
                   <button
                     type="submit"
-                    className="w-[616px] h-14 bg-blue text-white flex items-center justify-center rounded"
+                    className="w-[616px] h-14 bg-dark text-white flex items-center justify-center rounded"
                   >
                     Save Movie
                   </button>

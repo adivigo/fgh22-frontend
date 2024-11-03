@@ -54,7 +54,7 @@ function SeatList() {
               </div>
               <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
               <div>
-                <div className="h-14 w-14 bg-blue rounded-full">
+                <div className="h-14 w-14 bg-dark rounded-full">
                   <div className="flex justify-center content-center pt-5 text-white">
                     2
                   </div>
@@ -101,7 +101,7 @@ function SeatList() {
                       </div>
                     </div>
                     <div className="flex items-end pl-20">
-                      <button className="w-28 h-8 bg-blue text-white rounded">
+                      <button className="w-28 h-8 bg-dark text-white rounded">
                         Change
                       </button>
                     </div>
@@ -377,13 +377,13 @@ function SeatList() {
                     </div>
                     <div className="flex flex-row justify-between px-5 pt-6">
                       <div className="text-lg">Total Payment</div>
-                      <div className="text-2xl text-blue font-bold">$30</div>
+                      <div className="text-2xl text-dark font-bold">$30</div>
                     </div>
                   </div>
                 </div>
                 <div>
                   <Link to="/payment">
-                    <button className="w-[358px] h-14 bg-blue text-white rounded">
+                    <button className="w-[358px] h-14 bg-dark text-white rounded">
                       Checkout Now
                     </button>
                   </Link>

@@ -34,7 +34,7 @@ function ListMovie() {
             </Link>
             <Link
               to="/seat-list"
-              className="text-white bg-blue inline-block py-2 px-16 border-blue border rounded"
+              className="text-dark bg-white inline-block py-2 px-16 border-dark border rounded"
             >
               Buy Ticket
             </Link>
@@ -106,7 +106,7 @@ function ListMovie() {
           <div className="flex gap-6 flex-col">
             <div>Filter</div>
             <div className="flex flex-row gap-x-8">
-              <div className="bg-blue rounded-lg text-white w-24 h-10 flex justify-center items-center">
+              <div className="bg-dark rounded-lg text-white w-24 h-10 flex justify-center items-center">
                 thriller
               </div>
               <div className="w-24 h-10 flex justify-center items-center">
@@ -145,7 +145,7 @@ function ListMovie() {
           </div>
         </div>
         <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-16">
-          <div className="h-14 w-14 bg-blue rounded-full">
+          <div className="h-14 w-14 bg-dark rounded-full">
             <div className="flex justify-center content-center pt-4 text-white">
               1
             </div>
@@ -165,13 +165,13 @@ function ListMovie() {
               4
             </div>
           </div>
-          <div className="h-14 w-14 bg-blue rounded-full">
+          <div className="h-14 w-14 bg-dark rounded-full">
             <div className="flex justify-center content-center pt-5 text-white">
               <FaArrowRight />
             </div>
           </div>
         </div>
-        <div className="w-full h-80 bg-blue rounded-2xl flex flex-col justify-evenly">
+        <div className="w-full h-80 bg-dark rounded-2xl flex flex-col justify-evenly">
           <div className="text-5xl flex text-center justify-center text-white">
             Subscribe to our newsletter
           </div>
@@ -179,14 +179,14 @@ function ListMovie() {
             <input
               type="text"
               placeholder="First Name"
-              className="flex w-56 h-16 bg-blue .placeholder-white border-2 border-white rounded-lg pl-4"
+              className="flex w-56 h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
             />
             <input
               type="email"
               placeholder="Email"
-              className="flex w-56 h-16 bg-blue .placeholder-white border-2 border-white rounded-lg pl-4"
+              className="flex w-56 h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
             />
-            <button className="flex w-56 h-16 bg-white text-blue .placeholder-white border-2 border-white rounded-lg items-center justify-center">
+            <button className="flex w-56 h-16 bg-white text-dark .placeholder-white border-2 border-white rounded-lg items-center justify-center">
               Subscribe Now
             </button>
           </div>

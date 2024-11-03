@@ -17,7 +17,7 @@ function ManageMovie() {
         <ul>
           <li className="flex gap-14 text-sm">
             <Link to="/graph">Dashboard</Link>
-            <Link to="/manage-movie" className="text-blue">
+            <Link to="/manage-movie" className="text-dark">
               Movie
             </Link>
           </li>
@@ -58,7 +58,7 @@ function ManageMovie() {
                 </div>
                 <div>
                   <Link to="/add-movie">
-                    <button className="w-[140px] h-14 bg-blue text-white rounded-lg">
+                    <button className="w-[140px] h-14 bg-dark text-white rounded-lg">
                       Add Movie
                     </button>
                   </Link>
@@ -88,12 +88,12 @@ function ManageMovie() {
                   <td>07/05/2023</td>
                   <td>07/05/2023</td>
                   <td className="flex gap-3">
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <IoEyeOutline />
                       </div>
                     </button>
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <FaPen />
                       </div>
@@ -115,12 +115,12 @@ function ManageMovie() {
                   <td>07/05/2023</td>
                   <td>07/05/2023</td>
                   <td className="flex gap-3">
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <IoEyeOutline />
                       </div>
                     </button>
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <FaPen />
                       </div>
@@ -142,12 +142,12 @@ function ManageMovie() {
                   <td>07/05/2023</td>
                   <td>07/05/2023</td>
                   <td className="flex gap-3">
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <IoEyeOutline />
                       </div>
                     </button>
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <FaPen />
                       </div>
@@ -169,12 +169,12 @@ function ManageMovie() {
                   <td>07/05/2023</td>
                   <td>07/05/2023</td>
                   <td className="flex gap-3">
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <IoEyeOutline />
                       </div>
                     </button>
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <FaPen />
                       </div>
@@ -196,12 +196,12 @@ function ManageMovie() {
                   <td>07/05/2023</td>
                   <td>07/05/2023</td>
                   <td className="flex gap-3">
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <IoEyeOutline />
                       </div>
                     </button>
-                    <button className="w-[31px] h-[31px] bg-blue">
+                    <button className="w-[31px] h-[31px] bg-dark">
                       <div className="flex justify-center items-center text-white">
                         <FaPen />
                       </div>
@@ -216,7 +216,7 @@ function ManageMovie() {
               </tbody>
             </table>
             <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-5">
-              <div className="h-14 w-14 bg-blue rounded-lg">
+              <div className="h-14 w-14 bg-dark rounded-lg">
                 <div className="flex justify-center content-center pt-4 text-white text-lg">
                   1
                 </div>

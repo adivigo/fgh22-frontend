@@ -128,7 +128,7 @@ function Thankyou() {
                 </div>
               </div>
               <div className="flex pt-6">
-                <div className="w-[357px] h-14 flex flex-row gap-6 text-blue justify-center items-center border border-blue rounded-md">
+                <div className="w-[357px] h-14 flex flex-row gap-6 text-dark justify-center items-center border border-dark rounded-md">
                   <div>
                     <FiDownload className="w-6 h-6" />
                   </div>
@@ -136,7 +136,7 @@ function Thankyou() {
                 </div>
               </div>
               <div className="pt-2">
-                <div className="w-[357px] h-14 flex flex-row gap-6 text-white bg-blue justify-center items-center border border-blue rounded-md font-bold">
+                <div className="w-[357px] h-14 flex flex-row gap-6 text-white bg-dark justify-center items-center border border-dark rounded-md font-bold">
                   Done
                 </div>
               </div>

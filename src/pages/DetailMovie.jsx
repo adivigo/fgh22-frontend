@@ -125,7 +125,7 @@ function DetailMovie() {
               </select>
             </div>
             <div className="flex items-end">
-              <div className="w-48 h-14 bg-blue text-white flex justify-center items-center">
+              <div className="w-48 h-14 bg-dark text-white flex justify-center items-center">
                 Filter
               </div>
             </div>
@@ -144,7 +144,7 @@ function DetailMovie() {
                 </div>
               </div>
             </div>
-            <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg bg-blue">
+            <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg bg-dark">
               <div className="w-64 h-40 border rounded-lg flex justify-center items-center">
                 <div>
                   <img src={hiflixp6} alt="" className="w-52 h-10" />
@@ -167,7 +167,7 @@ function DetailMovie() {
             </div>
           </div>
           <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-9">
-            <div className="h-14 w-14 bg-blue rounded-lg">
+            <div className="h-14 w-14 bg-dark rounded-lg">
               <div className="flex justify-center content-center pt-4 text-white text-lg">
                 1
               </div>
@@ -190,7 +190,7 @@ function DetailMovie() {
           </div>
           <div className="flex justify-center items-center pt-14 pb-6">
             <Link to="/seat-list">
-              <button className=" w-48 h-14 bg-blue text-white rounded text-sm">
+              <button className=" w-48 h-14 bg-dark text-white rounded text-sm">
                 Book Now
               </button>
             </Link>

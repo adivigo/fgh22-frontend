@@ -81,12 +81,12 @@ function Login() {
                 ></input>
               </div>
               <div className="pt-6 flex flex-row justify-end">
-                <Link to="" className="underline text-blue">
+                <Link to="" className="underline text-dark">
                   Forgot your password?
                 </Link>
               </div>
               <div className="flex pt-6">
-                <button className="w-96 h-16 bg-blue rounded-lg text-white">
+                <button className="w-96 h-16 bg-dark rounded-lg text-white">
                   Join For Free Now
                 </button>
               </div>

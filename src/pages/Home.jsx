@@ -38,7 +38,7 @@ function Home() {
             </Link>
             <Link
               to="/seat-list"
-              className="text-white bg-blue inline-block py-2 px-16 border-blue border rounded"
+              className="text-dark bg-white inline-block py-2 px-16 border-dark border rounded"
             >
               Buy Ticket
             </Link>
@@ -85,7 +85,7 @@ function Home() {
       <div className="px-32 flex flex-col">
         <div className="flex justify-between">
           <div className="flex flex-col gap-2 pt-28 flex-1">
-            <div className="text-lg text-blue">
+            <div className="text-lg text-dark">
               MOVIE TICKET PURCHASES #1 IN INDONESIA
             </div>
             <div className="text-5xl max-w-2xl">
@@ -127,7 +127,7 @@ function Home() {
           </div>
         </div>
         <div className="pb-20">
-          <div className="text-lg text-blue pt-28">WHY CHOOSE US</div>
+          <div className="text-lg text-dark pt-28">WHY CHOOSE US</div>
           <div className="text-3xl max-w-lg pt-3.5">
             Unleashing the Ultimate Movie Experience
           </div>
@@ -170,7 +170,7 @@ function Home() {
             </div>
           </div>
           <div className="flex flex-col pt-10 justify-center">
-            <div className="text-blue text-bold text-lg flex justify-center pb-3">
+            <div className="text-dark text-bold text-lg flex justify-center pb-3">
               MOVIES
             </div>
             <div className="flex justify-center">
@@ -185,7 +185,7 @@ function Home() {
               <MovieCard data={{ title: "Penguin", image: penguin }} />
             </div>
             <Link to="/list-movie">
-              <div className="flex flex-row justify-center text-blue text-lg items-center gap-2">
+              <div className="flex flex-row justify-center text-dark text-lg items-center gap-2">
                 <div>View All</div>
                 <FaArrowRightLong />
               </div>
@@ -194,7 +194,7 @@ function Home() {
           <div className="flex flex-col">
             <div className="flex flex-row justify-between">
               <div className="flex flex-col">
-                <div className="text-lg text-blue pt-10">Upcoming Movies</div>
+                <div className="text-lg text-dark pt-10">Upcoming Movies</div>
                 <div className="text-3xl flex pt-4 pb-7">
                   Exciting Movie Coming Soon
                 </div>
@@ -205,7 +205,7 @@ function Home() {
                     <FaArrowLeft />
                   </div>
                 </div>
-                <div className="h-14 w-14 bg-blue rounded-full">
+                <div className="h-14 w-14 bg-dark rounded-full">
                   <div className="flex justify-center content-center pt-5 text-white">
                     <FaArrowRight />
                   </div>
@@ -220,7 +220,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full h-80 bg-blue rounded-s-2xl flex flex-col justify-evenly">
+        <div className="w-full h-80 bg-dark rounded-s-2xl flex flex-col justify-evenly">
           <div className="text-5xl flex text-center justify-center text-white">
             Subscribe to our newsletter
           </div>
@@ -228,14 +228,14 @@ function Home() {
             <input
               type="text"
               placeholder="First Name"
-              className="flex w-56 h-16 bg-blue .placeholder-white border-2 border-white rounded-lg pl-4"
+              className="flex w-56 h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
             />
             <input
               type="email"
               placeholder="Email"
-              className="flex w-56 h-16 bg-blue .placeholder-white border-2 border-white rounded-lg pl-4"
+              className="flex w-56 h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
             />
-            <button className="flex w-56 h-16 bg-white text-blue .placeholder-white border-2 border-white rounded-lg items-center justify-center">
+            <button className="flex w-56 h-16 bg-white text-dark .placeholder-white border-2 border-white rounded-lg items-center justify-center">
               Subscribe Now
             </button>
           </div>

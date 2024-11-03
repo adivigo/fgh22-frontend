@@ -12,7 +12,7 @@ function Graph() {
         <div className="text-3xl">TixIT</div>
         <ul>
           <li className="flex gap-14 text-sm">
-            <Link to="/graph" className="text-blue">
+            <Link to="/graph" className="text-dark">
               Dashboard
             </Link>
             <Link to="/manage-movie">Movie</Link>
@@ -59,7 +59,7 @@ function Graph() {
                 </div>
               </div>
               <div>
-                <button className="w-32 h-[50px] bg-blue rounded-lg text-white">
+                <button className="w-32 h-[50px] bg-dark rounded-lg text-white">
                   Filter
                 </button>
               </div>
@@ -113,7 +113,7 @@ function Graph() {
                   </div>
                 </div>
                 <div>
-                  <button className="w-32 h-[50px] bg-blue rounded-lg text-white">
+                  <button className="w-32 h-[50px] bg-dark rounded-lg text-white">
                     Filter
                   </button>
                 </div>

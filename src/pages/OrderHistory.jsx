@@ -77,7 +77,7 @@ function OrderHistory() {
                   <div className="font-semibold">Loyalty Points</div>
                 </div>
                 <div className="flex justify-center pt-6">
-                  <div className="bg-blue w-60 h-32 rounded-2xl flex">
+                  <div className="bg-dark w-60 h-32 rounded-2xl flex">
                     <div className="flex flex-col justify-around pl-4 text-white">
                       <div className="flex flex-row w-56 justify-between items-center">
                         <div className="font-bold text-lg">Moviegoers</div>
@@ -97,7 +97,7 @@ function OrderHistory() {
                 </div>
                 <div className="flex justify-center pt-2">
                   <div className="bg-grey w-60 h-4 rounded-lg">
-                    <div className="bg-blue w-32 h-4 rounded-lg"></div>
+                    <div className="bg-dark w-32 h-4 rounded-lg"></div>
                   </div>
                 </div>
               </div>
@@ -115,7 +115,7 @@ function OrderHistory() {
                 </div>
                 <div>
                   <div className="pb-6 text-lg">Order History</div>
-                  <hr className="text-blue " />
+                  <hr className="text-dark " />
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@ function OrderHistory() {
                             12321328913829724
                           </div>
                           <div>
-                            <button className=" w-20 h-12 text-blue border border-blue rounded">
+                            <button className=" w-20 h-12 text-dark border border-dark rounded">
                               Copy
                             </button>
                           </div>
@@ -197,7 +197,7 @@ function OrderHistory() {
                           <div>:</div>
                         </div>
                         <div className="flex flex-row justify-center items-center gap-5">
-                          <div className="text-lg text-blue font-bold">$30</div>
+                          <div className="text-lg text-dark font-bold">$30</div>
                         </div>
                       </div>
                       <div className="pt-3 font-normal text-dark text-opacity-40">
@@ -207,7 +207,7 @@ function OrderHistory() {
                         will be forfeited
                       </div>
                       <div className="pt-3 pb-9">
-                        <button className="w-[191px] h-12 text-white bg-blue rounded font-bold">
+                        <button className="w-[191px] h-12 text-white bg-dark rounded font-bold">
                           Check Pembayaran
                         </button>
                       </div>
@@ -243,7 +243,7 @@ function OrderHistory() {
                         Ticket Used
                       </div>
                     </div>
-                    <div className="w-[198px] h-10 text-blue bg-blue bg-opacity-10 text-sm rounded-lg">
+                    <div className="w-[198px] h-10 text-dark bg-dark bg-opacity-10 text-sm rounded-lg">
                       <div className="flex justify-center pt-2">Paid</div>
                     </div>
                   </div>

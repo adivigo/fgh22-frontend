@@ -26,7 +26,7 @@ function Register() {
               <div className="flex flex-col pt-9">
                 <div className="flex flex-row gap-6">
                   <div>
-                    <div className="h-14 w-14 bg-blue rounded-full">
+                    <div className="h-14 w-14 bg-dark rounded-full">
                       <div className="flex justify-center content-center pt-5 text-white">
                         1
                       </div>
@@ -92,14 +92,14 @@ function Register() {
                 </label>
               </div>
               <div className="flex pt-6">
-                <button className="w-96 h-16 bg-blue rounded-lg text-white">
+                <button className="w-96 h-16 bg-dark rounded-lg text-white">
                   Join For Free Now
                 </button>
               </div>
               <br></br>
               <span>
                 already have an account?{" "}
-                <Link to="/login" className="underline text-blue">
+                <Link to="/login" className="underline text-dark">
                   Log in
                 </Link>
               </span>

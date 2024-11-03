@@ -63,7 +63,7 @@ function PaymentConfirm() {
           </div>
           <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
           <div>
-            <div className="h-14 w-14 bg-blue rounded-full">
+            <div className="h-14 w-14 bg-dark rounded-full">
               <div className="flex justify-center content-center pt-5 text-white">
                 3
               </div>
@@ -110,7 +110,7 @@ function PaymentConfirm() {
                   <div className="text-sm text-dark text-opacity-50">
                     TOTAL PAYMENT
                   </div>
-                  <div className="pb-2 text-blue font-bold">$30,00</div>
+                  <div className="pb-2 text-dark font-bold">$30,00</div>
                   <hr className="text-dark text-opacity-20" />
                 </div>
               </div>
@@ -189,7 +189,7 @@ function PaymentConfirm() {
                 </div>
               </div>
               <div className="flex pt-12">
-                <div className="flex justify-center items-center w-[665px] h-14 bg-blue rounded">
+                <div className="flex justify-center items-center w-[665px] h-14 bg-dark rounded">
                   <button className="text-white">Pay your order</button>
                 </div>
               </div>
@@ -214,7 +214,7 @@ function PaymentConfirm() {
                   <div className="flex flex-row justify-center items-center gap-5">
                     <div className="text-lg font-bold">12321328913829724</div>
                     <div>
-                      <button className=" w-20 h-12 text-blue border border-blue rounded">
+                      <button className=" w-20 h-12 text-dark border border-dark rounded">
                         Copy
                       </button>
                     </div>
@@ -228,7 +228,7 @@ function PaymentConfirm() {
                     <div>:</div>
                   </div>
                   <div className="flex flex-row justify-center items-center gap-5">
-                    <div className="text-lg text-blue font-bold">$30</div>
+                    <div className="text-lg text-dark font-bold">$30</div>
                   </div>
                 </div>
                 <div className="pt-8 font-normal text-dark text-opacity-40">
@@ -238,14 +238,18 @@ function PaymentConfirm() {
                   forfeited
                 </div>
                 <div className="pt-14">
-                  <button className="w-[545px] h-14 text-white bg-blue rounded font-bold">
-                    Check Payment
-                  </button>
+                  <Link to="/thankyou">
+                    <button className="w-[545px] h-14 text-white bg-dark rounded font-bold">
+                      Check Payment
+                    </button>
+                  </Link>
                 </div>
                 <div className="pt-2">
-                  <button className="w-[545px] h-14 text-blue bg-white rounded font-bold">
-                    Pay Later
-                  </button>
+                  <Link to="/payment">
+                    <button className="w-[545px] h-14 text-dark bg-white rounded font-bold">
+                      Pay Later
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

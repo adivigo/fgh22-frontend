@@ -70,7 +70,7 @@ function Profile() {
                   <div className="font-semibold">Loyalty Points</div>
                 </div>
                 <div className="flex justify-center pt-6">
-                  <div className="bg-blue w-60 h-32 rounded-2xl flex">
+                  <div className="bg-dark w-60 h-32 rounded-2xl flex">
                     <div className="flex flex-col justify-around pl-4 text-white">
                       <div className="flex flex-row w-56 justify-between items-center">
                         <div className="font-bold text-lg">Moviegoers</div>
@@ -90,7 +90,7 @@ function Profile() {
                 </div>
                 <div className="flex justify-center pt-2">
                   <div className="bg-grey w-60 h-4 rounded-lg">
-                    <div className="bg-blue w-32 h-4 rounded-lg"></div>
+                    <div className="bg-dark w-32 h-4 rounded-lg"></div>
                   </div>
                 </div>
               </div>
@@ -101,7 +101,7 @@ function Profile() {
               <div className="flex flex-row pt-6 pl-12 gap-14">
                 <div>
                   <div className="pb-6 text-lg">Account Settings</div>
-                  <hr className="text-blue " />
+                  <hr className="text-dark " />
                 </div>
                 <Link to="/history">
                   <div className="text-dark text-opacity-40 text-lg">
@@ -179,7 +179,7 @@ function Profile() {
               </div>
             </div>
             <div>
-              <div className="w-96 h-14 bg-blue flex justify-center items-center rounded-2xl text-white font-bold">
+              <div className="w-96 h-14 bg-dark flex justify-center items-center rounded-2xl text-white font-bold">
                 Update Changes
               </div>
             </div>
