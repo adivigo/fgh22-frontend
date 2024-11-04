@@ -74,12 +74,12 @@ function Home() {
           >
             SignIn
           </a>
-          <a
-            href="#"
+          <Link
+            to="/register"
             className="px-4 py-3 bg-gray rounded-lg text-white border border-gray"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
       </nav>
       <div className="px-32 flex flex-col">

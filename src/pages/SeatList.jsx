@@ -215,7 +215,7 @@ function SeatList() {
                       <div className="grid grid-col-8 grid-rows-8 gap-2">
                         <div className="bg-gray w-7 h-7 rounded"></div>
                         <div className="bg-grey w-7 h-7 rounded"></div>
-                        <div className="bg-blue w-7 h-7 rounded"></div>
+                        <div className="bg-grey w-7 h-7 rounded"></div>
                         <div className="bg-grey w-7 h-7 rounded"></div>
                         <div className="bg-grey w-7 h-7 rounded"></div>
                         <div className="bg-grey w-7 h-7 rounded"></div>

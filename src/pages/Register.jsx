@@ -17,7 +17,7 @@ function Register() {
         <div className="absolute top-16 w-72 h-24">
           <img src={logotickitz} alt="" />
         </div>
-        <div className="absolute w-[546px] h-[739px] bg-white top-44 rounded-2xl">
+        <div className="absolute w-[546px] bg-white top-44 rounded-2xl">
           <form
             action=""
             className="flex flex-col justify-center content-center px-20"
@@ -99,7 +99,7 @@ function Register() {
               <br></br>
               <span>
                 already have an account?{" "}
-                <Link to="/login" className="underline text-dark">
+                <Link to="/login" className="underline text-blue">
                   Log in
                 </Link>
               </span>
@@ -108,7 +108,7 @@ function Register() {
                 <div>or</div>
                 <hr class="w-40 h-px my-4 bg-dark border-0 md:my-10" />
               </div>
-              <div className="flex flex-row justify-between ">
+              <div className="flex flex-row justify-between pb-7 ">
                 <div className="flex flex-row items-center gap-6 shadow-xl w-44 h-16 justify-center">
                   <FcGoogle className="w-6 h-6" />
                   <button className="text-lg">Google</button>
