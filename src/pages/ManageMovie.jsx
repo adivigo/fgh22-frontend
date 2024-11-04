@@ -67,14 +67,14 @@ function ManageMovie() {
             </div>
             <table>
               <thead>
-                <tr className="w-[1105px] flex justify-around items-center border-b-2 border-dark border-opacity-20 pb-4 text-xs pt-10">
-                  <th>No.</th>
-                  <th className="flex items-center">Thumbnail</th>
-                  <th>Movie Name</th>
-                  <th>Category</th>
-                  <th>Released Date</th>
-                  <th>Duration</th>
-                  <th>Action</th>
+                <tr className="w-[1105px] flex items-center border-b-2 border-dark border-opacity-20 pb-4 text-xs pt-10">
+                  <th className="pl-14">No.</th>
+                  <th className="pl-14">Thumbnail</th>
+                  <th className="pl-28">Movie Name</th>
+                  <th className="pl-36">Category</th>
+                  <th className="pl-28">Released Date</th>
+                  <th className="pl-20">Duration</th>
+                  <th className="pl-28">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -106,7 +106,7 @@ function ManageMovie() {
                   </td>
                 </tr>
                 <tr className="w-[1105px] flex justify-between items-center pl-[58px] pr-[36px] pt-2 border-b-2 border-dark border-opacity-20 pb-4">
-                  <td>1</td>
+                  <td>2</td>
                   <td>
                     <img src={g2} alt="" className="w-[46px] h-[38px]" />
                   </td>
@@ -133,7 +133,7 @@ function ManageMovie() {
                   </td>
                 </tr>
                 <tr className="w-[1105px] flex justify-between items-center pl-[58px] pr-[36px] pt-2 border-b-2 border-dark border-opacity-20 pb-4">
-                  <td>1</td>
+                  <td>3</td>
                   <td>
                     <img src={g2} alt="" className="w-[46px] h-[38px]" />
                   </td>
@@ -160,7 +160,7 @@ function ManageMovie() {
                   </td>
                 </tr>
                 <tr className="w-[1105px] flex justify-between items-center pl-[58px] pr-[36px] pt-2 border-b-2 border-dark border-opacity-20 pb-4">
-                  <td>1</td>
+                  <td>4</td>
                   <td>
                     <img src={g2} alt="" className="w-[46px] h-[38px]" />
                   </td>
@@ -187,7 +187,7 @@ function ManageMovie() {
                   </td>
                 </tr>
                 <tr className="w-[1105px] flex justify-between items-center pl-[58px] pr-[36px] pt-2 border-b-2 border-dark border-opacity-20 pb-4">
-                  <td>1</td>
+                  <td>5</td>
                   <td>
                     <img src={g2} alt="" className="w-[46px] h-[38px]" />
                   </td>

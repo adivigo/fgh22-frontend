@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import gc from "/src/assets/images/gc.png";
 import dw from "/src/assets/images/dw.jpg";
 import frieren from "/src/assets/images/frieren.png";
@@ -16,6 +16,9 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function ListMovie() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const MovieCard = (props) => {
     return (
       <div className="flex flex-col gap-5">

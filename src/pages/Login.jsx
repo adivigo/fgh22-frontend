@@ -7,6 +7,7 @@ import { FaFacebook } from "react-icons/fa6";
 import { PiHandWavingLight } from "react-icons/pi";
 
 function Login() {
+  const [isAlert, setAlert] = React.useState(false);
   const [login, setLogin] = React.useState([]);
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,7 +20,7 @@ function Login() {
     }
     setLogin(obj);
     if (obj.email !== "admin@mail.com" || obj.password !== "1234") {
-      window.alert("Email atau password salah");
+      setAlert(true);
     } else {
       window.location.replace("http://localhost:5173/");
     }
@@ -52,9 +53,11 @@ function Login() {
                   Sign in with your data that you entered during your
                   registration
                 </div>
-                <div className="invisible justify-center bg-red text-white rounded-sm">
-                  Wrong email or password
-                </div>
+                {isAlert && (
+                  <div className="flex justify-center bg-red text-white rounded-md">
+                    Wrong email or password
+                  </div>
+                )}
                 <div className="flex flex-col gap-3">
                   <label htmlFor="email">
                     <b className="flex pt-6">Email</b>
