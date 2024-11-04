@@ -18,16 +18,18 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function Home() {
+  const [isShow, setShow] = React.useState(false);
   const MovieCard = (props) => {
     return (
       <div className="flex flex-col gap-5">
-        <div className="group w-[284px] h-[405px] bg-red rounded-xl overflow-hidden">
+        <div className="flex-shrink-0 group w-[284px] h-[405px] bg-red rounded-xl overflow-hidden relative">
           <img
             src={props.data.image}
             alt=""
-            className="group w-[284px] h-[405px] rounded-xl overflow-hidden absolute"
+            className="group w-[284px] h-[405px] rounded-xl absolute"
           />
           <div className="w-full h-full bg-dark bg-opacity-70 invisible group-hover:visible flex flex-col justify-center items-center gap-2 relative">
             <Link
@@ -45,6 +47,9 @@ function Home() {
           </div>
         </div>
         <div className="text-xl font-normal">{props.data.title}</div>
+        {props.data.date && (
+          <div className="text-xl font-normal text-blue">{props.data.date}</div>
+        )}
         <div className="flex flex-row gap-2">
           <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg">
             Action
@@ -58,16 +63,16 @@ function Home() {
   };
   return (
     <div>
-      <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
+      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
         <div className="text-3xl">TixIT</div>
         <ul>
-          <li className="flex gap-14 text-sm">
+          <li className="hidden md:flex gap-14 text-sm">
             <a href="#">Home</a>
             <a href="#">Movie</a>
             <a href="#">Buy Ticket</a>
           </li>
         </ul>
-        <div className="flex gap-3 text-sm">
+        <div className="hidden md:flex gap-3 text-sm">
           <a
             href="#"
             className="px-4 py-3 bg-white rounded-lg text-black border border-gray"
@@ -81,11 +86,25 @@ function Home() {
             Sign Up
           </Link>
         </div>
+        <button className="md:hidden" onClick={() => setShow(!isShow)}>
+          <GiHamburgerMenu />
+        </button>
       </nav>
-      <div className="px-32 flex flex-col">
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-2 pt-28 flex-1">
-            <div className="text-lg text-dark">
+      {isShow && (
+        <>
+          <div className="w-screen flex flex-col justify-center items-center">
+            <div className="h-12">Home</div>
+            <div className="h-12">Movie</div>
+            <div className="h-12">Buy Ticket</div>
+            <div className="h-12">Sign In</div>
+            <div className="h-12">SignUp</div>
+          </div>
+        </>
+      )}
+      <div className="px-6 md:px-32 flex flex-col">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between">
+          <div className="flex flex-col gap-2 pt-12 md:pt-28 flex-1 text-center md:text-start">
+            <div className="text-lg text-blue">
               MOVIE TICKET PURCHASES #1 IN INDONESIA
             </div>
             <div className="text-5xl max-w-2xl">
@@ -127,24 +146,30 @@ function Home() {
           </div>
         </div>
         <div className="pb-20">
-          <div className="text-lg text-dark pt-28">WHY CHOOSE US</div>
-          <div className="text-3xl max-w-lg pt-3.5">
-            Unleashing the Ultimate Movie Experience
+          <div className="text-lg text-blue md:pt-28 text-center md:text-start">
+            WHY CHOOSE US
           </div>
-          <div className="flex flex-row justify-between pt-6">
-            <div className="flex flex-col gap-5">
-              <div className="h-14 w-14 bg-grey rounded-full">
-                <div className="flex justify-center  pt-4">
-                  <img src={shieldLogo} alt="" className="h-6 w-6" />
+          <div className="flex justify-center md:justify-start">
+            <div className="text-3xl max-w-lg pt-3.5 text-center md:text-start">
+              Unleashing the Ultimate Movie Experience
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between pt-6">
+            <div className="flex justify-center md:justify-start">
+              <div className="flex flex-col text-center md:text-start items-center md:items-start gap-5">
+                <div className="h-14 w-14 bg-grey rounded-full">
+                  <div className="flex justify-center  pt-4">
+                    <img src={shieldLogo} alt="" className="h-6 w-6" />
+                  </div>
+                </div>
+                <div className="text-lg font-bold">Guaranteed</div>
+                <div className="text-secondary max-w-xs">
+                  Lorem ipsum dolor sit amet, consectetur adipis elit. Sit enim
+                  nec, proin faucibus nibh et sagittis a. Lacinia purus ac amet.
                 </div>
               </div>
-              <div className="text-lg font-bold">Guaranteed</div>
-              <div className="text-secondary max-w-xs">
-                Lorem ipsum dolor sit amet, consectetur adipis elit. Sit enim
-                nec, proin faucibus nibh et sagittis a. Lacinia purus ac amet.
-              </div>
             </div>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col text-center md:text-start items-center md:items-start gap-5">
               <div className="h-14 w-14 bg-grey rounded-full">
                 <div className="flex justify-center  pt-4">
                   <img src={checkLogo} alt="" className="h-6 w-6" />
@@ -156,7 +181,7 @@ function Home() {
                 nec, proin faucibus nibh et sagittis a. Lacinia purus ac amet.
               </div>
             </div>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col text-center md:text-start items-center md:items-start gap-5">
               <div className="h-14 w-14 bg-grey rounded-full">
                 <div className="flex justify-center pt-4">
                   <img src={chatLogo} alt="" className="h-6 w-6" />
@@ -170,7 +195,7 @@ function Home() {
             </div>
           </div>
           <div className="flex flex-col pt-10 justify-center">
-            <div className="text-dark text-bold text-lg flex justify-center pb-3">
+            <div className="text-blue text-bold text-lg flex justify-center pb-3">
               MOVIES
             </div>
             <div className="flex justify-center">
@@ -178,28 +203,34 @@ function Home() {
                 Exciting Movies That Should Be Watched Today
               </div>
             </div>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between overflow-x-scroll gap-5">
+              <MovieCard data={{ title: "Deadpool x Wolverine", image: dw }} />
+              <MovieCard data={{ title: "Gyeongseong Creature", image: gc }} />
+              <MovieCard data={{ title: "Frieren", image: frieren }} />
+              <MovieCard data={{ title: "Penguin", image: penguin }} />
               <MovieCard data={{ title: "Deadpool x Wolverine", image: dw }} />
               <MovieCard data={{ title: "Gyeongseong Creature", image: gc }} />
               <MovieCard data={{ title: "Frieren", image: frieren }} />
               <MovieCard data={{ title: "Penguin", image: penguin }} />
             </div>
             <Link to="/list-movie">
-              <div className="flex flex-row justify-center text-dark text-lg items-center gap-2">
+              <div className="hidden md:flex flex-row justify-center text-dark text-lg items-center gap-2">
                 <div>View All</div>
                 <FaArrowRightLong />
               </div>
             </Link>
           </div>
           <div className="flex flex-col">
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col md:flex-row justify-between">
               <div className="flex flex-col">
-                <div className="text-lg text-dark pt-10">Upcoming Movies</div>
-                <div className="text-3xl flex pt-4 pb-7">
+                <div className="text-lg text-dark pt-10 text-center md:text-start">
+                  Upcoming Movies
+                </div>
+                <div className="text-3xl flex pt-4 pb-7 justify-center md:justify-start">
                   Exciting Movie Coming Soon
                 </div>
               </div>
-              <div className="flex flex-row gap-x-2 items-end pb-7">
+              <div className="hidden md:flex flex-row gap-x-2 items-end pb-7">
                 <div className="h-14 w-14 bg-gray bg-opacity-50 rounded-full">
                   <div className="flex justify-center content-center pt-5 text-white">
                     <FaArrowLeft />
@@ -212,36 +243,90 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row justify-between">
-              <MovieCard data={{ title: "Spiderman", image: dw }} />
-              <MovieCard data={{ title: "Spiderman", image: gc }} />
-              <MovieCard data={{ title: "Spiderman", image: frieren }} />
-              <MovieCard data={{ title: "Spiderman", image: penguin }} />
+            <div className="flex flex-row justify-between overflow-x-scroll gap-5">
+              <MovieCard
+                data={{
+                  title: "Deadpool x Wolverine",
+                  image: dw,
+                  date: "December 2024",
+                }}
+              />
+              <MovieCard
+                data={{
+                  title: "Gyeongseong Creature",
+                  image: gc,
+                  date: "December 2024",
+                }}
+              />
+              <MovieCard
+                data={{
+                  title: "Frieren",
+                  image: frieren,
+                  date: "December 2024",
+                }}
+              />
+              <MovieCard
+                data={{
+                  title: "Penguin",
+                  image: penguin,
+                  date: "December 2024",
+                }}
+              />
+              <MovieCard
+                data={{
+                  title: "Deadpool x Wolverine",
+                  image: dw,
+                  date: "December 2024",
+                }}
+              />
+              <MovieCard
+                data={{
+                  title: "Gyeongseong Creature",
+                  image: gc,
+                  date: "December 2024",
+                }}
+              />
+              <MovieCard
+                data={{
+                  title: "Frieren",
+                  image: frieren,
+                  date: "December 2024",
+                }}
+              />
+              <MovieCard
+                data={{
+                  title: "Penguin",
+                  image: penguin,
+                  date: "December 2024",
+                }}
+              />
             </div>
           </div>
         </div>
-        <div className="w-full h-80 bg-dark rounded-s-2xl flex flex-col justify-evenly">
-          <div className="text-5xl flex text-center justify-center text-white">
-            Subscribe to our newsletter
-          </div>
-          <div className="flex justify-center gap-x-3">
-            <input
-              type="text"
-              placeholder="First Name"
-              className="flex w-56 h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="flex w-56 h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
-            />
-            <button className="flex w-56 h-16 bg-white text-dark .placeholder-white border-2 border-white rounded-lg items-center justify-center">
-              Subscribe Now
-            </button>
+        <div className="flex justify-center">
+          <div className="min-w-[327px] min-h-[538px] md:w-full md:h-80 bg-dark rounded-2xl flex flex-col justify-evenly">
+            <div className="text-5xl flex flex-row text-center justify-center text-white">
+              Subscribe to our newsletter
+            </div>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-3">
+              <input
+                type="text"
+                placeholder="First Name"
+                className="flex w-[264px] h-[60px] md:max-w-56 md:max-h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="flex w-[264px] h-[60px] md:max-w-56 md:max-h-16 bg-dark .placeholder-white border-2 border-white rounded-lg pl-4"
+              />
+              <button className="flex min-w-[264px] min-h-[60px] md:max-w-56 md:max-h-16 bg-white text-dark .placeholder-white border-2 border-white rounded-lg items-center justify-center">
+                Subscribe Now
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <footer className="px-32 pt-24">
+      <footer className="px-6 md:px-32 pt-24">
         <div className="flex flex-col ">
           <div className="flex w-full py-3 px-11 flex-col md:flex-row md:justify-between gap-3 ">
             <div className="brand-footer gap-4">
@@ -253,24 +338,40 @@ function Home() {
             </div>
             <div className="flex flex-col gap-3">
               <b className="pb-4">Explore</b>
-              <a className="cursor-pointer" href="">
-                Cinemas
-              </a>
-              <a className="cursor-pointer" href="">
-                Movie List
-              </a>
-              <a className="cursor-pointer" href="">
-                My ticket
-              </a>
-              <a className="cursor-pointer" href="">
-                Notification
-              </a>
+              <div className="flex flex-row md:flex-col gap-10">
+                <a className="cursor-pointer" href="">
+                  Cinemas
+                </a>
+                <a className="cursor-pointer" href="">
+                  Movie List
+                </a>
+                <a className="cursor-pointer" href="">
+                  My ticket
+                </a>
+                <a className="cursor-pointer" href="">
+                  Notification
+                </a>
+              </div>
             </div>
             <div className="flex flex-col gap-6">
               <b>Our Sponsor</b>
-              <img className="w-1/3" src={ebv} alt="logo-sponsor" />
-              <img className="w-1/3" src={cineone} alt="logo-sponsor" />
-              <img className="w-1/3" src={hiflix} alt="logo-sponsor" />
+              <div className="flex flex-row md:flex-col gap-6">
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={ebv}
+                  alt="logo-sponsor"
+                />
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={cineone}
+                  alt="logo-sponsor"
+                />
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={hiflix}
+                  alt="logo-sponsor"
+                />
+              </div>
             </div>
             <div className="flex flex-col gap-3">
               <b>Follow us</b>
