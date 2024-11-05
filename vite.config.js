@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ["/src/assets/images/checkLogo.png"],
+      external: [
+        "/src/assets/images/checkLogo.png",
+        "/src/assets/images/chatLogo.png",
+      ],
     },
   },
 });
