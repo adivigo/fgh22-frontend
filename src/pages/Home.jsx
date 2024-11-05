@@ -375,7 +375,7 @@ function Home() {
             </div>
             <div className="flex flex-col gap-3">
               <b>Follow us</b>
-              <div className="flex sm:flex-row sm:justify-center gap-5 lg:flex-col">
+              <div className="flex sm:flex-row sm:justify-start gap-5 lg:flex-col">
                 <a className="flex items-center">
                   <img src={fb} alt="icon" />
                   <h6 className="hidden lg:flex">Tickitz Cinema</h6>

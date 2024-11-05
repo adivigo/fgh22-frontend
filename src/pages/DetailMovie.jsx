@@ -11,36 +11,56 @@ import bannerp5 from "/src/assets/images/g2.svg";
 import g2 from "/src/assets/images/g2.png";
 import hiflixp6 from "/src/assets/images/hiflixp6.svg";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { FaChevronUp } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
 function DetailMovie() {
+  const [isNav, setNav] = React.useState(false);
+  const [isShow, setShow] = React.useState(false);
   return (
     <div>
-      <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
+      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
         <div className="text-3xl">TixIT</div>
         <ul>
-          <li className="flex gap-14 text-sm">
+          <li className="hidden md:flex gap-14 text-sm">
             <a href="#">Home</a>
             <a href="#">Movie</a>
             <a href="#">Buy Ticket</a>
           </li>
         </ul>
-        <div className="flex gap-3 text-sm">
+        <div className="hidden md:flex gap-3 text-sm">
           <a
             href="#"
             className="px-4 py-3 bg-white rounded-lg text-black border border-gray"
           >
             SignIn
           </a>
-          <a
-            href="#"
+          <Link
+            to="/register"
             className="px-4 py-3 bg-gray rounded-lg text-white border border-gray"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
+        <button className="md:hidden" onClick={() => setNav(!isNav)}>
+          <GiHamburgerMenu />
+        </button>
       </nav>
+      {isNav && (
+        <>
+          <div className="w-screen flex flex-col justify-center items-center">
+            <div className="h-12">Home</div>
+            <div className="h-12">Movie</div>
+            <div className="h-12">Buy Ticket</div>
+            <div className="h-12">Sign In</div>
+            <div className="h-12">SignUp</div>
+          </div>
+        </>
+      )}
       <div>
-        <div className="flex relative w-full h-[415px]">
+        <div className="flex relative h-[475px] w-full md:h-[415px]">
           <div class="banner">
             <img
               src={bannerp5}
@@ -50,12 +70,12 @@ function DetailMovie() {
             />
           </div>
         </div>
-        <div className="w-[264px] h-[405px] absolute top-[356px] left-[130px]">
+        <div className="w-[327px] h-[502px] md:w-[264px] md:h-[405px] absolute top-[402px] left-[170px] md:top-[356px] md:left-[130px]">
           <img src={g2} alt="" />
         </div>
-        <div className="pl-[413px] pt-6">
+        <div className="flex justify-center flex-col pt-52 text-center md:text-start md:pl-[413px] md:pt-6">
           <div className="text-3xl">Spider-Man: Homecoming</div>
-          <div className="flex flex-row gap-2 pt-6">
+          <div className="flex flex-row gap-2 pt-6 justify-center md:justify-start">
             <div className="rounded-2xl border border-grey text-dark text-opacity-50 bg-grey px-3 flex justify-center items-center">
               Action
             </div>
@@ -63,12 +83,12 @@ function DetailMovie() {
               Adventure
             </div>
           </div>
-          <div className="flex flex-row py-4">
+          <div className="flex flex-row py-4 justify-around md:justify-start">
             <div>
-              <div className="text-sm text-dark text-opacity-50 pr-28">
+              <div className="text-sm text-dark text-opacity-50 md:pr-28 text-start">
                 Release Date
               </div>
-              <div>June 28, 2017</div>
+              <div className="text-start">June 28, 2017</div>
             </div>
             <div>
               <div className="text-sm text-dark text-opacity-50">
@@ -77,14 +97,20 @@ function DetailMovie() {
               <div>Jon Watss</div>
             </div>
           </div>
-          <div className="flex flex-row pb-12">
-            <div className="pr-16">
-              <div className="text-sm text-dark text-opacity-50">Duration</div>
-              <div>2 hours 13 minutes </div>
+          <div className="flex flex-row pb-12 justify-evenly md:justify-start">
+            <div className="md:pr-16">
+              <div className="text-sm text-dark text-opacity-50 text-start">
+                Duration
+              </div>
+              <div className="">2 hours 13 minutes </div>
             </div>
             <div>
-              <div className="text-sm text-dark text-opacity-50">Casts</div>
-              <div>Tom Holland, Michael Keaton, Robert Downey Jr</div>
+              <div className="text-sm text-dark text-opacity-50 text-start">
+                Casts
+              </div>
+              <div className="flex flex-wrap max-w-[153px] text-star0 md:max-w-96">
+                Tom Holland, Michael Keaton, Robert Downey Jr
+              </div>
             </div>
           </div>
         </div>
@@ -101,42 +127,53 @@ function DetailMovie() {
               most important will be threatened.
             </div>
           </div>
-          <div className="pt-14 text-3xl">Book Tickets</div>
-          <div className="flex flex-row gap-8 pt-10 justify-between">
+          <div className="hidden md:block pt-14 text-3xl">Book Tickets</div>
+          <div className="block text-center md:hidden pt-14 text-3xl">
+            Showtimes and Tickets
+          </div>
+          <div className="flex flex-col md:flex-row gap-8 pt-10 justify-center items-center md:items-start md:justify-between">
             <div>
-              <div className="text-xl pb-3">Choose Date</div>
-              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10 px-6">
+              <div className="hidden md:block text-xl pb-3">Choose Date</div>
+              <select
+                id="time"
+                class="w-[327px] md:w-72 h-14 bg-gray bg-opacity-10 px-6"
+              >
                 <option selected>21/07/20</option>
                 <option value="CA">22/07/20</option>
               </select>
             </div>
-            <div>
-              <div className="text-xl pb-3">Choose Time</div>
+            <div className="hidden md:block">
+              <div className="htext-xl pb-3">Choose Time</div>
               <select id="time" class="w-72 h-14 bg-gray bg-opacity-10 px-6">
                 <option selected>08 : 30 AM</option>
                 <option value="CA">09 : 00 AM</option>
               </select>
             </div>
             <div>
-              <div className="text-xl pb-3">Choose Location</div>
-              <select id="time" class="w-72 h-14 bg-gray bg-opacity-10 px-6">
+              <div className="hidden md:block text-xl pb-3">
+                Choose Location
+              </div>
+              <select
+                id="time"
+                class="w-[327px] md:w-72 h-14 bg-gray bg-opacity-10 px-6"
+              >
                 <option selected>Purwokerto</option>
                 <option value="CA">California</option>
               </select>
             </div>
             <div className="flex items-end">
-              <div className="w-48 h-14 bg-dark text-white flex justify-center items-center">
+              <div className="w-[327px] md:w-48 h-14 bg-dark text-white flex justify-center items-center">
                 Filter
               </div>
             </div>
           </div>
-          <div className="flex flex-row gap-9 pt-10 pb-9">
-            <div className="text-xl">Choose Cinema</div>
+          <div className="flex justify-center md:justify-start flex-row gap-9 pt-3 md:pt-10 pb-9">
+            <div className="hidden md:block text-xl">Choose Cinema</div>
             <div className="text-lg text-dark text-opacity-60 justify-end">
               39 Result
             </div>
           </div>
-          <div className="flex flex-row gap-4 justify-center pl-14">
+          <div className="hidden md:flex flex-row gap-4 justify-center pl-14">
             <div className="w-64 h-40 border border-dark border-opacity-20 rounded-lg">
               <div className="w-64 h-40 border rounded-lg flex justify-center items-center">
                 <div>
@@ -166,6 +203,146 @@ function DetailMovie() {
               </div>
             </div>
           </div>
+          <div className="flex md:hidden flex-col justify-center items-center gap-12">
+            <div className="w-[327px] border border-dark border-opacity-30 rounded-xl">
+              <div className="flex flex-row justify-between pb-5 pt-8 px-8">
+                <div className="">
+                  <div className="w-[112px] h-[45px]">
+                    <img src={ebv} alt="" />
+                  </div>
+                  <div className="text-2xl">EBV.id</div>
+                  <div className="text-xs text-dark text-opacity-50 w-[207px]">
+                    Whatever street No.12, South Purwokerto
+                  </div>
+                </div>
+                <button
+                  className="flex items-center"
+                  onClick={() => setShow(!isShow)}
+                >
+                  {isShow && <FaChevronUp className="w-4 h-4" />}
+                  {!isShow && <FaChevronDown className="w-4 h-4" />}
+                </button>
+              </div>
+              {isShow && (
+                <>
+                  <div className="px-8">
+                    <hr />
+                  </div>
+                  <div className="px-8">
+                    <div className="text-xl pt-5">REGULAR</div>
+                    <div className="grid grid-cols-2 gap-2 pt-7 ">
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-8">
+                    <div className="text-xl pt-5">GOLD</div>
+                    <div className="grid grid-cols-2 gap-2 pt-7 ">
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-8">
+                    <div className="text-xl pt-5">PLATINUM S</div>
+                    <div className="grid grid-cols-2 gap-2 pt-7 pb-10">
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                      <div className="bg-background bg-opacity-20 rounded-2xl w-[88px] h-[31px] text-center pt-1">
+                        10.30 AM
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+            <div></div>
+            <div className="w-[327px] h-[187px] border border-dark border-opacity-30 rounded-xl">
+              <div className="flex flex-row justify-between pt-8 px-8">
+                <div className="flex flex-col">
+                  <div className="w-[112px] h-[22px]">
+                    <img src={hiflix} alt="" />
+                  </div>
+                  <div className="text-2xl pt-4">Hiflix Cinema</div>
+                  <div className="text-xs text-dark text-opacity-50 w-[207px]">
+                    Whatever street No.12, South Purwokerto
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <FaChevronDown className="w-4 h-4" />
+                </div>
+              </div>
+            </div>
+            <div className="w-[327px] h-[187px] border border-dark border-opacity-30 rounded-xl">
+              <div className="flex flex-row justify-between pt-8 px-8">
+                <div className="">
+                  <div className="w-[112px] h-[14px]">
+                    <img src={cineone} alt="" />
+                  </div>
+                  <div className="text-2xl pt-4">Cineone 21</div>
+                  <div className="text-xs text-dark text-opacity-50 w-[207px]">
+                    Whatever street No.12, South Purwokerto
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <FaChevronDown className="w-4 h-4" />
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-9">
             <div className="h-14 w-14 bg-dark rounded-lg">
               <div className="flex justify-center content-center pt-4 text-white text-lg">
@@ -188,7 +365,7 @@ function DetailMovie() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center items-center pt-14 pb-6">
+          <div className="hidden md:flex justify-center items-center pt-14 pb-6">
             <Link to="/seat-list">
               <button className=" w-48 h-14 bg-dark text-white rounded text-sm">
                 Book Now
@@ -197,7 +374,7 @@ function DetailMovie() {
           </div>
         </div>
       </div>
-      <footer className="px-32 pt-24 h-439px">
+      <footer className="px-6 md:px-32 pt-24">
         <div className="flex flex-col ">
           <div className="flex w-full py-3 px-11 flex-col md:flex-row md:justify-between gap-3 ">
             <div className="brand-footer gap-4">
@@ -209,28 +386,44 @@ function DetailMovie() {
             </div>
             <div className="flex flex-col gap-3">
               <b className="pb-4">Explore</b>
-              <a className="cursor-pointer" href="">
-                Cinemas
-              </a>
-              <a className="cursor-pointer" href="">
-                Movie List
-              </a>
-              <a className="cursor-pointer" href="">
-                My ticket
-              </a>
-              <a className="cursor-pointer" href="">
-                Notification
-              </a>
+              <div className="flex flex-row md:flex-col gap-10">
+                <a className="cursor-pointer" href="">
+                  Cinemas
+                </a>
+                <a className="cursor-pointer" href="">
+                  Movie List
+                </a>
+                <a className="cursor-pointer" href="">
+                  My ticket
+                </a>
+                <a className="cursor-pointer" href="">
+                  Notification
+                </a>
+              </div>
             </div>
             <div className="flex flex-col gap-6">
               <b>Our Sponsor</b>
-              <img className="w-1/3" src={ebv} alt="logo-sponsor" />
-              <img className="w-1/3" src={cineone} alt="logo-sponsor" />
-              <img className="w-1/3" src={hiflix} alt="logo-sponsor" />
+              <div className="flex flex-row md:flex-col gap-6">
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={ebv}
+                  alt="logo-sponsor"
+                />
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={cineone}
+                  alt="logo-sponsor"
+                />
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={hiflix}
+                  alt="logo-sponsor"
+                />
+              </div>
             </div>
             <div className="flex flex-col gap-3">
               <b>Follow us</b>
-              <div className="flex sm:flex-row sm:justify-center gap-5 lg:flex-col">
+              <div className="flex sm:flex-row sm:justify-start gap-5 lg:flex-col">
                 <a className="flex items-center">
                   <img src={fb} alt="icon" />
                   <h6 className="hidden lg:flex">Tickitz Cinema</h6>
@@ -250,7 +443,7 @@ function DetailMovie() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center pt-12">
+          <div className="flex justify-center">
             © 2020 Tickitz. All Rights Reserved.
           </div>
         </div>

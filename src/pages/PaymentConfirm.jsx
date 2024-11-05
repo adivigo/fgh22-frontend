@@ -10,36 +10,52 @@ import youtube from "/src/assets/images/ytlogo.png";
 import { IoMdCheckmark } from "react-icons/io";
 import visa from "/src/assets/images/logos_visa.svg";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function PaymentConfirm() {
+  const [isShow, setShow] = React.useState(false);
   return (
     <div>
-      <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
+      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
         <div className="text-3xl">TixIT</div>
         <ul>
-          <li className="flex gap-14 text-sm">
+          <li className="hidden md:flex gap-14 text-sm">
             <a href="#">Home</a>
             <a href="#">Movie</a>
             <a href="#">Buy Ticket</a>
           </li>
         </ul>
-        <div className="flex gap-3 text-sm">
+        <div className="hidden md:flex gap-3 text-sm">
           <a
             href="#"
             className="px-4 py-3 bg-white rounded-lg text-black border border-gray"
           >
             SignIn
           </a>
-          <a
-            href="#"
+          <Link
+            to="/register"
             className="px-4 py-3 bg-gray rounded-lg text-white border border-gray"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
+        <button className="md:hidden" onClick={() => setShow(!isShow)}>
+          <GiHamburgerMenu />
+        </button>
       </nav>
+      {isShow && (
+        <>
+          <div className="w-screen flex flex-col justify-center items-center">
+            <div className="h-12">Home</div>
+            <div className="h-12">Movie</div>
+            <div className="h-12">Buy Ticket</div>
+            <div className="h-12">Sign In</div>
+            <div className="h-12">SignUp</div>
+          </div>
+        </>
+      )}
       <div className="bg-gray bg-opacity-10">
-        <div className="flex flex-row gap-6 justify-center pt-8">
+        <div className="hidden md:flex flex-row gap-6 justify-center pt-8">
           <div className="flex justify-center items-center flex-col">
             <div className="h-14 w-14 bg-green rounded-full">
               <div className="flex justify-center content-center pt-5 text-white">
@@ -74,16 +90,16 @@ function PaymentConfirm() {
           </div>
         </div>
         <div className="flex justify-center pb-24 pt-8">
-          <div className="bg-white w-[732px] h-[1375px]">
+          <div className="bg-white rounded-2xl min-w-[327px] max-h-[1488]px md:w-[732px] md:h-[1375px]">
             <div className="px-9 pt-12">
               <div className="text-2xl font-bold">Payment Info</div>
               <div className="pb-2 pt-6 flex gap-3 flex-col">
                 <div className="flex flex-col gap-2">
-                  <div className="text-sm text-dark text-opacity-50">
+                  <div className="text-sm text-dark text-opacity-50 ">
                     DATE & TIME
                   </div>
                   <div className="pb-2">Tuesday, 07 July 2020 at 02:00pm</div>
-                  <hr className="text-dark text-opacity-20" />
+                  <hr className="text-dark text-opacity-20 min-w-[275px]" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-sm text-dark text-opacity-50">
@@ -114,14 +130,16 @@ function PaymentConfirm() {
                   <hr className="text-dark text-opacity-20" />
                 </div>
               </div>
-              <div className="text-2xl font-bold pt-12">Payment Info</div>
+              <div className="text-2xl font-bold pt-12">
+                Personal Information
+              </div>
               <div className="pt-5 flex flex-col gap-3">
                 <div className="flex flex-col gap-3">
                   <div>Full Name</div>
                   <input
                     type="text"
                     placeholder="Jonas El Rodriguez"
-                    className="w-[665px] h-16 pl-11 border border-dark border-opacity-20"
+                    className="min-w-[275px] md:w-[665px] h-16 pl-11 border border-dark border-opacity-20"
                   />
                 </div>
                 <div className="flex flex-col gap-3">
@@ -129,7 +147,7 @@ function PaymentConfirm() {
                   <input
                     type="email"
                     placeholder="jonasrodri123@gmail.com"
-                    className="w-[665px] h-16 pl-11 border border-dark border-opacity-20"
+                    className="min-w-[275px] md:w-[665px] h-16 pl-11 border border-dark border-opacity-20"
                   />
                 </div>
                 <div className="flex flex-col gap-3">
@@ -137,13 +155,13 @@ function PaymentConfirm() {
                   <input
                     type="text"
                     placeholder="+62 | 81445687121"
-                    className="w-[665px] h-16 pl-11 border border-dark border-opacity-20"
+                    className="min-w-[275px] md:w-[665px] h-16 pl-11 border border-dark border-opacity-20"
                   />
                 </div>
               </div>
               <div>
                 <div className="text-2xl font-bold pt-12">Payment Method</div>
-                <div className="grid grid-cols-4 pt-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 pt-8 gap-8">
                   <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
                     <div>
                       <img src={visa} alt="" />
@@ -165,7 +183,7 @@ function PaymentConfirm() {
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-4 pt-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 pt-8 gap-8">
                   <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
                     <div>
                       <img src={visa} alt="" />
@@ -188,9 +206,13 @@ function PaymentConfirm() {
                   </div>
                 </div>
               </div>
-              <div className="flex pt-12">
+              <div className="flex pt-12 pb-16">
                 <div className="flex justify-center items-center w-[665px] h-14 bg-dark rounded">
-                  <button className="text-white">Pay your order</button>
+                  <Link to="/payment-confirm">
+                    <button className="text-white min-w-[275px]">
+                      Pay your order
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -199,19 +221,19 @@ function PaymentConfirm() {
         {/* dari sini */}
         <div className="w-screen bg-dark bg-opacity-40 absolute top-24 h-[1617px]">
           <div className="flex justify-center">
-            <div className="w-[573px] h-[506px] bg-white rounded-lg flex flex-col absolute top-1/2 -translate-y-2/4">
+            <div className="w-[326px] h-[486px] md:w-[573px] md:h-[506px] bg-white rounded-lg flex flex-col absolute top-1/4 -translate-y-2/4">
               <div className="pt-6 flex flex-col px-3">
                 <div className="flex justify-center">
                   <div className="text-2xl font-bold">Payment Info</div>
                 </div>
-                <div className="flex flex-row justify-between pt-8">
-                  <div className="flex flex-row justify-center items-center">
+                <div className="flex flex-col md:flex-row justify-between pt-8">
+                  <div className="flex flex-row justify-start md:justify-center items-center">
                     <div className="text-sm text-dark text-opacity-40 pr-10 justify-end">
                       No. Rekening Virtual
                     </div>
                     <div>:</div>
                   </div>
-                  <div className="flex flex-row justify-center items-center gap-5">
+                  <div className="flex flex-row justify-start md:justify-center items-center gap-5">
                     <div className="text-lg font-bold">12321328913829724</div>
                     <div>
                       <button className=" w-20 h-12 text-dark border border-dark rounded">
@@ -257,7 +279,7 @@ function PaymentConfirm() {
         </div>
         {/* sampe sini */}
       </div>
-      <footer className="px-32 pt-24 h-439px">
+      <footer className="px-6 md:px-32 pt-24">
         <div className="flex flex-col ">
           <div className="flex w-full py-3 px-11 flex-col md:flex-row md:justify-between gap-3 ">
             <div className="brand-footer gap-4">
@@ -269,28 +291,44 @@ function PaymentConfirm() {
             </div>
             <div className="flex flex-col gap-3">
               <b className="pb-4">Explore</b>
-              <a className="cursor-pointer" href="">
-                Cinemas
-              </a>
-              <a className="cursor-pointer" href="">
-                Movie List
-              </a>
-              <a className="cursor-pointer" href="">
-                My ticket
-              </a>
-              <a className="cursor-pointer" href="">
-                Notification
-              </a>
+              <div className="flex flex-row md:flex-col gap-10">
+                <a className="cursor-pointer" href="">
+                  Cinemas
+                </a>
+                <a className="cursor-pointer" href="">
+                  Movie List
+                </a>
+                <a className="cursor-pointer" href="">
+                  My ticket
+                </a>
+                <a className="cursor-pointer" href="">
+                  Notification
+                </a>
+              </div>
             </div>
             <div className="flex flex-col gap-6">
               <b>Our Sponsor</b>
-              <img className="w-1/3" src={ebv} alt="logo-sponsor" />
-              <img className="w-1/3" src={cineone} alt="logo-sponsor" />
-              <img className="w-1/3" src={hiflix} alt="logo-sponsor" />
+              <div className="flex flex-row md:flex-col gap-6">
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={ebv}
+                  alt="logo-sponsor"
+                />
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={cineone}
+                  alt="logo-sponsor"
+                />
+                <img
+                  className="w-[81px] h-[31px] md:w-1/3"
+                  src={hiflix}
+                  alt="logo-sponsor"
+                />
+              </div>
             </div>
             <div className="flex flex-col gap-3">
               <b>Follow us</b>
-              <div className="flex sm:flex-row sm:justify-center gap-5 lg:flex-col">
+              <div className="flex sm:flex-row sm:justify-start gap-5 lg:flex-col">
                 <a className="flex items-center">
                   <img src={fb} alt="icon" />
                   <h6 className="hidden lg:flex">Tickitz Cinema</h6>
@@ -310,7 +348,7 @@ function PaymentConfirm() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center pt-12">
+          <div className="flex justify-center">
             © 2020 Tickitz. All Rights Reserved.
           </div>
         </div>
