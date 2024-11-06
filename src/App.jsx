@@ -13,6 +13,8 @@ import OrderHistory from "/src/pages/OrderHistory";
 import Graph from "/src/pages/Graph";
 import ManageMovie from "/src/pages/ManageMovie";
 import AddMovie from "/src/pages/AddMovie";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const router = createBrowserRouter([
   {
@@ -74,7 +76,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

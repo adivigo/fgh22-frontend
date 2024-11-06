@@ -242,14 +242,14 @@ function PaymentConfirm() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row justify-between pt-8">
-                  <div className="flex flex-row justify-center items-center">
+                <div className="flex flex-col md:flex-row justify-between pt-2 md:pt-14">
+                  <div className="flex flex-row justify-start md:justify-center items-center">
                     <div className="text-sm text-dark text-opacity-40 pr-20 justify-end">
                       Total Payment
                     </div>
                     <div>:</div>
                   </div>
-                  <div className="flex flex-row justify-center items-center gap-5">
+                  <div className="flex flex-row justify-start md:justify-center items-center gap-5">
                     <div className="text-lg text-dark font-bold">$30</div>
                   </div>
                 </div>
@@ -259,16 +259,18 @@ function PaymentConfirm() {
                   bill has not been paid by the specified time, it will be
                   forfeited
                 </div>
-                <div className="pt-14">
-                  <Link to="/thankyou">
-                    <button className="w-[545px] h-14 text-white bg-dark rounded font-bold">
-                      Check Payment
-                    </button>
-                  </Link>
+                <div className="items-center">
+                  <div className=" pt-8 md:pt-14">
+                    <Link to="/thankyou">
+                      <button className="w-[302px] md:w-[545px] h-14 text-white bg-dark rounded font-bold">
+                        Check Payment
+                      </button>
+                    </Link>
+                  </div>
                 </div>
                 <div className="pt-2">
                   <Link to="/payment">
-                    <button className="w-[545px] h-14 text-dark bg-white rounded font-bold">
+                    <button className="w-[302px] md:w-[545px] h-14 text-dark bg-white rounded font-bold">
                       Pay Later
                     </button>
                   </Link>

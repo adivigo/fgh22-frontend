@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import imageBg from "/src/assets/images/imagebg.png";
 import logotickitz from "/src/assets/images/logotickitz.png";
 import { FcGoogle } from "react-icons/fc";
@@ -9,6 +9,7 @@ import { PiHandWavingLight } from "react-icons/pi";
 function Login() {
   const [isAlert, setAlert] = React.useState(false);
   const [login, setLogin] = React.useState([]);
+  const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -22,7 +23,7 @@ function Login() {
     if (obj.email !== "admin@mail.com" || obj.password !== "1234") {
       setAlert(true);
     } else {
-      window.location.replace("http://localhost:5173/");
+      navigate("/profile");
     }
     console.log(login);
   }

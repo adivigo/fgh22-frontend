@@ -13,42 +13,63 @@ import logocover from "/src/assets/images/logotickitz.png";
 import { FaArrowRightLong } from "react-icons/fa6";
 import qr from "/src/assets/images/qr.svg";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaArrowDownLong } from "react-icons/fa6";
 
 function Thankyou() {
+  const [isShow, setShow] = React.useState(false);
   return (
     <div>
-      <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
+      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
         <div className="text-3xl">TixIT</div>
         <ul>
-          <li className="flex gap-14 text-sm">
+          <li className="hidden md:flex gap-14 text-sm">
             <a href="#">Home</a>
             <a href="#">Movie</a>
             <a href="#">Buy Ticket</a>
           </li>
         </ul>
-        <div className="flex gap-3 text-sm">
-          <Link
-            to="/profile"
+        <div className="hidden md:flex gap-3 text-sm">
+          <a
+            href="#"
             className="px-4 py-3 bg-white rounded-lg text-black border border-gray"
           >
             SignIn
-          </Link>
-          <a
-            href="#"
+          </a>
+          <Link
+            to="/register"
             className="px-4 py-3 bg-gray rounded-lg text-white border border-gray"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
+        <button className="md:hidden" onClick={() => setShow(!isShow)}>
+          <GiHamburgerMenu />
+        </button>
       </nav>
+      {isShow && (
+        <>
+          <div className="w-screen flex flex-col justify-center items-center">
+            <div className="h-12">Home</div>
+            <div className="h-12">Movie</div>
+            <div className="h-12">Buy Ticket</div>
+            <div className="h-12">Sign In</div>
+            <div className="h-12">SignUp</div>
+          </div>
+        </>
+      )}
       <div className="flex flex-row bg-gray bg-opacity-20">
-        <div className="w-screen flex flex-row justify-center">
+        <div className="w-screen flex flex-col md:flex-row justify-center">
           <div className="relative">
             <img src={tycover} alt="" />
-            <div className="absolute w-[800px] h-[920px] bg-dark top-0 bg-opacity-85"></div>
-            <div className="absolute top-72 left-36 text-white">
-              <div className="flex gap-6 flex-col">
-                <img src={logocover} alt="" className="w-72 h-28" />
+            <div className="min-w-[767px] min-h-[882px] absolute md:min-w-[800px] md:min-h-[920px] bg-dark top-0 bg-opacity-85"></div>
+            <div className="absolute top-60 left-24 md:top-72 md:left-36 text-white">
+              <div className="flex justify-center items-center md:justify-start md:items-start text-center md:text-start gap-6 flex-col">
+                <img
+                  src={logocover}
+                  alt=""
+                  className="w-[127px] h-12 md:w-72 md:h-28"
+                />
                 <div className="text-5xl font-bold">
                   Thankyou For Purchasing
                 </div>
@@ -56,16 +77,19 @@ function Thankyou() {
                   Lorem ipsum dolor sit amet consectetur. Quam pretium pretium
                   tempor integer sed magna et.
                 </div>
-                <div className="flex flex-row gap-6 text-center items-center">
+                <div className="flex flex-col md:flex-row gap-6 text-center items-center">
                   <div className="text-lg">Please Download Your Ticket</div>
-                  <div>
+                  <div className="hidden md:block">
                     <FaArrowRightLong />
+                  </div>
+                  <div className="block md:hidden">
+                    <FaArrowDownLong />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-[669px] pt-24">
+          <div className="flex flex-col w-screen md:w-[669px] pt-24">
             <div className="flex flex-col items-center justify-center">
               <div className="w-[295px] h-[635px] bg-white">
                 <div>
@@ -135,7 +159,7 @@ function Thankyou() {
                   <div className="font-bold">Download</div>
                 </div>
               </div>
-              <div className="pt-2">
+              <div className="pb-14 md:pb-0 pt-2">
                 <div className="w-[357px] h-14 flex flex-row gap-6 text-white bg-dark justify-center items-center border border-dark rounded-md font-bold">
                   Done
                 </div>
