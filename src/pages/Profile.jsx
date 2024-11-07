@@ -6,10 +6,15 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import star from "/src/assets/images/star.svg";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { editUser } from "../redux/reducers/profile";
+import { useDispatch, useSelector } from "react-redux";
 
 function Profile() {
   const [isShow, setShow] = React.useState(false);
-  5;
+  const user = useSelector((state) => state.profile.data);
+  const dispatch = useDispatch();
+
+  const onSubmit = (e) => {};
   return (
     <div>
       <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
@@ -140,84 +145,86 @@ function Profile() {
                 </Link>
               </div>
             </div>
-            <div className="bg-white w-[866px] h-[418px] rounded-3xl">
-              <div className="px-8">
-                <div className="pt-10 pb-2">Detail Information</div>
-                <hr className="text-dark text-opacity-20" />
-                <div className="flex flex-col">
-                  <div className="flex flex-row pt-12 gap-8">
-                    <div className="flex flex-col">
-                      <label className="flex pb-3">First Name</label>
-                      <input
-                        type="text"
-                        className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                        placeholder="Jonaz"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="flex pb-3">Last Name</label>
-                      <input
-                        type="text"
-                        className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                        placeholder="El Rodrigues"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row pt-12 gap-8">
-                    <div className="flex flex-col">
-                      <label className="flex pb-3">Email</label>
-                      <input
-                        type="email"
-                        className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                        placeholder="jonasrodrigu123@gmail.com"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="flex pb-3">Phone Number</label>
-                      <div className="flex flex-row items-center border border-dark border-opacity-20 rounded-2xl">
-                        <div className="border-r-[1px] pr-2 pl-6 text-dark text-opacity-50">
-                          +62
-                        </div>
+            <form onSubmit={onSubmit}>
+              <div className="bg-white w-[866px] h-[418px] rounded-3xl">
+                <div className="px-8">
+                  <div className="pt-10 pb-2">Detail Information</div>
+                  <hr className="text-dark text-opacity-20" />
+                  <div className="flex flex-col">
+                    <div className="flex flex-row pt-12 gap-8">
+                      <div className="flex flex-col">
+                        <label className="flex pb-3">First Name</label>
                         <input
-                          type="number"
-                          className="w-80 h-16 pl-4 box-border"
-                          placeholder="81445687121"
+                          type="text"
+                          className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          placeholder="Jonaz"
                         />
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="flex pb-3">Last Name</label>
+                        <input
+                          type="text"
+                          className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          placeholder="El Rodrigues"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-row pt-12 gap-8">
+                      <div className="flex flex-col">
+                        <label className="flex pb-3">Email</label>
+                        <input
+                          type="email"
+                          className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          placeholder="jonasrodrigu123@gmail.com"
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="flex pb-3">Phone Number</label>
+                        <div className="flex flex-row items-center border border-dark border-opacity-20 rounded-2xl">
+                          <div className="border-r-[1px] pr-2 pl-6 text-dark text-opacity-50">
+                            +62
+                          </div>
+                          <input
+                            type="number"
+                            className="w-80 h-16 pl-4 box-border"
+                            placeholder="81445687121"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="bg-white w-[866px] h-72 rounded-3xl">
-              <div className="px-8">
-                <div className="pt-10 pb-2">Account and Privacy </div>
-                <hr className="text-dark text-opacity-20" />
-                <div className="flex flex-row pt-12 gap-8">
-                  <div className="flex flex-col">
-                    <label className="flex pb-3">New Password</label>
-                    <input
-                      type="password"
-                      className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                      placeholder="Write your password"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label className="flex pb-3">Confirm Password</label>
-                    <input
-                      type="password"
-                      className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                      placeholder="Confirm your password"
-                    />
+              <div className="bg-white w-[866px] h-72 rounded-3xl">
+                <div className="px-8">
+                  <div className="pt-10 pb-2">Account and Privacy </div>
+                  <hr className="text-dark text-opacity-20" />
+                  <div className="flex flex-row pt-12 gap-8">
+                    <div className="flex flex-col">
+                      <label className="flex pb-3">New Password</label>
+                      <input
+                        type="password"
+                        className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                        placeholder="Write your password"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="flex pb-3">Confirm Password</label>
+                      <input
+                        type="password"
+                        className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                        placeholder="Confirm your password"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <div className="w-96 h-14 bg-dark flex justify-center items-center rounded-2xl text-white font-bold">
-                Update Changes
+              <div className="pt-5">
+                <button className="w-96 h-14 bg-dark flex justify-center items-center rounded-2xl text-white font-bold">
+                  Update Changes
+                </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

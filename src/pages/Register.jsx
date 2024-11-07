@@ -80,7 +80,7 @@ function Register() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 pt-5">
                   {isAlert && (
                     <div className="flex justify-center">
                       <div className="bg-red text-center text-white mt-10 w-40 rounded-md">

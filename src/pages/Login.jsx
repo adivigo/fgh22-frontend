@@ -5,28 +5,40 @@ import logotickitz from "/src/assets/images/logotickitz.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa6";
 import { PiHandWavingLight } from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../redux/reducers/auth";
+import { setProfile } from "../redux/reducers/profile";
 
 function Login() {
   const [isAlert, setAlert] = React.useState(false);
-  const [login, setLogin] = React.useState([]);
+  const cekUser = useSelector((state) => state.user.user);
+  const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = new FormData(e.target);
-    const obj = {};
+  const dispatch = useDispatch();
 
-    for (let [key, val] of form.entries()) {
-      obj[key] = (obj[key], val);
-      continue;
-    }
-    setLogin(obj);
-    if (obj.email !== "admin@mail.com" || obj.password !== "1234") {
+  const ceklogin = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const found = cekUser?.find((e) => e.email === email);
+    if (
+      !found ||
+      found.password !== password ||
+      email == "" ||
+      password == ""
+    ) {
       setAlert(true);
-    } else {
+      return;
+    }
+    dispatch(loginAction("abc"));
+    dispatch(setProfile(found));
+  };
+  React.useEffect(() => {
+    if (token !== "") {
       navigate("/profile");
     }
-    console.log(login);
-  }
+  }, [token]);
   return (
     <div>
       <div className=" relative flex min-h-screen justify-center items-center bg-dark">
@@ -42,7 +54,7 @@ function Login() {
           <form
             action=""
             className="flex flex-col justify-center content-center px-5 md:px-20"
-            onSubmit={handleSubmit}
+            onSubmit={ceklogin}
           >
             <div>
               <div className="flex flex-col pt-9">
