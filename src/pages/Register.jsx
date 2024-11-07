@@ -1,11 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import imageBg from "/src/assets/images/imagebg.png";
 import logotickitz from "/src/assets/images/logotickitz.png";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../redux/reducers/user";
 
 function Register() {
+  const [isAlert, setAlert] = React.useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cekUser = useSelector((state) => state.user.user);
+
+  const saveData = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const found = cekUser?.find((e) => e.email === email);
+    if (!found) {
+      dispatch(addUser({ email, password }));
+      navigate("/login");
+      return;
+    }
+    setAlert(true);
+  };
+
   return (
     <div>
       <div className="relative flex min-h-screen justify-center items-center bg-dark">
@@ -19,6 +40,7 @@ function Register() {
         </div>
         <div className="absolute w-[326px] top-36 md:w-[546px] bg-white md:top-44 rounded-2xl">
           <form
+            onSubmit={saveData}
             action=""
             className="flex flex-col justify-center content-center px-5 md:px-20"
           >
@@ -59,8 +81,15 @@ function Register() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-3">
+                  {isAlert && (
+                    <div className="flex justify-center">
+                      <div className="bg-red text-center text-white mt-10 w-40 rounded-md">
+                        email sudah terdaftar
+                      </div>
+                    </div>
+                  )}
                   <label for="email">
-                    <b className="flex pt-10">Email</b>
+                    <b className="flex">Email</b>
                   </label>
                   <input
                     type="email"
