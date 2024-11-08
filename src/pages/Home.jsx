@@ -63,6 +63,7 @@ function Home() {
   };
   return (
     <div>
+      <div></div>
       <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
         <div className="text-3xl">TixIT</div>
         <ul>
