@@ -12,7 +12,6 @@ import g2 from "/src/assets/images/g2.png";
 import hiflixp6 from "/src/assets/images/hiflixp6.svg";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaChevronUp } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 

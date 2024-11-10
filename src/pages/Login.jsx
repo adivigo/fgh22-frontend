@@ -108,9 +108,9 @@ function Login() {
               </div>
               <br></br>
               <div className="flex flex-row justify-between items-center gap-3 ">
-                <hr class="w-40 h-px my-4 bg-grey border-0 md:my-10" />
+                <hr className="w-40 h-px my-4 bg-grey border-0 md:my-10" />
                 <div>or</div>
-                <hr class="w-40 h-px my-4 bg-grey border-0 md:my-10" />
+                <hr className="w-40 h-px my-4 bg-grey border-0 md:my-10" />
               </div>
               <div className="flex flex-row justify-center gap-8 md:justify-between pb-7 ">
                 <div className="flex flex-row items-center gap-6 shadow-xl w-16 md:w-44 h-16 justify-center">

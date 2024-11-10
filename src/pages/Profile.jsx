@@ -4,17 +4,29 @@ import { SlMagnifier } from "react-icons/sl";
 import pp from "/src/assets/images/pp.png";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import star from "/src/assets/images/star.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { editUser } from "../redux/reducers/profile";
 import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../redux/reducers/auth";
 
 function Profile() {
   const [isShow, setShow] = React.useState(false);
   const user = useSelector((state) => state.profile.data);
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {};
+  const doLogout = (e) => {
+    e.preventDefault();
+    dispatch(loginAction(""));
+  };
+  React.useEffect(() => {
+    if (token == "") {
+      navigate("/login");
+    }
+  }, [token]);
   return (
     <div>
       <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
@@ -41,6 +53,7 @@ function Profile() {
               className="w-14 h-14 rounded-full flex object-cover"
             />
           </div>
+          <button onClick={doLogout}>Logout</button>
         </div>
         <button className="md:hidden" onClick={() => setShow(!isShow)}>
           <GiHamburgerMenu />

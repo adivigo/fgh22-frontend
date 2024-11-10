@@ -6,18 +6,46 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux/reducers/user";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 function Register() {
   const [isAlert, setAlert] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cekUser = useSelector((state) => state.user.user);
+  const loginFormSchema = yup.object({
+    email: yup
+      .string()
+      .email("email is invalid")
+      .min(8, "your email is must be 8 or more characters")
+      .required("email is required"),
+    password: yup
+      .string()
+      .required("Please enter your password")
+      .min(8, "password must contain at least 8 characters")
+      .matches(
+        /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        "Password must contain at least one uppercase, one number and one special case character"
+      ),
+    "agree-tos": yup
+      .string()
+      .required()
+      .is(["true"], "you have to agree to our ToS"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginFormSchema),
+  });
 
-  const saveData = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
+  const onSubmit = (e) => {
+    const email = e.email;
+    const password = e.password;
+    console.log(e);
     const found = cekUser?.find((e) => e.email === email);
     if (!found) {
       dispatch(addUser({ email, password }));
@@ -40,7 +68,7 @@ function Register() {
         </div>
         <div className="absolute w-[326px] top-36 md:w-[546px] bg-white md:top-44 rounded-2xl">
           <form
-            onSubmit={saveData}
+            onSubmit={handleSubmit(onSubmit)}
             action=""
             className="flex flex-col justify-center content-center px-5 md:px-20"
           >
@@ -57,7 +85,7 @@ function Register() {
                       Fill Form
                     </div>
                   </div>
-                  <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed" />
+                  <hr className="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed" />
                   <div>
                     <div className="h-14 w-14 bg-grey rounded-full">
                       <div className="flex justify-center content-center pt-5 text-dark">
@@ -68,7 +96,7 @@ function Register() {
                       Activate
                     </div>
                   </div>
-                  <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed" />
+                  <hr className="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed" />
                   <div>
                     <div className="h-14 w-14 bg-grey rounded-full">
                       <div className="flex justify-center content-center pt-5 text-dark">
@@ -88,16 +116,23 @@ function Register() {
                       </div>
                     </div>
                   )}
-                  <label for="email">
+                  <label htmlFor="email">
                     <b className="flex">Email</b>
                   </label>
                   <input
                     type="email"
                     id="email"
-                    name="email"
+                    {...register("email")}
                     placeholder="enter your Email"
-                    className="w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                    className={
+                      errors.email?.message
+                        ? " w-[284px] h-[50px] md:w-96 md:h-16 border-red border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                        : " w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                    }
                   ></input>
+                  {errors.email?.message && (
+                    <span className="text-red">{errors.email?.message}</span>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col pt-6 gap-3">
@@ -107,18 +142,32 @@ function Register() {
                 <input
                   type="password"
                   id="password"
-                  name="password"
+                  {...register("password")}
                   placeholder="enter your Password"
-                  className="w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                  className={
+                    errors.password?.message
+                      ? " w-[284px] h-[50px] md:w-96 md:h-16 border-red border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                      : " w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                  }
                 ></input>
+                {errors.password?.message && (
+                  <span className="text-red">{errors.password?.message}</span>
+                )}
               </div>
-              <div className="hidden pt-6 md:flex flex-row">
-                <input type="checkbox" id="agree" name="agree"></input>
-                <label htmlFor="agree">
-                  <div className="flex pl-4">
-                    I agree to term and conditions
-                  </div>
-                </label>
+              <div className="hidden pt-6 md:flex flex-col">
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    value="true"
+                    {...register("agree-tos")}
+                  />
+                  <label>I agree Term of Services</label>
+                </div>
+                {errors["agree-tos"]?.message && (
+                  <span className="text-red">
+                    {errors["agree-tos"]?.message}
+                  </span>
+                )}
               </div>
               <div className="flex pt-6">
                 <button className="w-[284px] h-[50px] md:w-96 md:h-16 bg-dark rounded-lg text-white">
@@ -133,9 +182,9 @@ function Register() {
                 </Link>
               </span>
               <div className="flex flex-row justify-between items-center gap-3 ">
-                <hr class="w-40 h-px my-4 bg-grey border-0 md:my-10" />
+                <hr className="w-40 h-px my-4 bg-grey border-0 md:my-10" />
                 <div>or</div>
-                <hr class="w-40 h-px my-4 bg-grey border-0 md:my-10" />
+                <hr className="w-40 h-px my-4 bg-grey border-0 md:my-10" />
               </div>
               <div className="flex flex-row justify-center gap-8 md:justify-between pb-7 ">
                 <div className="flex flex-row items-center gap-6 shadow-xl w-16 md:w-44 h-16 justify-center">
