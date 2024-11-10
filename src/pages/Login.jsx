@@ -8,6 +8,9 @@ import { PiHandWavingLight } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/reducers/auth";
 import { setProfile } from "../redux/reducers/profile";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 function Login() {
   const [isAlert, setAlert] = React.useState(false);
@@ -15,24 +18,37 @@ function Login() {
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loginFormSchema = yup.object({
+    email: yup
+      .string()
+      .email("email is invalid")
+      .min(8, "your email is must be 8 or more characters")
+      .required("email is required"),
+    password: yup
+      .string()
+      .required("Please enter your password")
+      .min(8, "password must contain at least 8 characters")
+      .required("password is required"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginFormSchema),
+  });
 
-  const ceklogin = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
+  const onSubmit = (e) => {
+    const email = e.email;
+    const password = e.password;
+    console.log(e);
     const found = cekUser?.find((e) => e.email === email);
-    if (
-      !found ||
-      found.password !== password ||
-      email == "" ||
-      password == ""
-    ) {
+    if (!found || found.password !== password) {
       setAlert(true);
       return;
     }
     dispatch(loginAction("abc"));
-    dispatch(setProfile(found));
+    dispatch(setProfile({ email, password }));
   };
   React.useEffect(() => {
     if (token !== "") {
@@ -54,7 +70,7 @@ function Login() {
           <form
             action=""
             className="flex flex-col justify-center content-center px-5 md:px-20"
-            onSubmit={ceklogin}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <div>
               <div className="flex flex-col pt-9">
@@ -78,10 +94,17 @@ function Login() {
                   <input
                     type="email"
                     id="email"
-                    name="email"
+                    {...register("email")}
                     placeholder="enter your Email"
-                    className="w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                    className={
+                      errors.email?.message
+                        ? " w-[284px] h-[50px] md:w-96 md:h-16 border-red border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                        : " w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                    }
                   ></input>
+                  {errors.email?.message && (
+                    <span className="text-red">{errors.email?.message}</span>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col pt-6 gap-3">
@@ -91,10 +114,17 @@ function Login() {
                 <input
                   type="password"
                   id="password"
-                  name="password"
+                  {...register("password")}
                   placeholder="enter your Password"
-                  className="w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                  className={
+                    errors.password?.message
+                      ? " w-[284px] h-[50px] md:w-96 md:h-16 border-red border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                      : " w-[284px] h-[50px] md:w-96 md:h-16 border-gray border-opacity-30 bg-background bg-opacity-20 rounded border pl-3"
+                  }
                 ></input>
+                {errors.password?.message && (
+                  <span className="text-red">{errors.password?.message}</span>
+                )}
               </div>
               <div className="pt-6 flex flex-row justify-end">
                 <Link to="" className="underline text-blue">

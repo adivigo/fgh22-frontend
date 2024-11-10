@@ -15,7 +15,7 @@ function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cekUser = useSelector((state) => state.user.user);
-  const loginFormSchema = yup.object({
+  const registerFormSchema = yup.object({
     email: yup
       .string()
       .email("email is invalid")
@@ -39,7 +39,7 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(loginFormSchema),
+    resolver: yupResolver(registerFormSchema),
   });
 
   const onSubmit = (e) => {
