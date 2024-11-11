@@ -21,14 +21,18 @@ const user = createSlice({
       state.user = [...state.user, action.payload];
     },
     editUser: (state, action) => {
-      state.data[foundIndex].firstName = action.payload.firstName;
-      state.data[foundIndex].lastName = action.payload.lastName;
-      state.data[foundIndex].phoneNumber = action.payload.phoneNumber;
-      state.data[foundIndex].email = action.payload.email;
-      if (action.payload.password !== "") {
-        state.data[foundIndex].password = action.payload.password;
+      const email = action.payload.email;
+      const foundIndex = state.user.findIndex((user) => user.email === email);
+      console.log(email);
+      if (foundIndex !== -1) {
+        state.user[foundIndex].firstName = action.payload.firstName;
+        state.user[foundIndex].lastName = action.payload.lastName;
+        state.user[foundIndex].phoneNumber = action.payload.phoneNumber;
+        state.user[foundIndex].email = action.payload.email;
+        if (action.payload.password !== "") {
+          state.user[foundIndex].password = action.payload.password;
+        }
       }
-      state.data[foundIndex].image = action.payload.image;
     },
   },
 });

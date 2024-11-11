@@ -61,17 +61,16 @@ function Profile() {
     resolver: yupResolver(profileFormSchema),
   });
 
-  const onSubmit = (e) => {
-    const firstName = e.firstName;
-    const lastName = e.lastName;
-    const email = e.email;
-    const phoneNumber = e.phoneNumber;
-    const password = e.password;
-    console.log(e);
+  const onSubmit = (value) => {
+    const firstName = value.firstName;
+    const lastName = value.lastName;
+    const email = value.email;
+    const phoneNumber = value.phoneNumber;
+    const password = value.password;
     dispatch(
       editProfile({ firstName, lastName, email, phoneNumber, password })
     );
-    const found = cekUser?.find((e) => e.email === email);
+    const found = cekUser?.find((e) => e.email === value.email);
     console.log(found);
     dispatch(editUser({ firstName, lastName, email, phoneNumber, password }));
   };
@@ -233,7 +232,7 @@ function Profile() {
                               : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
                           }
                           {...register("firstName")}
-                          placeholder=""
+                          value={user.firstName}
                         />
                         {errors.firstName?.message && (
                           <span className="text-red">
@@ -251,7 +250,7 @@ function Profile() {
                               : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
                           }
                           {...register("lastName")}
-                          placeholder=""
+                          value={user.lastName}
                         />
                         {errors.lastName?.message && (
                           <span className="text-red">
@@ -295,7 +294,7 @@ function Profile() {
                             type="number"
                             className=" w-80 h-16 rounded-2xl pl-6"
                             {...register("phoneNumber")}
-                            placeholder="81445687121"
+                            value={user.phoneNumber}
                           />
                         </div>
                         {errors.phoneNumber?.message && (

@@ -41,15 +41,13 @@ function Login() {
   const onSubmit = (value) => {
     const email = value.email;
     const password = value.password;
-    console.log(value);
-    const found = cekUser?.findIndex((e) => e.email === value.email);
-    console.log(found);
+    const found = cekUser?.find((e) => e.email === value.email);
     if (!found || found.password !== password) {
       setAlert(true);
       return;
     }
     dispatch(loginAction("abc"));
-    dispatch(setProfile({ email, password }));
+    dispatch(setProfile({ firstName, lastName, email, phoneNumber, password }));
   };
   React.useEffect(() => {
     if (token !== "") {
