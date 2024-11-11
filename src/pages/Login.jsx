@@ -38,11 +38,12 @@ function Login() {
     resolver: yupResolver(loginFormSchema),
   });
 
-  const onSubmit = (e) => {
-    const email = e.email;
-    const password = e.password;
-    console.log(e);
-    const found = cekUser?.find((e) => e.email === email);
+  const onSubmit = (value) => {
+    const email = value.email;
+    const password = value.password;
+    console.log(value);
+    const found = cekUser?.findIndex((e) => e.email === value.email);
+    console.log(found);
     if (!found || found.password !== password) {
       setAlert(true);
       return;

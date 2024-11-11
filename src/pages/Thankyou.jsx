@@ -12,12 +12,29 @@ import { FiDownload } from "react-icons/fi";
 import logocover from "/src/assets/images/logotickitz.png";
 import { FaArrowRightLong } from "react-icons/fa6";
 import qr from "/src/assets/images/qr.svg";
-import { Link } from "react-router-dom";
+import defpp from "/src/assets/images/defpp.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaArrowDownLong } from "react-icons/fa6";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { SlMagnifier } from "react-icons/sl";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../redux/reducers/auth";
+import { Link, useNavigate } from "react-router-dom";
 
 function Thankyou() {
+  const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isShow, setShow] = React.useState(false);
+  const doLogout = (e) => {
+    e.preventDefault();
+    dispatch(loginAction(""));
+  };
+  React.useEffect(() => {
+    if (token == "") {
+      navigate("/login");
+    }
+  }, [token]);
   return (
     <div>
       <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
@@ -29,19 +46,24 @@ function Thankyou() {
             <a href="#">Buy Ticket</a>
           </li>
         </ul>
-        <div className="hidden md:flex gap-3 text-sm">
-          <a
-            href="#"
-            className="px-4 py-3 bg-white rounded-lg text-black border border-gray"
-          >
-            SignIn
-          </a>
-          <Link
-            to="/register"
-            className="px-4 py-3 bg-gray rounded-lg text-white border border-gray"
-          >
-            Sign Up
-          </Link>
+        <div className="hidden md:flex gap-3 justify-center items-center">
+          <div>Location</div>
+          <div className="w-4 h-4 flex justify-center items-end">
+            <RiArrowDropDownLine className="" />
+          </div>
+          <div>
+            <SlMagnifier />
+          </div>
+          <div className="w-14 h-14 rounded-full bg-red">
+            <Link to="/profile">
+              <img
+                src={defpp}
+                alt=""
+                className="w-14 h-14 rounded-full flex object-cover"
+              />
+            </Link>
+          </div>
+          <button onClick={doLogout}>Logout</button>
         </div>
         <button className="md:hidden" onClick={() => setShow(!isShow)}>
           <GiHamburgerMenu />

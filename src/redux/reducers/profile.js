@@ -18,21 +18,20 @@ const profile = createSlice({
   initialState,
   reducers: {
     setProfile: (state, action) => {
-      // console.log(state);
-      state.user = action.payload;
+      state.data = action.payload;
     },
-    editUser: (state, action) => {
-      state.data[foundIndex].firstName = action.payload.firstName;
-      state.data[foundIndex].lastName = action.payload.lastName;
-      state.data[foundIndex].phoneNumber = action.payload.phoneNumber;
-      state.data[foundIndex].email = action.payload.email;
+    editProfile: (state, action) => {
+      state.data.firstName = action.payload.firstName;
+      state.data.lastName = action.payload.lastName;
+      state.data.phoneNumber = action.payload.phoneNumber;
+      state.data.email = action.payload.email;
       if (action.payload.password !== "") {
-        state.data[foundIndex].password = action.payload.password;
+        state.data.password = action.payload.password;
       }
-      state.data[foundIndex].image = action.payload.image;
+      state.data.image = action.payload.image;
     },
   },
 });
 
-export const { setProfile, editUser } = profile.actions;
+export const { setProfile, editProfile } = profile.actions;
 export default profile.reducer;

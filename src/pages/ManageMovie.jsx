@@ -7,22 +7,38 @@ import g2 from "/src/assets/images/g2.png";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaPen } from "react-icons/fa";
 import { FiTrash } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import defpp from "/src/assets/images/defpp.png";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../redux/reducers/auth";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function ManageMovie() {
+  const [isShow, setShow] = React.useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const doLogout = (e) => {
+    e.preventDefault();
+    dispatch(loginAction(""));
+  };
+  React.useEffect(() => {
+    if (token == "") {
+      navigate("/login");
+    }
+  }, [token]);
   return (
     <div>
-      <nav className="px-32 flex justify-between items-center h-24 shadow-lg">
+      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
         <div className="text-3xl">TixIT</div>
         <ul>
-          <li className="flex gap-14 text-sm">
-            <Link to="/graph">Dashboard</Link>
-            <Link to="/manage-movie" className="text-dark">
-              Movie
-            </Link>
+          <li className="hidden md:flex gap-14 text-sm">
+            <a href="#">Home</a>
+            <a href="#">Movie</a>
+            <a href="#">Buy Ticket</a>
           </li>
         </ul>
-        <div className="flex gap-3 justify-center items-center">
+        <div className="hidden md:flex gap-3 justify-center items-center">
           <div>Location</div>
           <div className="w-4 h-4 flex justify-center items-end">
             <RiArrowDropDownLine className="" />
@@ -32,13 +48,28 @@ function ManageMovie() {
           </div>
           <div className="w-14 h-14 rounded-full bg-red">
             <img
-              src={pp}
+              src={defpp}
               alt=""
               className="w-14 h-14 rounded-full flex object-cover"
             />
           </div>
+          <button onClick={doLogout}>Logout</button>
         </div>
+        <button className="md:hidden" onClick={() => setShow(!isShow)}>
+          <GiHamburgerMenu />
+        </button>
       </nav>
+      {isShow && (
+        <>
+          <div className="w-screen flex flex-col justify-center items-center">
+            <div className="h-12">Home</div>
+            <div className="h-12">Movie</div>
+            <div className="h-12">Buy Ticket</div>
+            <div className="h-12">Sign In</div>
+            <div className="h-12">SignUp</div>
+          </div>
+        </>
+      )}
       <div className="bg-background bg-opacity-20 w-full h-screen">
         <div className="flex justify-center items-center pt-16">
           <div className="w-[1105px] h-[567px] bg-white rounded-2xl">

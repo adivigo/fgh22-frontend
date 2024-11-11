@@ -6,9 +6,14 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import star from "/src/assets/images/star.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { editUser } from "../redux/reducers/profile";
+import defpp from "/src/assets/images/defpp.png";
+import { editProfile } from "../redux/reducers/profile";
+import { editUser } from "../redux/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/reducers/auth";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 function Profile() {
   const [isShow, setShow] = React.useState(false);
@@ -16,8 +21,61 @@ function Profile() {
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cekUser = useSelector((state) => state.user.user);
+  const profileFormSchema = yup.object({
+    firstName: yup
+      .string()
+      .required("first name is required")
+      .min(1, "first name cant be empty"),
+    lastName: yup
+      .string()
+      .required("last name is required")
+      .min(1, "last name cant be empty"),
+    email: yup
+      .string()
+      .email("email is invalid")
+      .min(8, "your email is must be 8 or more characters")
+      .required("email is required"),
+    phoneNumber: yup
+      .number()
+      .required("last name is required")
+      .min(8, "not a valid phone number"),
+    password: yup
+      .string()
+      .required("Please enter your password")
+      .min(8, "password must contain at least 8 characters")
+      .matches(
+        /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        "Password must contain at least one uppercase, one number and one special case character"
+      ),
+    confirmPassword: yup
+      .string()
+      .required("Please confirm your password")
+      .oneOf([yup.ref("password"), null], "Password doesn't match."),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(profileFormSchema),
+  });
 
-  const onSubmit = (e) => {};
+  const onSubmit = (e) => {
+    const firstName = e.firstName;
+    const lastName = e.lastName;
+    const email = e.email;
+    const phoneNumber = e.phoneNumber;
+    const password = e.password;
+    console.log(e);
+    dispatch(
+      editProfile({ firstName, lastName, email, phoneNumber, password })
+    );
+    const found = cekUser?.find((e) => e.email === email);
+    console.log(found);
+    dispatch(editUser({ firstName, lastName, email, phoneNumber, password }));
+  };
+
   const doLogout = (e) => {
     e.preventDefault();
     dispatch(loginAction(""));
@@ -48,7 +106,7 @@ function Profile() {
           </div>
           <div className="w-14 h-14 rounded-full bg-red">
             <img
-              src={pp}
+              src={defpp}
               alt=""
               className="w-14 h-14 rounded-full flex object-cover"
             />
@@ -97,7 +155,7 @@ function Profile() {
                 <div className="flex justify-center pt-8">
                   <div className="w-32 h-32 bg-red rounded-full">
                     <img
-                      src={pp}
+                      src={defpp}
                       alt=""
                       className="w-32 h-32 bg-red rounded-full object-cover"
                     />
@@ -105,7 +163,7 @@ function Profile() {
                 </div>
                 <div className="flex justify-center">
                   <div className="text-xl font-semibold pt-8">
-                    Jonas El Rodriguez
+                    {user.firstName} {user.lastName}
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -158,7 +216,7 @@ function Profile() {
                 </Link>
               </div>
             </div>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="bg-white w-[866px] h-[418px] rounded-3xl">
                 <div className="px-8">
                   <div className="pt-10 pb-2">Detail Information</div>
@@ -169,17 +227,37 @@ function Profile() {
                         <label className="flex pb-3">First Name</label>
                         <input
                           type="text"
-                          className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                          placeholder="Jonaz"
+                          className={
+                            errors.firstName?.message
+                              ? " w-96 h-16 border border-red rounded-2xl pl-6"
+                              : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          }
+                          {...register("firstName")}
+                          placeholder=""
                         />
+                        {errors.firstName?.message && (
+                          <span className="text-red">
+                            {errors.firstName?.message}
+                          </span>
+                        )}
                       </div>
                       <div className="flex flex-col">
                         <label className="flex pb-3">Last Name</label>
                         <input
                           type="text"
-                          className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                          placeholder="El Rodrigues"
+                          className={
+                            errors.lastName?.message
+                              ? " w-96 h-16 border border-red rounded-2xl pl-6"
+                              : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          }
+                          {...register("lastName")}
+                          placeholder=""
                         />
+                        {errors.lastName?.message && (
+                          <span className="text-red">
+                            {errors.lastName?.message}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="flex flex-row pt-12 gap-8">
@@ -187,47 +265,91 @@ function Profile() {
                         <label className="flex pb-3">Email</label>
                         <input
                           type="email"
-                          className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                          placeholder="jonasrodrigu123@gmail.com"
+                          className={
+                            errors.email?.message
+                              ? " w-96 h-16 border border-red rounded-2xl pl-6"
+                              : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          }
+                          {...register("email")}
+                          value={user.email}
                         />
+                        {errors.email?.message && (
+                          <span className="text-red">
+                            {errors.email?.message}
+                          </span>
+                        )}
                       </div>
                       <div className="flex flex-col">
                         <label className="flex pb-3">Phone Number</label>
-                        <div className="flex flex-row items-center border border-dark border-opacity-20 rounded-2xl">
+                        <div
+                          className={
+                            errors.phoneNumber?.message
+                              ? " flex flex-row items-center border border-red rounded-2xl"
+                              : " flex flex-row items-center border border-dark border-opacity-20 rounded-2xl"
+                          }
+                        >
                           <div className="border-r-[1px] pr-2 pl-6 text-dark text-opacity-50">
                             +62
                           </div>
                           <input
                             type="number"
-                            className="w-80 h-16 pl-4 box-border"
+                            className=" w-80 h-16 rounded-2xl pl-6"
+                            {...register("phoneNumber")}
                             placeholder="81445687121"
                           />
                         </div>
+                        {errors.phoneNumber?.message && (
+                          <span className="text-red">
+                            {errors.phoneNumber?.message}
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bg-white w-[866px] h-72 rounded-3xl">
-                <div className="px-8">
-                  <div className="pt-10 pb-2">Account and Privacy </div>
-                  <hr className="text-dark text-opacity-20" />
-                  <div className="flex flex-row pt-12 gap-8">
-                    <div className="flex flex-col">
-                      <label className="flex pb-3">New Password</label>
-                      <input
-                        type="password"
-                        className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                        placeholder="Write your password"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="flex pb-3">Confirm Password</label>
-                      <input
-                        type="password"
-                        className="w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
-                        placeholder="Confirm your password"
-                      />
+              <div className="flex pt-5">
+                <div className="bg-white w-[866px] h-72 rounded-3xl">
+                  <div className="px-8">
+                    <div className="pt-10 pb-2">Account and Privacy </div>
+                    <hr className="text-dark text-opacity-20" />
+                    <div className="flex flex-row pt-12 gap-8">
+                      <div className="flex flex-col">
+                        <label className="flex pb-3">New Password</label>
+                        <input
+                          type="password"
+                          className={
+                            errors.password?.message
+                              ? " w-96 h-16 border border-red rounded-2xl pl-6"
+                              : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          }
+                          {...register("password")}
+                          value={user.password}
+                        />
+                        {errors.password?.message && (
+                          <span className="text-red">
+                            {errors.password?.message}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-col">
+                        <label className="flex pb-3">Confirm Password</label>
+                        <input
+                          type="password"
+                          className={
+                            errors.confirmPassword?.message
+                              ? " w-96 h-16 border border-red rounded-2xl pl-6"
+                              : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
+                          }
+                          {...register("confirmPassword")}
+                          placeholder="Confirm your password"
+                        />
+                        {errors.confirmPassword?.message && (
+                          <span className="text-red">
+                            {errors.confirmPassword?.message}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
