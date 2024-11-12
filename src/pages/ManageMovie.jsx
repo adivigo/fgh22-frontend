@@ -33,9 +33,8 @@ function ManageMovie() {
         <div className="text-3xl">TixIT</div>
         <ul>
           <li className="hidden md:flex gap-14 text-sm">
-            <a href="#">Home</a>
-            <a href="#">Movie</a>
-            <a href="#">Buy Ticket</a>
+            <Link to="/graph">Dashboard</Link>
+            <Link to="/manage-movie">Movie</Link>
           </li>
         </ul>
         <div className="hidden md:flex gap-3 justify-center items-center">
@@ -47,11 +46,13 @@ function ManageMovie() {
             <SlMagnifier />
           </div>
           <div className="w-14 h-14 rounded-full bg-red">
-            <img
-              src={defpp}
-              alt=""
-              className="w-14 h-14 rounded-full flex object-cover"
-            />
+            <Link to="/profile">
+              <img
+                src={defpp}
+                alt=""
+                className="w-14 h-14 rounded-full flex object-cover"
+              />
+            </Link>
           </div>
           <button onClick={doLogout}>Logout</button>
         </div>

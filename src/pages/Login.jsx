@@ -135,6 +135,12 @@ function Login() {
                   Login
                 </button>
               </div>
+              <span className="flex justify-center md:justify-start pt-5">
+                Dont have an account?{" "}
+                <Link to="/register" className="underline text-blue">
+                  Register
+                </Link>
+              </span>
               <br></br>
               <div className="flex flex-row justify-between items-center gap-3 ">
                 <hr className="w-40 h-px my-4 bg-grey border-0 md:my-10" />
