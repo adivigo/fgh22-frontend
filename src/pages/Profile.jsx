@@ -70,11 +70,12 @@ function Profile() {
     localStorage.setItem("user", serializedState);
     const found = cekUser?.find((e) => e.email === value.email);
     console.log(found);
-    // dispatch(editUser({ firstName, lastName, email, phoneNumber, password }));
+    dispatch(editUser({ firstName, lastName, email, phoneNumber, password }));
   };
 
   const doLogout = () => {
     dispatch(loginAction(""));
+    localStorage.removeItem("user");
   };
 
   React.useEffect(() => {
