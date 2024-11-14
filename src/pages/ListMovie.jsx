@@ -21,6 +21,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 function ListMovie() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isShow, setShow] = React.useState(false);
   const token = useSelector((state) => state.auth.token);
   const [charImg, setCharImg] = useState(null);
   useEffect(() => {

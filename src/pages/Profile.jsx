@@ -1,7 +1,6 @@
 import React from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
-import pp from "/src/assets/images/pp.png";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import star from "/src/assets/images/star.svg";
 import { Link, useNavigate } from "react-router-dom";
