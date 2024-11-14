@@ -47,7 +47,9 @@ function Login() {
       return;
     }
     dispatch(loginAction("abc"));
-    dispatch(setProfile({ firstName, lastName, email, phoneNumber, password }));
+    // dispatch(setProfile({ email, password }));
+    const serializedState = JSON.stringify(value);
+    localStorage.setItem("user", serializedState);
   };
   React.useEffect(() => {
     if (token !== "") {

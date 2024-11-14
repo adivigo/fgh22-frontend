@@ -17,7 +17,7 @@ import * as yup from "yup";
 
 function Profile() {
   const [isShow, setShow] = React.useState(false);
-  const user = useSelector((state) => state.profile.data);
+  const user = JSON.parse(localStorage.getItem("user"));
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,9 +67,8 @@ function Profile() {
     const email = value.email;
     const phoneNumber = value.phoneNumber;
     const password = value.password;
-    dispatch(
-      editProfile({ firstName, lastName, email, phoneNumber, password })
-    );
+    const serializedState = JSON.stringify(value);
+    localStorage.setItem("user", serializedState);
     const found = cekUser?.find((e) => e.email === value.email);
     console.log(found);
     dispatch(editUser({ firstName, lastName, email, phoneNumber, password }));
@@ -78,6 +77,7 @@ function Profile() {
   const doLogout = (e) => {
     e.preventDefault();
     dispatch(loginAction(""));
+    localStorage.clear();
   };
   React.useEffect(() => {
     if (token == "") {
