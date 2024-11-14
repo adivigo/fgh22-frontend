@@ -16,6 +16,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/reducers/auth";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function ListMovie() {
   const navigate = useNavigate();
