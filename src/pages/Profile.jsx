@@ -73,15 +73,16 @@ function Profile() {
     // dispatch(editUser({ firstName, lastName, email, phoneNumber, password }));
   };
 
-  const doLogout = (e) => {
-    e.preventDefault();
+  const doLogout = () => {
     dispatch(loginAction(""));
   };
+
   React.useEffect(() => {
     if (token == "") {
       navigate("/login");
     }
   }, [token]);
+
   return (
     <div>
       <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
