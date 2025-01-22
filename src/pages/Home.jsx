@@ -18,12 +18,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import defpp from "/src/assets/images/defpp.png";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { SlMagnifier } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../redux/reducers/auth";
+import Navbar from "../components/Navbar";
 
 function Home() {
   const navigate = useNavigate();
@@ -31,21 +27,29 @@ function Home() {
   const token = useSelector((state) => state.auth.token);
   const [isShow, setShow] = React.useState(false);
   const [charImg, setCharImg] = useState(null);
-  const doLogout = (e) => {
-    e.preventDefault();
-    dispatch(loginAction(""));
-  };
+
   React.useEffect(() => {
     if (token == "") {
       navigate("/login");
     }
   }, [token]);
 
+  const headers = {};
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
+    fetch("http://localhost:8888/movies", {
+      method: "GET",
+      headers,
+    })
       .then((response) => response.json())
-      .then((data) => setCharImg(data.results));
+      .then((data) => setCharImg(data.results))
+      .catch((err) => console.log(err));
   }, []);
+
   const MovieCard = () => {
     return (
       <div className="flex flex-row gap-5">
@@ -55,7 +59,7 @@ function Home() {
               <div className="flex-shrink-0 flex flex-row group w-[284px] h-[405px] bg-red rounded-xl overflow-hidden relative">
                 <img
                   className="group w-[284px] h-[405px] absolute"
-                  src={el.image}
+                  src={`http://localhost:8888/profiles/images/${el.image}`}
                 />
                 <div className="w-[284px] h-[425px] bg-dark bg-opacity-70 invisible group-hover:visible flex flex-col justify-center items-center gap-2 relative">
                   <Link
@@ -72,9 +76,9 @@ function Home() {
                   </Link>
                 </div>
               </div>
-              <div className=" text-xl font-normal">{el.name}</div>
+              <div className=" text-xl font-normal">{el.title}</div>
               <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg px-1 py-1 text-center">
-                {el.status}
+                {el.genreName}
               </div>
             </div>
           ))}
@@ -83,49 +87,9 @@ function Home() {
   };
   return (
     <div>
-      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
-        <div className="text-3xl">TixIT</div>
-        <ul>
-          <li className="hidden md:flex gap-14 text-sm">
-            <Link to="/">Home</Link>
-            <Link to="/list-movie">Movie</Link>
-            <Link to="/detail-movie">Buy Ticket</Link>
-          </li>
-        </ul>
-        <div className="hidden md:flex gap-3 justify-center items-center">
-          <div>Location</div>
-          <div className="w-4 h-4 flex justify-center items-end">
-            <RiArrowDropDownLine className="" />
-          </div>
-          <div>
-            <SlMagnifier />
-          </div>
-          <div className="w-14 h-14 rounded-full bg-red">
-            <Link to="/profile">
-              <img
-                src={defpp}
-                alt=""
-                className="w-14 h-14 rounded-full flex object-cover"
-              />
-            </Link>
-          </div>
-          <button onClick={doLogout}>Logout</button>
-        </div>
-        <button className="md:hidden" onClick={() => setShow(!isShow)}>
-          <GiHamburgerMenu />
-        </button>
-      </nav>
-      {isShow && (
-        <>
-          <div className="w-screen flex flex-col justify-center items-center">
-            <div className="h-12">Home</div>
-            <div className="h-12">Movie</div>
-            <div className="h-12">Buy Ticket</div>
-            <div className="h-12">Sign In</div>
-            <div className="h-12">SignUp</div>
-          </div>
-        </>
-      )}
+      <div>
+        <Navbar />
+      </div>
       <div className="px-6 md:px-32 flex flex-col">
         <div className="flex flex-col md:flex-row justify-center md:justify-between">
           <div className="flex flex-col gap-2 pt-12 md:pt-28 flex-1 text-center md:text-start">

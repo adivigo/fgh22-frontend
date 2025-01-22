@@ -1,7 +1,6 @@
 import React from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
-import pp from "/src/assets/images/pp.png";
 import { IoCalendarClearOutline } from "react-icons/io5";
 import g2 from "/src/assets/images/g2.png";
 import { IoEyeOutline } from "react-icons/io5";

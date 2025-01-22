@@ -1,26 +1,22 @@
 import React from "react";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { SlMagnifier } from "react-icons/sl";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import star from "/src/assets/images/star.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
 import defpp from "/src/assets/images/defpp.png";
-import { editProfile } from "../redux/reducers/profile";
 import { editUser } from "../redux/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../redux/reducers/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import * as profileAction from "../redux/reducers/profile";
+import Navbar from "../components/Navbar";
 
 function Profile() {
-  const [isShow, setShow] = React.useState(false);
-  const user = JSON.parse(localStorage.getItem("user"));
   const token = useSelector((state) => state.auth.token);
+  const profileData = useSelector((state) => state.profile.data);
+  const passwordData = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const cekUser = useSelector((state) => state.user.user);
   const profileFormSchema = yup.object({
     firstName: yup
       .string()
@@ -61,74 +57,132 @@ function Profile() {
   });
 
   const onSubmit = (value) => {
-    const firstName = value.firstName;
-    const lastName = value.lastName;
-    const email = value.email;
-    const phoneNumber = value.phoneNumber;
-    const password = value.password;
-    const serializedState = JSON.stringify(value);
+    const formData = new FormData();
+
+    const payload = {
+      first_name: value.firstName,
+      last_name: value.lastName,
+      email: value.email,
+      phone_number: value.phoneNumber,
+      password: value.password,
+    };
+
+    Object.keys(payload).forEach((key) => {
+      formData.append(key, payload[key]);
+    });
+
+    const headers = {};
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    fetch("http://localhost:8888/profiles", {
+      method: "PATCH",
+      body: formData,
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Profile updated:", data);
+      })
+      .catch((error) => {
+        console.error("Error updating profile:", error);
+      });
+
+    dispatch(editUser(payload));
+    dispatch(profileAction.editProfile(payload));
+    getProfile(token);
+
+    const serializedState = JSON.stringify(payload);
     localStorage.setItem("user", serializedState);
-    const found = cekUser?.find((e) => e.email === value.email);
-    console.log(found);
-    dispatch(editUser({ firstName, lastName, email, phoneNumber, password }));
   };
 
-  const doLogout = () => {
-    dispatch(loginAction(""));
-    localStorage.removeItem("user");
-  };
+  async function getProfile(token) {
+    const data = await (
+      await fetch("http://localhost:8888/profiles", {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    ).json();
+    console.log(data.results);
+    dispatch(profileAction.setProfile(data.results));
+  }
 
   React.useEffect(() => {
     if (token == "") {
       navigate("/login");
+    } else {
+      getProfile(token);
     }
   }, [token]);
 
+  const allowed_ext = ["image/jpeg", "image/jpg", "image/png"];
+  const [file, setFile] = React.useState(null);
+  const formImage = useForm();
+
+  const selectFile = (e) => {
+    const selected = e.target.files[0];
+
+    console.log(selected);
+    if (selected.size > 2 * 1024 * 1024) {
+      window.alert("file size too large");
+      e.target.value = "";
+      return;
+    }
+
+    if (!allowed_ext.includes(selected.type)) {
+      window.alert("file extension is not supported");
+      e.target.value = "";
+    }
+
+    setFile(selected);
+  };
+
+  const uploadImage = (e) => {
+    const formData = new FormData();
+
+    const payloadImage = {
+      first_name: profileData.firstName,
+      last_name: profileData.lastName,
+      email: profileData.email,
+      phone_number: profileData.phoneNumber,
+      password: passwordData.password,
+      image: e.image,
+    };
+    Object.keys(payloadImage).forEach((key) => {
+      formData.append(key, payloadImage[key]);
+    });
+
+    if (file.name) {
+      formData.append("image", file);
+    }
+
+    const headers = {};
+
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+    fetch("http://localhost:8888/profiles", {
+      method: "PATCH",
+      body: formData,
+      headers,
+    })
+      .then((response) => response.json())
+      .then(() => {
+        // console.log(data.results.image);
+        // dispatch(profileAction.setProfile(data.results.image));
+        getProfile(token);
+      });
+  };
+
   return (
     <div>
-      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
-        <div className="text-3xl">TixIT</div>
-        <ul>
-          <li className="hidden md:flex gap-14 text-sm">
-            <Link to="/">Home</Link>
-            <Link to="/list-movie">Movie</Link>
-            <Link to="/detail-movie">Buy Ticket</Link>
-          </li>
-        </ul>
-        <div className="hidden md:flex gap-3 justify-center items-center">
-          <div>Location</div>
-          <div className="w-4 h-4 flex justify-center items-end">
-            <RiArrowDropDownLine className="" />
-          </div>
-          <div>
-            <SlMagnifier />
-          </div>
-          <div className="w-14 h-14 rounded-full bg-red">
-            <Link to="/profile">
-              <img
-                src={defpp}
-                alt=""
-                className="w-14 h-14 rounded-full flex object-cover"
-              />
-            </Link>
-          </div>
-          <button onClick={doLogout}>Logout</button>
-        </div>
-        <button className="md:hidden" onClick={() => setShow(!isShow)}>
-          <GiHamburgerMenu />
-        </button>
-      </nav>
-      {isShow && (
-        <>
-          <div className="w-screen flex flex-col justify-center items-center">
-            <div className="h-12">Home</div>
-            <div className="h-12">Movie</div>
-            <div className="h-12">Buy Ticket</div>
-            <div className="h-12">Sign In</div>
-            <div className="h-12">SignUp</div>
-          </div>
-        </>
-      )}
+      <div>
+        <Navbar />
+      </div>
       <div>
         <div className="flex flex-row justify-center pt-6 pl-12 gap-14 md:hidden">
           <div>
@@ -154,17 +208,35 @@ function Profile() {
                   </div>
                 </div>
                 <div className="flex justify-center pt-8">
-                  <div className="w-32 h-32 bg-red rounded-full">
-                    <img
-                      src={defpp}
-                      alt=""
-                      className="w-32 h-32 bg-red rounded-full object-cover"
-                    />
-                  </div>
+                  <form onSubmit={formImage.handleSubmit(uploadImage)}>
+                    <div className="flex flex-col justify-center items-center gap-3">
+                      <label className="w-32 h-32 bg-red rounded-full">
+                        <img
+                          src={
+                            profileData.image
+                              ? `http://localhost:8888/profiles/images/${profileData.image}`
+                              : defpp
+                          }
+                          alt=""
+                          className="w-32 h-32 bg-red rounded-full object-cover"
+                        />
+                        <input
+                          id="image"
+                          type="file"
+                          onChange={selectFile}
+                          className="hidden"
+                        />
+                      </label>
+                      <button className="w-44 h-8 bg-dark flex justify-center items-center rounded-2xl text-white font-bold">
+                        Update Photo
+                      </button>
+                    </div>
+                  </form>
                 </div>
                 <div className="flex justify-center">
                   <div className="text-xl font-semibold pt-8">
-                    {user.firstName} {user.lastName}
+                    {profileData.firstName ? profileData.firstName : ""}{" "}
+                    {profileData.lastName ? profileData.lastName : ""}
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -234,7 +306,9 @@ function Profile() {
                               : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
                           }
                           {...register("firstName")}
-                          value={user.firstName}
+                          defaultValue={
+                            profileData.firstName ? profileData.firstName : ""
+                          }
                         />
                         {errors.firstName?.message && (
                           <span className="text-red">
@@ -252,7 +326,9 @@ function Profile() {
                               : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
                           }
                           {...register("lastName")}
-                          value={user.lastName}
+                          defaultValue={
+                            profileData.lastName ? profileData.lastName : ""
+                          }
                         />
                         {errors.lastName?.message && (
                           <span className="text-red">
@@ -272,7 +348,9 @@ function Profile() {
                               : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
                           }
                           {...register("email")}
-                          value={user.email}
+                          defaultValue={
+                            profileData.email ? profileData.email : ""
+                          }
                         />
                         {errors.email?.message && (
                           <span className="text-red">
@@ -296,7 +374,11 @@ function Profile() {
                             type="number"
                             className=" w-80 h-16 rounded-2xl pl-6"
                             {...register("phoneNumber")}
-                            value={user.phoneNumber}
+                            defaultValue={
+                              profileData.phoneNumber
+                                ? profileData.phoneNumber
+                                : ""
+                            }
                           />
                         </div>
                         {errors.phoneNumber?.message && (
@@ -325,7 +407,10 @@ function Profile() {
                               : " w-96 h-16 border border-dark border-opacity-20 rounded-2xl pl-6"
                           }
                           {...register("password")}
-                          value={user.password}
+                          placeholder="enter your password"
+                          defaultValue={
+                            passwordData.password ? passwordData.password : ""
+                          }
                         />
                         {errors.password?.message && (
                           <span className="text-red">

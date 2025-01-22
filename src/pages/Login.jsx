@@ -7,14 +7,13 @@ import { FaFacebook } from "react-icons/fa6";
 import { PiHandWavingLight } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/reducers/auth";
-import { setProfile } from "../redux/reducers/profile";
+import * as profileAction from "../redux/reducers/profile";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 function Login() {
   const [isAlert, setAlert] = React.useState(false);
-  const cekUser = useSelector((state) => state.user.user);
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,20 +38,46 @@ function Login() {
   });
 
   const onSubmit = (value) => {
-    const email = value.email;
-    const password = value.password;
-    const found = cekUser?.find((e) => e.email === value.email);
-    if (!found || found.password !== password) {
-      setAlert(true);
-      return;
-    }
-    dispatch(loginAction("abc"));
-    // dispatch(setProfile({ email, password }));
+    // const email = value.email;
+    const passwordInput = value.password;
+    const queryString = new URLSearchParams(value);
+    const qs = queryString.toString();
+    // const found = cekUser?.find((e) => e.email === value.email);
+    // if (!found || found.password !== password) {
+    //   setAlert(true);
+    //   return;
+    // }
+    fetch("http://localhost:8888/auth/login", {
+      method: "POST",
+      body: qs,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch(loginAction(res.results.token));
+        dispatch(profileAction.setPassword(passwordInput)); // Simpan password
+      });
+
     const serializedState = JSON.stringify(value);
     localStorage.setItem("user", serializedState);
   };
+
+  async function getProfile(token) {
+    const data = await (
+      await fetch("http://localhost:8888/profiles", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    ).json();
+    console.log(data);
+    dispatch(profileAction.setProfile(data));
+  }
   React.useEffect(() => {
     if (token !== "") {
+      getProfile(token);
       navigate("/profile");
     }
   }, [token]);

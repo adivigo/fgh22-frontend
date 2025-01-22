@@ -23,7 +23,6 @@ const user = createSlice({
     editUser: (state, action) => {
       const email = action.payload.email;
       const foundIndex = state.user.findIndex((user) => user.email === email);
-      console.log(email);
       if (foundIndex !== -1) {
         state.user[foundIndex].firstName = action.payload.firstName;
         state.user[foundIndex].lastName = action.payload.lastName;

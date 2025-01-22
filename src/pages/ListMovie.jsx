@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import logoTickitz from "/src/assets/images/tickitzfooter.png";
 import ebv from "/src/assets/images/ebv.png";
 import cineone from "/src/assets/images/cineone.png";
@@ -10,37 +9,107 @@ import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
 import imagebg from "/src/assets/images/imagebg.png";
 import { FaArrowRight } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import defpp from "/src/assets/images/defpp.png";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { SlMagnifier } from "react-icons/sl";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/reducers/auth";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { useForm } from "react-hook-form";
+import { useLocation } from "react-router";
+import Navbar from "../components/Navbar";
 
 function ListMovie() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isShow, setShow] = React.useState(false);
   const token = useSelector((state) => state.auth.token);
-  const [charImg, setCharImg] = useState(null);
+  const [charImg, setCharImg] = React.useState([]);
+  const [info, setInfo] = React.useState({});
+  const formSearch = useForm();
+  const formLimit = useForm();
+  const location = useLocation();
+  const [_, setSearchParams] = useSearchParams();
+
+  const headers = {};
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
-      .then((response) => response.json())
-      .then((data) => setCharImg(data.results));
+    const params = new URLSearchParams();
+    fetch("http://localhost:8888/movies", {
+      method: "GET",
+      headers,
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        setCharImg(data.results);
+        setInfo(data.pageInfo);
+        setSearchParams(params);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
   const doLogout = (e) => {
     e.preventDefault();
     dispatch(loginAction(""));
   };
+
   React.useEffect(() => {
     if (token == "") {
       navigate("/login");
     }
   }, [token]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const fetchData = (search, page, limit) => {
+    const url = new URL("http://localhost:8888/movies");
+    const params = new URLSearchParams();
+    if (search) {
+      url.searchParams.append("search", search);
+      params.set("search", search);
+    }
+    if (page) {
+      url.searchParams.append("page", page);
+      params.set("page", page);
+    }
+    if (limit) {
+      url.searchParams.append("limit", limit);
+      params.set("limit", limit);
+    }
+    fetch(url)
+      .then((r) => r.json())
+      .then((data) => {
+        setCharImg(data.results);
+        setInfo(data.pageInfo);
+        setSearchParams(params);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const searchData = (q) => {
+    fetchData(q.search, 1, formLimit.getValues("limit"));
+  };
+
+  const limitData = (value) => {
+    fetchData(formSearch.getValues("search"), info.currentPage, value.limit);
+  };
+
+  React.useEffect(() => {
+    const qs = new URLSearchParams(location.search);
+    fetchData(qs.get("search"), qs.get("page"), qs.get("limit"));
+    if (qs.get("search")) {
+      formSearch.setValue("search", qs.get("search"));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    formLimit.watch((value) => {
+      limitData(value);
+    });
+  }, [formLimit.watch]);
+
   const MovieCard = () => {
     return (
       <div className="flex flex-row gap-5">
@@ -50,11 +119,11 @@ function ListMovie() {
               <div className="flex-shrink-0 flex flex-row group w-[284px] h-[405px] bg-red rounded-xl overflow-hidden relative">
                 <img
                   className="group w-[284px] h-[405px] absolute"
-                  src={el.image}
+                  src={`http://localhost:8888/profiles/images/${el.image}`}
                 />
                 <div className="w-[284px] h-[425px] bg-dark bg-opacity-70 invisible group-hover:visible flex flex-col justify-center items-center gap-2 relative">
                   <Link
-                    to="/detail-movie"
+                    to={`/list-movie/${el.id}`}
                     className="text-white bg-dark bg-opacity-70 inline-block py-2 px-20 border-white border rounded"
                   >
                     Detail
@@ -67,9 +136,9 @@ function ListMovie() {
                   </Link>
                 </div>
               </div>
-              <div className=" text-xl font-normal">{el.name}</div>
+              <div className=" text-xl font-normal">{el.title}</div>
               <div className="text-gray bg-grey p-1 border-1 border-grey rounded-lg px-1 py-1 text-center">
-                {el.status}
+                {el.genreName}
               </div>
             </div>
           ))}
@@ -78,49 +147,9 @@ function ListMovie() {
   };
   return (
     <div>
-      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
-        <div className="text-3xl">TixIT</div>
-        <ul>
-          <li className="hidden md:flex gap-14 text-sm">
-            <Link to="/">Home</Link>
-            <Link to="/list-movie">Movie</Link>
-            <Link to="/detail-movie">Buy Ticket</Link>
-          </li>
-        </ul>
-        <div className="hidden md:flex gap-3 justify-center items-center">
-          <div>Location</div>
-          <div className="w-4 h-4 flex justify-center items-end">
-            <RiArrowDropDownLine className="" />
-          </div>
-          <div>
-            <SlMagnifier />
-          </div>
-          <div className="w-14 h-14 rounded-full bg-red">
-            <Link to="/profile">
-              <img
-                src={defpp}
-                alt=""
-                className="w-14 h-14 rounded-full flex object-cover"
-              />
-            </Link>
-          </div>
-          <button onClick={doLogout}>Logout</button>
-        </div>
-        <button className="md:hidden" onClick={() => setShow(!isShow)}>
-          <GiHamburgerMenu />
-        </button>
-      </nav>
-      {isShow && (
-        <>
-          <div className="w-screen flex flex-col justify-center items-center">
-            <div className="h-12">Home</div>
-            <div className="h-12">Movie</div>
-            <div className="h-12">Buy Ticket</div>
-            <div className="h-12">Sign In</div>
-            <div className="h-12">SignUp</div>
-          </div>
-        </>
-      )}
+      <div>
+        <Navbar />
+      </div>
       <div className="flex flex-col px-32">
         <div className="flex relative w-full h-[462px]">
           <img
@@ -138,12 +167,27 @@ function ListMovie() {
         <div className="flex flex-row gap-5 pt-16 pl-36">
           <div>
             <div>Cari Event</div>
-            <div>
-              <input
-                type="text"
-                placeholder="New Born Expert"
-                className="w-80 h-16 bg-[rgba(222, 222, 222, 1)] pl-3 border border-gray rounded-md border-opacity-50"
-              />
+            <div className="flex flex-row gap-3 ">
+              <form>
+                <select
+                  onChange={limitData}
+                  className="h-16 border rounded w-12"
+                  {...formLimit.register("limit")}
+                >
+                  <option>2</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </form>
+              <form onSubmit={formSearch.handleSubmit(searchData)}>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="w-80 h-16 bg-[rgba(222, 222, 222, 1)] pl-3 border border-gray rounded-md border-opacity-50"
+                  {...formSearch.register("search")}
+                />
+                <button className="hidden">Submit</button>
+              </form>
             </div>
           </div>
           <div className="flex gap-6 flex-col">
@@ -171,33 +215,28 @@ function ListMovie() {
           <div className="flex flex-row justify-between pt-14 overflow-x-scroll ">
             <MovieCard />
           </div>
-          <div className="flex flex-row justify-between overflow-x-scroll ">
-            <MovieCard />
-          </div>
-          <div className="flex flex-row justify-between overflow-x-scroll ">
-            <MovieCard />
-          </div>
         </div>
+        <div>
+          Page {info.currentPage}/{info.totalPage}
+        </div>
+        <div>total data {info.totalData}</div>
         <div className="flex flex-row gap-x-5 pb-7 justify-center items-center pt-16">
-          <div className="h-14 w-14 bg-dark rounded-full">
-            <div className="flex justify-center content-center pt-4 text-white">
-              1
-            </div>
-          </div>
-          <div className="h-14 w-14 bg-grey rounded-full">
-            <div className="flex justify-center content-center pt-4 text-white">
-              2
-            </div>
-          </div>
-          <div className="h-14 w-14 bg-grey rounded-full">
-            <div className="flex justify-center content-center pt-4 text-white">
-              3
-            </div>
-          </div>
-          <div className="h-14 w-14 bg-grey rounded-full">
-            <div className="flex justify-center content-center pt-4 text-white">
-              4
-            </div>
+          <div>
+            {[...(Array(info.totalPage) || 0)].map((_, index) => (
+              <button
+                onClick={() =>
+                  fetchData(
+                    formSearch.getValues("search"),
+                    index + 1,
+                    formLimit.getValues("limit")
+                  )
+                }
+                disabled={index + 1 === info.currentPage}
+                className="h-14 w-14 bg-dark rounded-full text-white disabled:bg-grey disabled:text-gray"
+              >
+                {index + 1}
+              </button>
+            ))}
           </div>
           <div className="h-14 w-14 bg-dark rounded-full">
             <div className="flex justify-center content-center pt-5 text-white">

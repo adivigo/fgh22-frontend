@@ -88,7 +88,7 @@ function PaymentConfirm() {
               Dates and Time
             </div>
           </div>
-          <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
+          <hr className="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
           <div>
             <div className="h-14 w-14 bg-green rounded-full">
               <div className="flex justify-center content-center pt-5 text-white">
@@ -99,7 +99,7 @@ function PaymentConfirm() {
               Seat
             </div>
           </div>
-          <hr class="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
+          <hr className="w-20 gap-6 h-px my-4 bg-dark-500 border-dashed md:my-10" />
           <div>
             <div className="h-14 w-14 bg-dark rounded-full">
               <div className="flex justify-center content-center pt-5 text-white">

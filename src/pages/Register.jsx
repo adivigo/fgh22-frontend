@@ -45,7 +45,16 @@ function Register() {
   const onSubmit = (e) => {
     const email = e.email;
     const password = e.password;
-    console.log(e);
+    const queryString = new URLSearchParams(e);
+    const qs = queryString.toString();
+    console.log(qs);
+    fetch("http://localhost:8888/auth/register", {
+      method: "POST",
+      body: qs,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
     const found = cekUser?.find((e) => e.email === email);
     if (!found) {
       dispatch(addUser({ email, password }));

@@ -1,7 +1,4 @@
 import React from "react";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { SlMagnifier } from "react-icons/sl";
-import pp from "/src/assets/images/pp.png";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import star from "/src/assets/images/star.svg";
 import cineone from "/src/assets/images/cineone.png";
@@ -13,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import defpp from "/src/assets/images/defpp.png";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/reducers/auth";
-import { GiHamburgerMenu } from "react-icons/gi";
+import Navbar from "../components/Navbar";
 
 function OrderHistory() {
   const navigate = useNavigate();
@@ -33,49 +30,9 @@ function OrderHistory() {
   }, [token]);
   return (
     <div>
-      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
-        <div className="text-3xl">TixIT</div>
-        <ul>
-          <li className="hidden md:flex gap-14 text-sm">
-            <Link to="/">Home</Link>
-            <Link to="/list-movie">Movie</Link>
-            <Link to="/detail-movie">Buy Ticket</Link>
-          </li>
-        </ul>
-        <div className="hidden md:flex gap-3 justify-center items-center">
-          <div>Location</div>
-          <div className="w-4 h-4 flex justify-center items-end">
-            <RiArrowDropDownLine className="" />
-          </div>
-          <div>
-            <SlMagnifier />
-          </div>
-          <div className="w-14 h-14 rounded-full bg-red">
-            <Link to="/profile">
-              <img
-                src={defpp}
-                alt=""
-                className="w-14 h-14 rounded-full flex object-cover"
-              />
-            </Link>
-          </div>
-          <button onClick={doLogout}>Logout</button>
-        </div>
-        <button className="md:hidden" onClick={() => setShow3(!isShow3)}>
-          <GiHamburgerMenu />
-        </button>
-      </nav>
-      {isShow3 && (
-        <>
-          <div className="w-screen flex flex-col justify-center items-center">
-            <div className="h-12">Home</div>
-            <div className="h-12">Movie</div>
-            <div className="h-12">Buy Ticket</div>
-            <div className="h-12">Sign In</div>
-            <div className="h-12">SignUp</div>
-          </div>
-        </>
-      )}
+      <div>
+        <Navbar />
+      </div>
       <div className="w-screen bg-background bg-opacity-20">
         <div className="flex flex-row gap-8 justify-center">
           <div className="flex pt-14">
