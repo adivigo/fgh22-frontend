@@ -63,7 +63,7 @@ function Home() {
                 />
                 <div className="w-[284px] h-[425px] bg-dark bg-opacity-70 invisible group-hover:visible flex flex-col justify-center items-center gap-2 relative">
                   <Link
-                    to="/detail-movie"
+                    to={`/list-movie/${el.id}`}
                     className="text-white bg-dark bg-opacity-70 inline-block py-2 px-20 border-white border rounded"
                   >
                     Detail

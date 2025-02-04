@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logoTickitz from "/src/assets/images/tickitzfooter.png";
 import ebv from "/src/assets/images/ebv.png";
 import cineone from "/src/assets/images/cineone.png";
@@ -10,22 +10,34 @@ import youtube from "/src/assets/images/ytlogo.png";
 import { IoMdCheckmark } from "react-icons/io";
 import visa from "/src/assets/images/logos_visa.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import defpp from "/src/assets/images/defpp.png";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { SlMagnifier } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../redux/reducers/auth";
+import Navbar from "../components/Navbar";
 
 function PaymentConfirm() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const data = useSelector((state) => state.order?.data);
   const token = useSelector((state) => state.auth.token);
-  const [isShow, setShow] = React.useState(false);
-  const doLogout = (e) => {
-    e.preventDefault();
-    dispatch(loginAction(""));
-  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const headers = {};
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+    headers["Content-Type"] = "application/json";
+  }
+
+  useEffect(() => {
+    fetch(`http://localhost:8888/orders/payment`, {
+      method: "GET",
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => setPayment(data.results))
+      .catch((err) => console.log(err));
+  }, []);
   React.useEffect(() => {
     if (token == "") {
       navigate("/login");
@@ -33,49 +45,7 @@ function PaymentConfirm() {
   }, [token]);
   return (
     <div>
-      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
-        <div className="text-3xl">TixIT</div>
-        <ul>
-          <li className="hidden md:flex gap-14 text-sm">
-            <Link to="/">Home</Link>
-            <Link to="/list-movie">Movie</Link>
-            <Link to="/detail-movie">Buy Ticket</Link>
-          </li>
-        </ul>
-        <div className="hidden md:flex gap-3 justify-center items-center">
-          <div>Location</div>
-          <div className="w-4 h-4 flex justify-center items-end">
-            <RiArrowDropDownLine className="" />
-          </div>
-          <div>
-            <SlMagnifier />
-          </div>
-          <div className="w-14 h-14 rounded-full bg-red">
-            <Link to="/profile">
-              <img
-                src={defpp}
-                alt=""
-                className="w-14 h-14 rounded-full flex object-cover"
-              />
-            </Link>
-          </div>
-          <button onClick={doLogout}>Logout</button>
-        </div>
-        <button className="md:hidden" onClick={() => setShow(!isShow)}>
-          <GiHamburgerMenu />
-        </button>
-      </nav>
-      {isShow && (
-        <>
-          <div className="w-screen flex flex-col justify-center items-center">
-            <div className="h-12">Home</div>
-            <div className="h-12">Movie</div>
-            <div className="h-12">Buy Ticket</div>
-            <div className="h-12">Sign In</div>
-            <div className="h-12">SignUp</div>
-          </div>
-        </>
-      )}
+      <Navbar />
       <div className="bg-gray bg-opacity-10">
         <div className="hidden md:flex flex-row gap-6 justify-center pt-8">
           <div className="flex justify-center items-center flex-col">
@@ -256,7 +226,7 @@ function PaymentConfirm() {
                     <div>:</div>
                   </div>
                   <div className="flex flex-row justify-start md:justify-center items-center gap-5">
-                    <div className="text-lg font-bold">12321328913829724</div>
+                    <div className="text-lg font-bold">{data.VirtualId}</div>
                     <div>
                       <button className=" w-20 h-12 text-dark border border-dark rounded">
                         Copy
@@ -272,14 +242,21 @@ function PaymentConfirm() {
                     <div>:</div>
                   </div>
                   <div className="flex flex-row justify-start md:justify-center items-center gap-5">
-                    <div className="text-lg text-dark font-bold">$30</div>
+                    <div className="text-lg text-dark font-bold">
+                      ${data.totalPrice}
+                    </div>
                   </div>
                 </div>
                 <div className="pt-8 font-normal text-dark text-opacity-40">
                   Pay this payment bill before it is due,
-                  <span className="text-red"> on June 23, 2023</span>. If the
-                  bill has not been paid by the specified time, it will be
-                  forfeited
+                  <span className="text-red">
+                    {" "}
+                    {data?.ExpiryDate && typeof data?.ExpiryDate === "string"
+                      ? data.ExpiryDate.slice(0, 10)
+                      : ""}
+                  </span>
+                  . If the bill has not been paid by the specified time, it will
+                  be forfeited
                 </div>
                 <div className="items-center">
                   <div className=" pt-8 md:pt-14">
@@ -291,7 +268,7 @@ function PaymentConfirm() {
                   </div>
                 </div>
                 <div className="pt-2">
-                  <Link to="/payment">
+                  <Link to="/list-movie">
                     <button className="w-[302px] md:w-[545px] h-14 text-dark bg-white rounded font-bold">
                       Pay Later
                     </button>

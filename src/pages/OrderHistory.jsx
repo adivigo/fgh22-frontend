@@ -11,14 +11,18 @@ import defpp from "/src/assets/images/defpp.png";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/reducers/auth";
 import Navbar from "../components/Navbar";
+import { useForm } from "react-hook-form";
 
 function OrderHistory() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const profileData = useSelector((state) => state.profile.data);
   const token = useSelector((state) => state.auth.token);
   const [isShow, setShow] = React.useState(false);
   const [isShow2, setShow2] = React.useState(false);
   const [isShow3, setShow3] = React.useState(false);
+  const formImage = useForm();
+
   const doLogout = (e) => {
     e.preventDefault();
     dispatch(loginAction(""));
@@ -45,17 +49,24 @@ function OrderHistory() {
                   </div>
                 </div>
                 <div className="flex justify-center pt-8">
-                  <div className="w-32 h-32 bg-red rounded-full">
-                    <img
-                      src={defpp}
-                      alt=""
-                      className="w-32 h-32 bg-red rounded-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-center">
-                  <div className="text-xl font-semibold pt-8">
-                    Jonas El Rodriguez
+                  <div className="flex flex-col justify-center items-center gap-3">
+                    <label className="w-32 h-32 bg-red rounded-full">
+                      <img
+                        src={
+                          profileData.image
+                            ? `http://localhost:8888/profiles/images/${profileData.image}`
+                            : defpp
+                        }
+                        alt=""
+                        className="w-32 h-32 bg-red rounded-full object-cover"
+                      />
+                    </label>
+                    <div className="flex justify-center">
+                      <div className="text-xl font-semibold pt-8">
+                        {profileData.firstName ? profileData.firstName : ""}{" "}
+                        {profileData.lastName ? profileData.lastName : ""}
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-center">

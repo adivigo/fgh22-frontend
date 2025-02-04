@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logoTickitz from "/src/assets/images/tickitzfooter.png";
 import ebv from "/src/assets/images/ebv.png";
 import cineone from "/src/assets/images/cineone.png";
@@ -8,24 +8,135 @@ import ig from "/src/assets/images/instalogo.png";
 import tweet from "/src/assets/images/twitterlogo.png";
 import youtube from "/src/assets/images/ytlogo.png";
 import { IoMdCheckmark } from "react-icons/io";
-import visa from "/src/assets/images/logos_visa.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import defpp from "/src/assets/images/defpp.png";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { SlMagnifier } from "react-icons/sl";
+import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../redux/reducers/auth";
+import { useForm } from "react-hook-form";
+import { setResponse } from "../redux/reducers/order";
 
 function Payment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const [isShow, setShow] = React.useState(false);
-  const doLogout = (e) => {
-    e.preventDefault();
-    dispatch(loginAction(""));
+  const data = useSelector((state) => state.order?.data);
+  const [movie, setMovie] = useState({});
+  const movieId = useSelector((state) => state.order.data.movieId);
+  const [cinema, setCinema] = useState({});
+  const cinemaId = useSelector((state) => state.order.data.cinemaId);
+  const [profile, setProfile] = useState({});
+  const [payment, setPayment] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const fullname = (profile.firstName || "") + " " + (profile.lastName || "");
+  const { handleSubmit } = useForm();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const headers = {};
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+    headers["Content-Type"] = "application/json";
+  }
+
+  const onSubmit = () => {
+    fetch("http://localhost:8888/orders", {
+      method: "POST",
+      body: JSON.stringify({
+        cinemaId: cinemaId,
+        movieId: parseInt(movieId),
+        seats: data.selectedSeat,
+        paymentId: selectedId,
+      }),
+      headers,
+    })
+      .then((response) => response.json())
+      .then((result) => dispatch(setResponse(result.results)))
+      .catch((error) => console.error("Error placing order:", error));
+    navigate("/payment-confirm");
   };
+
+  const handleSelect = (id) => {
+    setSelectedId(id);
+  };
+  console.log(selectedId); // console.log(fullname);
+
+  const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const formatDate = new Date(data.date);
+  const day = daysOfWeek[formatDate.getDay()];
+  const dayOfMonth = formatDate.getDate().toString().padStart(2, "0");
+  const monthsOfYear = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const month = monthsOfYear[formatDate.getMonth()];
+  const year = formatDate.getFullYear();
+
+  useEffect(() => {
+    fetch(`http://localhost:8888/movies/${movieId}`, {
+      method: "GET",
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => setMovie(data.results))
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:8888/cinemas/${cinemaId}`, {
+      method: "GET",
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => setCinema(data.results))
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8888/profiles", {
+      method: "GET",
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results) {
+          setProfile(data.results);
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating profile:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:8888/orders/payment`, {
+      method: "GET",
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => setPayment(data.results))
+      .catch((err) => console.log(err));
+  }, []);
+
   React.useEffect(() => {
     if (token == "") {
       navigate("/login");
@@ -33,49 +144,7 @@ function Payment() {
   }, [token]);
   return (
     <div>
-      <nav className="px-6 md:px-32 flex flex-row justify-between items-center h-24 shadow-lg">
-        <div className="text-3xl">TixIT</div>
-        <ul>
-          <li className="hidden md:flex gap-14 text-sm">
-            <Link to="/">Home</Link>
-            <Link to="/list-movie">Movie</Link>
-            <Link to="/detail-movie">Buy Ticket</Link>
-          </li>
-        </ul>
-        <div className="hidden md:flex gap-3 justify-center items-center">
-          <div>Location</div>
-          <div className="w-4 h-4 flex justify-center items-end">
-            <RiArrowDropDownLine className="" />
-          </div>
-          <div>
-            <SlMagnifier />
-          </div>
-          <div className="w-14 h-14 rounded-full bg-red">
-            <Link to="/profile">
-              <img
-                src={defpp}
-                alt=""
-                className="w-14 h-14 rounded-full flex object-cover"
-              />
-            </Link>
-          </div>
-          <button onClick={doLogout}>Logout</button>
-        </div>
-        <button className="md:hidden" onClick={() => setShow(!isShow)}>
-          <GiHamburgerMenu />
-        </button>
-      </nav>
-      {isShow && (
-        <>
-          <div className="w-screen flex flex-col justify-center items-center">
-            <div className="h-12">Home</div>
-            <div className="h-12">Movie</div>
-            <div className="h-12">Buy Ticket</div>
-            <div className="h-12">Sign In</div>
-            <div className="h-12">SignUp</div>
-          </div>
-        </>
-      )}
+      <Navbar />
       <div className="bg-gray bg-opacity-10">
         <div className="hidden md:flex flex-row gap-6 justify-center pt-8">
           <div className="flex justify-center items-center flex-col">
@@ -120,35 +189,42 @@ function Payment() {
                   <div className="text-sm text-dark text-opacity-50 ">
                     DATE & TIME
                   </div>
-                  <div className="pb-2">Tuesday, 07 July 2020 at 02:00pm</div>
+                  <div className="pb-2">
+                    {day}, {dayOfMonth} {month} {year} at {data.time}
+                  </div>
                   <hr className="text-dark text-opacity-20 min-w-[275px]" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-sm text-dark text-opacity-50">
                     MOVIE TITLE
                   </div>
-                  <div className="pb-2">Spider-Man: Homecoming</div>
+                  <div className="pb-2">{movie.title}</div>
                   <hr className="text-dark text-opacity-20" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-sm text-dark text-opacity-50">
                     CINEMA NAME
                   </div>
-                  <div className="pb-2">CineOne21 Cinema</div>
+                  <div className="pb-2">{cinema.name} Cinema</div>
                   <hr className="text-dark text-opacity-20" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-sm text-dark text-opacity-50">
                     NUMBER OF TICKETS
                   </div>
-                  <div className="pb-2">3 pieces</div>
+                  <div className="pb-2">
+                    {data.selectedSeat.length ? data.selectedSeat.length : ""}{" "}
+                    pieces
+                  </div>
                   <hr className="text-dark text-opacity-20" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-sm text-dark text-opacity-50">
                     TOTAL PAYMENT
                   </div>
-                  <div className="pb-2 text-dark font-bold">$30,00</div>
+                  <div className="pb-2 text-dark font-bold">
+                    ${data.totalPayment},00
+                  </div>
                   <hr className="text-dark text-opacity-20" />
                 </div>
               </div>
@@ -160,7 +236,7 @@ function Payment() {
                   <div>Full Name</div>
                   <input
                     type="text"
-                    placeholder="Jonas El Rodriguez"
+                    defaultValue={fullname.trim()} // Ensures no extra spaces
                     className="min-w-[275px] md:w-[665px] h-16 pl-11 border border-dark border-opacity-20"
                   />
                 </div>
@@ -168,7 +244,7 @@ function Payment() {
                   <div>Email</div>
                   <input
                     type="email"
-                    placeholder="jonasrodri123@gmail.com"
+                    defaultValue={profile.email}
                     className="min-w-[275px] md:w-[665px] h-16 pl-11 border border-dark border-opacity-20"
                   />
                 </div>
@@ -176,7 +252,7 @@ function Payment() {
                   <div>Phone Number</div>
                   <input
                     type="text"
-                    placeholder="+62 | 81445687121"
+                    defaultValue={profile.phoneNumber}
                     className="min-w-[275px] md:w-[665px] h-16 pl-11 border border-dark border-opacity-20"
                   />
                 </div>
@@ -184,57 +260,36 @@ function Payment() {
               <div>
                 <div className="text-2xl font-bold pt-12">Payment Method</div>
                 <div className="grid grid-cols-2 md:grid-cols-4 pt-8 gap-8">
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 pt-8 gap-8">
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
-                  <div className="w-[146px] h-14 rounded-lg flex justify-center items-center border border-dark border-opacity-20">
-                    <div>
-                      <img src={visa} alt="" />
-                    </div>
-                  </div>
+                  {payment &&
+                    payment.map((el) => (
+                      <div
+                        key={el.id}
+                        className={`w-[146px] h-14 border border-dark border-opacity-20 rounded-lg flex justify-center items-center ${
+                          selectedId === el.id
+                            ? "border-8 border-dark border-opacity-40 63"
+                            : ""
+                        }`}
+                        onClick={() => handleSelect(el.id)}
+                      >
+                        <div>
+                          <img
+                            src={`http://localhost:8888/profiles/images/${el.image}`}
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
               <div className="flex pt-12 pb-16">
                 <div className="flex justify-center items-center w-[665px] h-14 bg-dark rounded">
-                  <Link to="/payment-confirm">
-                    <button className="text-white min-w-[275px]">
-                      Pay your order
-                    </button>
-                  </Link>
+                  <button
+                    className="text-white min-w-[275px]"
+                    type="submit"
+                    onClick={handleSubmit(onSubmit)}
+                  >
+                    Pay your order
+                  </button>
                 </div>
               </div>
             </div>

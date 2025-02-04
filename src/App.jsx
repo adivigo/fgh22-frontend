@@ -77,12 +77,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // const [data, setData] = React.useState({});
-  // React.useEffect(() => {
-  //   fetch("http://localhost:8888")
-  //     .then((res) => res.json())
-  //     .then(setData);
-  // },[]);
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>

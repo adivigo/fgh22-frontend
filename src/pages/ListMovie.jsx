@@ -48,11 +48,6 @@ function ListMovie() {
       .catch((err) => console.log(err));
   }, []);
 
-  const doLogout = (e) => {
-    e.preventDefault();
-    dispatch(loginAction(""));
-  };
-
   React.useEffect(() => {
     if (token == "") {
       navigate("/login");
